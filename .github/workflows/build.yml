@@ -344,9 +344,9 @@ jobs:
         shell: bash
         run: |
           cd tools
-          python3 apply_patches.py 2> git-patches.log
+          python3 apply_patches.py 2> git-patches.log || true
           if grep -qi "warning\|error\|crash" git-patches.log; then
-              echo "$(cat cpp-patches.log)"
+              cat git-patches.log
               exit -1
           fi
       - name: Cache 'build' folder
@@ -707,9 +707,9 @@ jobs:
         shell: bash
         run: |
           cd tools
-          python3 apply_patches.py 2> git-patches.log
+          python3 apply_patches.py 2> git-patches.log || true
           if grep -qi "warning\|error\|crash" git-patches.log; then
-              echo "$(cat cpp-patches.log)"
+              cat git-patches.log
               exit -1
           fi
       - uses: actions/download-artifact@v4
