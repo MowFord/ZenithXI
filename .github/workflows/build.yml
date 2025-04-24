@@ -339,7 +339,6 @@ jobs:
         run: |
           grep -v private modules/init.txt > modules/init.txt || true
           git submodule update --init --remote --force modules/LQS || true
-          git submodule update --init --remote --force modules/zenith-public || true
       - name: Cache 'build' folder
         uses: actions/cache@v4
         with:
@@ -688,8 +687,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: recursive
           fetch-depth: 1
+      - name: Include only public modules
+        run: |
+          grep -v private modules/init.txt > modules/init.txt || true
+          git submodule update --init --remote --force modules/LQS || true
       - uses: actions/download-artifact@v4
         with:
           name: windows_executables
