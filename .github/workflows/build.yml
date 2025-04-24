@@ -338,8 +338,16 @@ jobs:
       - name: Include only public modules
         shell: bash
         run: |
-          grep -v private modules/init.txt | tee modules/init.txt
-          git submodule update --init --remote --force modules/LQS
+          sed /private/d modules/init.txt -i
+          git submodule update --init --remote --force modules/LQS || true
+      - name: Apply git Patches
+        run: |
+          cd tools
+          python3 apply_patches.py 2> git-patches.log
+          if grep -qi "warning\|error\|crash" cpp-patches.log; then
+              echo "$(cat cpp-patches.log)"
+              exit -1
+          fi
       - name: Cache 'build' folder
         uses: actions/cache@v4
         with:
@@ -692,8 +700,16 @@ jobs:
       - name: Include only public modules
         shell: bash
         run: |
-          grep -v private modules/init.txt | tee modules/init.txt
-          git submodule update --init --remote --force modules/LQS
+          sed /private/d modules/init.txt -i
+          git submodule update --init --remote --force modules/LQS || true
+      - name: Apply git Patches
+        run: |
+          cd tools
+          python3 apply_patches.py 2> git-patches.log
+          if grep -qi "warning\|error\|crash" cpp-patches.log; then
+              echo "$(cat cpp-patches.log)"
+              exit -1
+          fi
       - uses: actions/download-artifact@v4
         with:
           name: windows_executables
