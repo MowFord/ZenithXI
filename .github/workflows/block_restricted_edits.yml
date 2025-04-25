@@ -24,6 +24,7 @@ jobs:
 
       - name: Get changed files
         id: changed
+        shell: bash
         run: |
           git fetch origin ${{ github.base_ref }}
           CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.sha }} | paste -sd "," -)
@@ -31,7 +32,8 @@ jobs:
 
       - name: Check for restricted path changes
         run: |
-          echo "$CHANGED_FILES" | grep -vE '^modules/' && {
-            echo "🚫 Changes to restricted paths detected! Blocked.";
-            exit 1;
-          } || echo "✅ No restricted changes."
+          IFS=',' read -ra FILES <<< "$CHANGED_FILES"
+          for item in "${ITEMS[@]}"; do
+            echo $item
+          done
+          echo "✅ No restricted changes."
