@@ -1,0 +1,33 @@
+name: Restrict to Allowed Paths
+
+on:
+  pull_request:
+
+jobs:
+  block-paths:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check source branch
+        shell: bash
+        run: |
+          if [[ "${{ github.head_ref }}" != "base" ]]; then
+            echo "Not a PR from 'base' branch, checking which files are modified"
+          else
+            echo "'base' branch is allowed to modify anything in the codebase"
+            exit 0  # 👈 Exit the whole job successfully
+          fi
+
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Get changed files
+        id: changed
+        run: |
+          echo "CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.sha }})" >> $GITHUB_ENV
+
+      - name: Check for restricted path changes
+        run: |
+          echo "$CHANGED_FILES" | grep -vE '^modules/' && {
+            echo "🚫 Changes to restricted paths detected! Blocked.";
+            exit 1;
+          } || echo "✅ No restricted changes."
