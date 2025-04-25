@@ -736,7 +736,6 @@ jobs:
       - name: Startup checks
         shell: bash
         run: |
-          type modules/init.txt
           python3 ./tools/ci/startup_checks.py
 
   Full_Startup_Checks_Windows_Tracy_Modules:
