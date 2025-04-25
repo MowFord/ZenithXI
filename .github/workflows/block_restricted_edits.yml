@@ -26,7 +26,8 @@ jobs:
         id: changed
         run: |
           git fetch origin ${{ github.base_ref }}
-          echo "CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.sha }})" >> $GITHUB_ENV
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.sha }} | paste -sd "," -)
+          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
 
       - name: Check for restricted path changes
         run: |
