@@ -19,7 +19,7 @@ matches = map(lambda s: s[:1].upper() + s[1:] if s else '', matches)
 # Print space-delimited for piping back to bash
 print(*matches)
 EOF`
-
+a
 global_objects=(
     LQS
     xi
