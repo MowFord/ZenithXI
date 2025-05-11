@@ -28,7 +28,7 @@ UPDATE `abilities` SET `level` = 70, `content_tag`= NULL WHERE `name` = 'enmity_
 
 -- RDM
 UPDATE `abilities` SET `level` = 60, `content_tag`= NULL WHERE `name` = 'spontaneity';
-UPDATE `abilities` SET `level` = 60, `recastTime`= 300, `content_tag`= NULL WHERE `name` = 'saboteur'; -- Recast changed from 180 to 300
+UPDATE `abilities` SET `level` = 75, `recastTime`= 300, `content_tag`= NULL WHERE `name` = 'saboteur'; -- Recast changed from 180 to 300
 
 -- THF
 UPDATE `abilities` SET `level` = 40, `content_tag`= NULL WHERE `name` = 'accomplice' ;
