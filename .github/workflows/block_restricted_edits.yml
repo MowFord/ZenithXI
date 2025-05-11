@@ -14,7 +14,7 @@ jobs:
             echo "Not a PR from 'base' branch, checking which files are modified"
           else
             echo "'base' branch is allowed to modify anything in the codebase"
-            exit 0  # 👈 Exit the whole job successfully
+            exit 78  # 👈 Exit the whole job successfully
           fi
 
       - name: Check out the code
