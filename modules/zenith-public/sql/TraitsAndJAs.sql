@@ -21,10 +21,10 @@ UPDATE `abilities` SET `level` = 60, `content_tag`= NULL WHERE `name` = 'divine_
 UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'sacrosanctity';
 
 -- BLM
-UPDATE `abilities` SET `level` = 45, `content_tag`= NULL WHERE `name` = 'manawell';
-UPDATE `abilities` SET `level` = 60, `recastTime`= 90, `content_tag`= NULL WHERE `name` = 'cascade'; -- Recast changed from 60 to 90
+UPDATE `abilities` SET `level` = 45, `recastTime`= 90, `content_tag`= NULL WHERE `name` = 'cascade'; -- Recast changed from 60 to 90
+UPDATE `abilities` SET `level` = 60, `content_tag`= NULL WHERE `name` = 'manawell';
 UPDATE `abilities` SET `level` = 70, `content_tag`= NULL WHERE `name` = 'enmity_douse';
-UPDATE `abilities` SET `level` = 70, `content_tag`= NULL WHERE `name` = 'mana_wall'; -- TODO: Test
+-- UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'mana_wall'; -- TODO: Not fully implemented.
 
 -- RDM
 UPDATE `abilities` SET `level` = 60, `content_tag`= NULL WHERE `name` = 'spontaneity';
