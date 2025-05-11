@@ -9,20 +9,24 @@ jobs:
     steps:
       - name: Check source branch
         shell: bash
+        id: check
         run: |
           if [[ "${{ github.head_ref }}" != "base" ]]; then
             echo "Not a PR from 'base' branch, checking which files are modified"
+            echo "should_continue=true" >> $GITHUB_OUTPUT
           else
             echo "'base' branch is allowed to modify anything in the codebase"
-            exit 78  # 👈 Exit the whole job successfully
+            echo "should_continue=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Check out the code
+        if: steps.check.outputs.should_continue == 'true'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Get changed files
+        if: steps.check.outputs.should_continue == 'true'
         id: changed
         shell: bash
         run: |
@@ -31,6 +35,7 @@ jobs:
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
 
       - name: Check for restricted path changes
+        if: steps.check.outputs.should_continue == 'true'
         run: |
           if echo "$CHANGED_FILES" | sed 's/,/\n/g' | grep -qv "^modules/zenith-public"; then
             echo "🚫 Changes to restricted paths detected! Please do not modify files outside of the public modules directory."
