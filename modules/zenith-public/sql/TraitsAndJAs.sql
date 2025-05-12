@@ -1,6 +1,6 @@
 --------------------------------
 -- Job Ability and Trait Changes
---- Public Module for ZenithXI
+-- Public Module for ZenithXI
 --------------------------------
 -- Content tags are set NULL to ensure they aren't disabled before we enable the corresponding `content_tag` expansion.
 
@@ -44,7 +44,7 @@ UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'sepulch
 -- DRK
 UPDATE `abilities` SET `level` = 65, `content_tag`= NULL WHERE `name` = 'nether_void';
 UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'arcane_crest'; -- TODO: Duration changed from 180 to 120.
-UPDATE `abilities` SET `level` = 75, `recastTime`= 180, `content_tag`= NULL WHERE `name` = 'scarlet_delirium'; -- Recast changed from 90 to 180
+-- UPDATE `abilities` SET `level` = 75, `recastTime`= 180, `content_tag`= NULL WHERE `name` = 'scarlet_delirium'; -- Recast changed from 90 to 180. TODO: Not fully implemented.
 
 -- BST
 -- UPDATE `abilities` SET `level` = 65, `content_tag`= NULL WHERE `name` = 'spur'; -- TODO: Not yet implemented
@@ -81,21 +81,21 @@ UPDATE `abilities` SET `level` = 65, `content_tag`= NULL WHERE `name` = 'efflux'
 UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'unbridled_learning';
 
 -- COR
-UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'triple_shot'; --TODO: Potency changed from 40% to 10%
+UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'triple_shot'; -- TODO: Potency changed from 40% to 10%
 
 -- PUP
 UPDATE `abilities` SET `level` = 60, `content_tag`= NULL WHERE `name` = 'cooldown';
-UPDATE `abilities` SET `level` = 71, `content_tag`= NULL WHERE `name` = 'tactical_switch';
+-- UPDATE `abilities` SET `level` = 71, `content_tag`= NULL WHERE `name` = 'tactical_switch'; -- TODO: Not yet implemented
 
 -- DNC
 UPDATE `abilities` SET `level` = 71, `recastTime`= 30, `content_tag`= NULL WHERE `name` = 'presto'; -- TODO: Potency changed from 5 steps to original 3. Daze increase from 5 to original 2. Step Accuracy from +50 to +20.
 UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'feather_step';
-UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'climactic_flourish';
-UPDATE `abilities` SET `level` = 71, `recastTime`= 45, `content_tag`= NULL WHERE `name` = 'striking_flourish'; -- TODO: Not yet implemented
-UPDATE `abilities` SET `level` = 75, `recastTime`= 60, `content_tag`= NULL WHERE `name` = 'ternary_flourish'; -- TODO: Not yet implemented
+-- UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'climactic_flourish'; -- TODO: Not yet implemented. TODO: Flourish III Category does not display in the menu when making them available at an earlier level.
+-- UPDATE `abilities` SET `level` = 71, `recastTime`= 45, `content_tag`= NULL WHERE `name` = 'striking_flourish'; -- TODO: Not yet implemented
+-- UPDATE `abilities` SET `level` = 75, `recastTime`= 60, `content_tag`= NULL WHERE `name` = 'ternary_flourish'; -- TODO: Not yet implemented
 
 -- SCH
-UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'libra';
+-- UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'libra'; -- TODO: Not yet implemented.
 UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'perpetuance';
 UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'immanence';
 
@@ -108,7 +108,7 @@ UPDATE `abilities` SET `level` = 71, `content_tag`= NULL WHERE `name` = 'liement
 UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'one_for_all';
 
 -- GEO
-UPDATE `abilities` SET `level` = 45, `content_tag`= NULL WHERE `name` = 'concentric_pulse';
+UPDATE `abilities` SET `level` = 65, `content_tag`= NULL WHERE `name` = 'concentric_pulse';
 UPDATE `abilities` SET `level` = 71, `content_tag`= NULL WHERE `name` = 'theurgic_focus'; -- TODO: Not yet implemented. TODO: Potency changed from +50MAB to +25MAB
 
 ------------------------
