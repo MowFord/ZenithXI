@@ -722,7 +722,7 @@ m:addOverride('xi.zones.Nashmau.npcs.Pipiroon.onTrigger', function(player, npc)
         { xi.item.FLASK_OF_DISTILLED_WATER, 12, }, -- *
         { xi.item.SPRIG_OF_FRESH_MARJORAM,  47, }, -- *
         { xi.item.HATCHET,                 500, }, -- *
-        { 5356,                           2083, }, -- Remedy Ointment*
+        { 5356,                           2700, }, -- Remedy Ointment*
 -- { 2873,                    10000, }, -- Nashmau Waystone
     }
 
@@ -748,17 +748,10 @@ end)
 m:addOverride('xi.zones.Nashmau.npcs.Chichiroon.onTrigger', function(player, npc)
     local stock =
     {
--- { 6368,  69288, }, -- Geomancer Die
--- { 6369,  73920, }, -- Rune Fencer Die
+-- { 6368,  69288, }, -- Geomancer Die (SOA)
+-- { 6369,  73920, }, -- Rune Fencer Die (SOA)
         { 5498,  85500, }, -- Caster's Die
         { 5497,  99224, }, -- Bolter's Die
--- { 5504,  95800, }, -- Companion's Die
--- { 5503,  96250, }, -- Miser's Die
--- { 5499,  97350, }, -- Courser's Die
--- { 5500, 100650, }, -- Blitzer's Die
--- { 5501, 109440, }, -- Tactician's Die
--- { 5502, 116568, }, -- Allies' Die
--- { 5505, 123744, }, -- Avenger's Die
     }
 
     player:showText(npc, zones[player:getZoneID()].text.CHICHIROON_SHOP_DIALOG)
