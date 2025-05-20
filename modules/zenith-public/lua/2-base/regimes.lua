@@ -7,7 +7,6 @@ m:addOverride('xi.regime.checkRegime', function(player, mob, regimeId, index, re
     local localVarName = 'regimeReminder'
     if player:getCharVar('[regime]lastReward') < vanadielEpoch then
         player:setLocalVar(localVarName, 0)
-        player:setLocalVar('[regime]repeat', 0)
         super(player, mob, regimeId, index, regimeType)
     else
         -- cannot receive credit for regime today, maybe give a system message once per zone?
