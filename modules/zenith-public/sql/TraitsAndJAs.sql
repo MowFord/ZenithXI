@@ -10,11 +10,11 @@
 
 -- WAR
 UPDATE `abilities` SET `level` = 71, `content_tag`= NULL WHERE `name` = 'restraint';
-UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'blood_rage'; -- TODO: Potency changed from +20% to +10%.
+UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'blood_rage';
 
 -- MNK
 UPDATE `abilities` SET `level` = 71, `recastTime`= 90, `content_tag`= NULL WHERE `name` = 'perfect_counter'; -- Recast changed from 60 to 90
-UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'impetus'; -- TODO: Duration changed from 180 to 120
+UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'impetus';
 
 -- WHM
 UPDATE `abilities` SET `level` = 60, `content_tag`= NULL WHERE `name` = 'divine_caress'; -- TODO: Ability needs to be corrected
@@ -34,12 +34,12 @@ UPDATE `abilities` SET `level` = 75, `recastTime`= 300, `content_tag`= NULL WHER
 UPDATE `abilities` SET `level` = 40, `content_tag`= NULL WHERE `name` = 'accomplice' ;
 UPDATE `abilities` SET `level` = 40, `content_tag`= NULL WHERE `name` = 'collaborator';
 UPDATE `abilities` SET `level` = 60, `content_tag`= NULL WHERE `name` = 'despoil';
-UPDATE `abilities` SET `level` = 65, `content_tag`= NULL WHERE `name` = 'conspirator'; -- TODO: Potency reduced.
+UPDATE `abilities` SET `level` = 65, `content_tag`= NULL WHERE `name` = 'conspirator';
 UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'bully';
 
 -- PLD
 UPDATE `abilities` SET `level` = 65, `content_tag`= NULL WHERE `name` = 'divine_emblem';
-UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'sepulcher'; -- TODO: Duration changed from 180 to 120
+UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'sepulcher';
 
 -- DRK
 UPDATE `abilities` SET `level` = 65, `content_tag`= NULL WHERE `name` = 'nether_void';
@@ -52,16 +52,16 @@ UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'arcane_
 
 -- BRD
 -- UPDATE `abilities` SET `level` = 40, `content_tag`= NULL WHERE `name` = 'tenuto'; -- TODO: Not yet implemented
-UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'marcato'; -- TODO: Potency changed from +50% to +25%
+UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'marcato';
 
 -- RNG
 UPDATE `abilities` SET `level` = 60, `content_tag`= NULL WHERE `name` = 'bounty_shot';
-UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'double_shot'; -- TODO: Potency changed from 40% to 10%
+UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'double_shot';
 
 -- SAM
-UPDATE `abilities` SET `level` = 55, `content_tag`= NULL WHERE `name` = 'hagakure'; -- TODO: Bonus reduced by 50%
-UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'sengikori'; -- TODO: Potency reduced from 25% to 15%
-UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'hamanoha'; -- TODO: Duration changed from 180 to 120
+UPDATE `abilities` SET `level` = 55, `content_tag`= NULL WHERE `name` = 'hagakure';
+UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'sengikori';
+UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'hamanoha';
 
 -- NIN
 UPDATE `abilities` SET `level` = 50, `content_tag`= NULL WHERE `name` = 'futae';
@@ -71,7 +71,7 @@ UPDATE `abilities` SET `level` = 71, `content_tag`= NULL WHERE `name` = 'issekig
 UPDATE `abilities` SET `level` = 40, `content_tag`= NULL WHERE `name` = 'smiting_breath';
 UPDATE `abilities` SET `level` = 60, `content_tag`= NULL WHERE `name` = 'steady_wing';
 UPDATE `abilities` SET `level` = 71, `recastTime`= 90, `content_tag`= NULL WHERE `name` = 'restoring_breath'; -- Recast changed from 60 to 90
-UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'dragon_breaker'; -- TODO: Duration changed from 180 to 120
+UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'dragon_breaker';
 
 -- SMN
 UPDATE `abilities` SET `level` = 75, `recastTime`= 300, `content_tag`= NULL WHERE `name` = 'avatars_favor'; -- Recast changed from 30 to 300
@@ -82,7 +82,7 @@ UPDATE `abilities` SET `level` = 65, `content_tag`= NULL WHERE `name` = 'efflux'
 UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'unbridled_learning';
 
 -- COR
-UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'triple_shot'; -- TODO: Potency changed from 40% to 10%
+UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'triple_shot';
 
 -- PUP
 UPDATE `abilities` SET `level` = 60, `content_tag`= NULL WHERE `name` = 'cooldown';
