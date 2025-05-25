@@ -285,7 +285,7 @@ m:addOverride('xi.zones.Selbina.npcs.Dohdjuma.onTrigger', function(player, npc)
         { xi.item.JUG_OF_SELBINA_MILK,         62 },
         { xi.item.PICKLED_HERRING,           1296 }, -- *
         { xi.item.SERVING_OF_HERB_QUUS,      5183 },
--- { xi.item.SELBINA_WAYSTONE,         10400 },
+-- { xi.item.SELBINA_WAYSTONE,         10500 },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.DOHDJUMA_SHOP_DIALOG)
@@ -295,9 +295,9 @@ end)
 m:addOverride('xi.zones.Mhaura.npcs.Tya_Padolih.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.SCROLL_OF_SLEEPGA, 11200 },
-        { 4912,                      18032 }, -- Scroll of Distract
-        { 4914,                      25038 }, -- Scroll of Frazzle
+        { xi.item.SCROLL_OF_SLEEPGA,    11648 },
+        { xi.item.SCROLL_OF_DISTRACT,   20384 },
+        { xi.item.SCROLL_OF_FRAZZLE,    28304 },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.TYAPADOLIH_SHOP_DIALOG)
@@ -307,19 +307,19 @@ end)
 m:addOverride('xi.zones.Kazham.npcs.Toji_Mumosulah.onTrigger', function(player, npc)
     local stock =
     {
-        { 112,                        496 }, -- Yellow Jar
-        { 13199,                      104 }, -- Blood Stone
-        { 13076,                     3816 }, -- Fang Necklace
-        { 13321,                     1812 }, -- Bone Earring
-        { 17351,                     5160 }, -- Gemshorn
-        { 16993,                       70 }, -- Peeled Crayfish
-        { 16998,                       40 }, -- Insect Paste
-        { xi.item.JUG_OF_WORMY_BROTH, 100 }, -- *
-        { 17876,                      165 }, -- Fish Broth
-        { 17880,                      695 }, -- Seedbed Soil
-        { xi.item.HATCHET,            500 },
-        { 4988,                      3600 }, -- Scroll of Army's Paeon III
-        { 4964,                      9590 }, -- Scroll of Monomi: Ichi
+        { xi.item.YELLOW_JAR,                  520 },
+        { xi.item.BLOOD_STONE,                 109 },
+        { xi.item.FANG_NECKLACE,              4006 },
+        { xi.item.BONE_EARRING,               1902 },
+        { xi.item.SCROLL_OF_MONOMI_ICHI,     10069 },
+        { xi.item.GEMSHORN,                   5418 },
+        { xi.item.PEELED_CRAYFISH,              73 },
+        { xi.item.BALL_OF_INSECT_PASTE,         42 },
+        { xi.item.JUG_OF_FISH_BROTH,            94 },
+        { xi.item.JUG_OF_WORMY_BROTH,          100 }, -- *
+        { xi.item.JUG_OF_SEEDBED_SOIL,         499 },
+        { xi.item.HATCHET,                     525 },
+        { xi.item.SCROLL_OF_ARMYS_PAEON_III,  3780 },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.TOJIMUMOSULAH_SHOP_DIALOG)
@@ -329,17 +329,17 @@ end)
 m:addOverride('xi.zones.Norg.npcs.Solby-Maholby.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.LUGWORM, 12 },
-        { 4899,          500, }, -- Earth Spirit Pact
--- { 2870,        10500, }, -- Norg Waystone
-        { 4930,       119250, }, -- Scroll of Katon: San
-        { 4933,       119250, }, -- Scroll of Hyoton: San
-        { 4936,       119250, }, -- Scroll of Huton: San
-        { 4939,       119250, }, -- Scroll of Doton: San
-        { 4942,       119250, }, -- Scroll of Raiton: San
-        { 4945,       119250, }, -- Scroll of Suiton: San
-        { 4970,       155910, }, -- Scroll of Gekka: Ichi
-        { 4971,       155910, }, -- Scroll of Yain: Ichi
+        { xi.item.LUGWORM,                     12 },
+        { xi.item.EARTH_SPIRIT_PACT,          500 },
+-- { xi.item.NORG_WAYSTONE,            10500 },
+        { xi.item.SCROLL_OF_KATON_SAN,     125212 },
+        { xi.item.SCROLL_OF_HYOTON_SAN,    125212 },
+        { xi.item.SCROLL_OF_HUTON_SAN,     125212 },
+        { xi.item.SCROLL_OF_DOTON_SAN,     125212 },
+        { xi.item.SCROLL_OF_RAITON_SAN,    125212 },
+        { xi.item.SCROLL_OF_SUITON_SAN,    125212 },
+        { xi.item.SCROLL_OF_GEKKA_ICHI,    163705 },
+        { xi.item.SCROLL_OF_YAIN_ICHI,     163705 },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.SOLBYMAHOLBY_SHOP_DIALOG)
@@ -506,29 +506,79 @@ m:addOverride('xi.zones.Bastok_Mines.npcs.Boytz.onTrigger', function(player, npc
 
     local rank = GetNationRank(xi.nation.BASTOK)
 
-    if rank >= 2 then
+    if GetNationRank(player:getNation()) >= 2 then -- Player nation rank 2 or 3.
         table.insert(stock, { xi.item.SET_OF_THIEFS_TOOLS, 4158, 3 })
     end
 
-    if rank >= 3 then
-        table.insert(stock, { xi.item.LIVING_KEY, 6000, 3 })
+    local sandyNationRank  = GetNationRank(xi.nation.SANDORIA)
+    local bastokNationRank = GetNationRank(xi.nation.BASTOK)
+    local windyNationRank  = GetNationRank(xi.nation.WINDURST)
+    if
+        (bastokNationRank == sandyNationRank and bastokNationRank == windyNationRank) or                        -- All 3 nations tied.
+        (bastokNationRank ~= sandyNationRank and bastokNationRank ~= windyNationRank and bastokNationRank == 3) -- Nation not tied and nation last.
+    then
+        table.insert(stock, { xi.item.LIVING_KEY, 5520, 3 })
     end
 
     player:showText(npc, zones[player:getZoneID()].text.BOYTZ_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.BASTOK)
 end)
 
+m:addOverride('xi.zones.Windurst_Waters.npcs.Ness_Rugetomal.onTrigger', function(player, npc)
+    local stock =
+    {
+        { xi.item.ACORN_COOKIE,               24, 3 },
+        { xi.item.CINNA_COOKIE,               16, 2 },
+        { xi.item.GINGER_COOKIE,              12, 1 },
+        { xi.item.STRIP_OF_MEAT_JERKY,       124, 3 },
+        { xi.item.CARP_SUSHI,                748, 1 },
+        { xi.item.FLASK_OF_DISTILLED_WATER,   12, 3 },
+        { xi.item.BOTTLE_OF_ORANGE_JUICE,    208, 2 },
+        { xi.item.BOTTLE_OF_TOMATO_JUICE,    332, 1 },
+        { xi.item.ROAST_PIPIRA,             2868, 3 }, -- *
+        { xi.item.BOILED_CRAB,              2340, 2 },
+        { xi.item.NEBIMONITE_BAKE,          1872, 1 },
+    }
+
+    player:showText(npc, zones[player:getZoneID()].text.NESSRUGETOMALL_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end)
+
+m:addOverride('xi.zones.Windurst_Waters.npcs.Taajiji.onTrigger', function(player, npc)
+    local stock =
+    {
+        { xi.item.TORTILLA,                        145, 3 },
+        { xi.item.MUTTON_TORTILLA,                2240, 2 }, -- *
+        { xi.item.DHALMEL_PIE,                    1964, 1 }, -- *
+        { xi.item.BOWL_OF_PULS,                    624, 3 },
+        { xi.item.PLATE_OF_MUSHROOM_RISOTTO,      5200, 1 },
+        { xi.item.BOWL_OF_DHALMEL_STEW,           2698, 3 },
+        { xi.item.BOWL_OF_WHITEFISH_STEW,        13710, 2 }, -- *
+        { xi.item.SERVING_OF_SHALLOPS_TROPICALE, 13141, 1 },
+        { xi.item.SERVING_OF_BEAUGREEN_SAUTE,     1887, 2 },
+        { xi.item.FLASK_OF_DISTILLED_WATER,         12, 3 },
+        { xi.item.BOTTLE_OF_ORANGE_JUICE,          208, 2 },
+        { xi.item.CUP_OF_WINDURSTIAN_TEA,          260, 3 }, -- *
+        { xi.item.ORANGE_KUCHEN,                  1014, 1 },
+        { xi.item.DHALMEL_STEAK,                  1497, 2 },
+        { xi.item.WINDURST_SALAD,                 1934, 3 },
+    }
+
+    player:showText(npc, zones[player:getZoneID()].text.TAAJIJI_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end)
+
 m:addOverride('xi.zones.Windurst_Woods.npcs.Wije_Tiren.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.FLASK_OF_EYE_DROPS,   2724, 3 },
-        { xi.item.ANTIDOTE,              331, 3 },
-        { xi.item.FLASK_OF_ECHO_DROPS,   840, 2 },
-        { xi.item.POTION,                955, 2 },
-        { xi.item.ETHER,                5025, 1 },
-        { 5014,                            108, }, --Scroll of Herb Pastoral
-        { xi.item.FLASK_OF_DISTILLED_WATER,  12 },
--- { 2864,                          10500, }, --Federation Waystone
+        { xi.item.FLASK_OF_EYE_DROPS,     2724, 3 },
+        { xi.item.ANTIDOTE,                331, 3 },
+        { xi.item.FLASK_OF_ECHO_DROPS,     840, 2 },
+        { xi.item.POTION,                  955, 2 },
+        { xi.item.ETHER,                  5025, 1 },
+        { xi.item.SCROLL_OF_HERB_PASTORAL,    112 },
+        { xi.item.FLASK_OF_DISTILLED_WATER,    12 },
+-- { xi.item.FEDERATION_WAYSTONE,      10400 },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.WIJETIREN_SHOP_DIALOG)
@@ -538,17 +588,18 @@ end)
 m:addOverride('xi.zones.Mhaura.npcs.Pikini-Mikini.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.FLASK_OF_EYE_DROPS,      2724, },
-        { xi.item.ANTIDOTE,                 331, },
-        { xi.item.FLASK_OF_ECHO_DROPS,      840, },
-        { xi.item.POTION,                   955, },
-        { xi.item.FLASK_OF_DISTILLED_WATER,  12, },
-        { xi.item.SHEET_OF_PARCHMENT,      1980, },
-        { xi.item.LUGWORM,                   12, },
-        { xi.item.HATCHET,                  500, },
-        { xi.item.STRIP_OF_MEAT_JERKY,      124, },
-        { 5299,                             162, }, -- Salsa
--- { 2867,                           10500, }, -- Mhaura Waystone
+        { xi.item.FLASK_OF_EYE_DROPS,     2724, 3 },
+        { xi.item.ANTIDOTE,                331, 3 },
+        { xi.item.FLASK_OF_ECHO_DROPS,     840, 2 },
+        { xi.item.POTION,                  955, 2 },
+        { xi.item.ETHER,                  5025, 1 },
+        { xi.item.FLASK_OF_DISTILLED_WATER,    12 },
+        { xi.item.SHEET_OF_PARCHMENT,        2059 },
+        { xi.item.LUGWORM,                     12 },
+        { xi.item.HATCHET,                    520 },
+        { xi.item.STRIP_OF_MEAT_JERKY,        124 },
+        { xi.item.DISH_OF_SALSA,              153 },
+-- { xi.item.MHAURA_WAYSTONE,          10500 },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.PIKINIMIKINI_SHOP_DIALOG)
@@ -574,11 +625,11 @@ end)
 m:addOverride('xi.zones.Kazham.npcs.Nuh_Celodehki.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.FISH_MITHKABOB,           3240, }, -- *
-        { 4536,                             3406, }, -- Blackened Frog
-        { xi.item.ROAST_MUSHROOM,            688, }, -- *
-        { xi.item.EEL_KABOB,                3150, },
-        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  728 }, -- *
+        { xi.item.FISH_MITHKABOB,            3402 }, -- *
+        { xi.item.BLACKENED_FROG,            3576 },
+        { xi.item.ROAST_MUSHROOM,             722 }, -- *
+        { xi.item.EEL_KABOB,                 3150 },
+        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  832 }, -- *
         { xi.item.WINDURST_SALAD,            2046 }, -- *
     }
 
@@ -589,16 +640,16 @@ end)
 m:addOverride('xi.zones.Kazham.npcs.Ghemi_Sinterilo.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.BUNCH_OF_PAMAMAS,        80, },
-        { xi.item.KAZHAM_PINEAPPLE,        60, },
-        { xi.item.MITHRAN_TOMATO,          40, },
-        { xi.item.BUNCH_OF_KAZHAM_PEPPERS, 60, },
-        { xi.item.STICK_OF_CINNAMON,      260, }, -- Cinnamon
-        { xi.item.KUKURU_BEAN,            120, }, -- Kukuru Bean
-        { 5187,                           172, }, -- Elshimo Coconut
-        { 5604,                           344, }, -- Elshimo Pachira Fruit*
--- { 2869,                         10000, }, -- Kazham Waystone
-        { xi.item.AQUILARIA_LOG,         3128, }, -- Aquilaria Log
+        { xi.item.BUNCH_OF_PAMAMAS,           84 },
+        { xi.item.KAZHAM_PINEAPPLE,           63 },
+        { xi.item.MITHRAN_TOMATO,             42 },
+        { xi.item.BUNCH_OF_KAZHAM_PEPPERS,    63 },
+        { xi.item.STICK_OF_CINNAMON,         273 },
+        { xi.item.KUKURU_BEAN,               126 },
+        { xi.item.ELSHIMO_COCONUT,           180 },
+        { xi.item.ELSHIMO_PACHIRA_FRUIT,     352 }, -- *
+-- { xi.item.KAZHAM_WAYSTONE,         10500 },
+        { xi.item.AQUILARIA_LOG,            3284 },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.GHEMISENTERILO_SHOP_DIALOG)
@@ -645,7 +696,7 @@ end)
 m:addOverride('xi.zones.Aht_Urhgan_Whitegate.npcs.Fayeewah.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.CUP_OF_CHAI,    204, }, -- *
+        { xi.item.CUP_OF_CHAI,    544, }, -- *
         { 5637,                    41, }, -- Pogaca*
         { xi.item.IRMIK_HELVASI, 4150, }, -- *
     }
@@ -658,7 +709,7 @@ m:addOverride('xi.zones.Aht_Urhgan_Whitegate.npcs.Yafaaf.onTrigger', function(pl
     local stock =
     {
         { xi.item.BOWL_OF_SUTLAC,         3000, }, -- *
-        { 5596,                           1675, }, -- Simit*
+        { 5596,                           1875, }, -- Simit*
         { xi.item.CUP_OF_IMPERIAL_COFFEE, 1350, }, -- Imperial Coffee
     }
 
@@ -681,7 +732,7 @@ end)
 m:addOverride('xi.zones.Aht_Urhgan_Whitegate.npcs.Rubahah.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.EAR_OF_MILLIONCORN, 48, },
+        { xi.item.EAR_OF_MILLIONCORN, 57, }, -- *
         { 2237,                       60, }, -- Imperial Flour (Requires Astral Candescence)
         { 2214,                       68, }, -- Imperial Rice (Requires Astral Candescence)
         { 2271,                      948, }, -- Coffee Beans (Requires Astral Candescence)*
