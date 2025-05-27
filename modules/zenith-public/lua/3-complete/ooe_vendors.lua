@@ -1,20 +1,20 @@
---------------------------------------------------------------
+-----------------------------------
 -- Out of Era vendors and other shop overrides
 -- Does not restore Era functionality but customizes offerings
 -- Public module for ZenitXI
 -- Items with an * have had their default prices changed
---------------------------------------------------------------
+-----------------------------------
 local m = Module:new('ooe_vendors')
 
------------------------------
--- Scroll Vendor Overrides --
------------------------------
+-----------------------------------
+-- Scroll Vendor Overrides
+-----------------------------------
 
 -----------------------------------
 -- Restores Taza as a scroll vendor
 -- Area: Lower Jeuno
 -----------------------------------
-xi.module.ensureTable("xi.zones.Lower_Jeuno.npcs.Taza")
+xi.module.ensureTable('xi.zones.Lower_Jeuno.npcs.Taza')
 
 zxi.npcHelpers.removeDefaultHandler(xi.zone.LOWER_JEUNO, 'Taza')
 
@@ -48,9 +48,9 @@ m:addOverride('xi.zones.Lower_Jeuno.npcs.Taza.onTrigger', function(player, npc)
     xi.shop.general(player, stock)
 end)
 
----------------------
--- Stock overrides --
----------------------
+-----------------------------------
+-- Stock overrides
+-----------------------------------
 m:addOverride('xi.zones.Bastok_Markets.npcs.Hortense.onTrigger', function(player, npc)
     local stock =
     {
@@ -489,9 +489,9 @@ m:addOverride('xi.zones.Nashmau.npcs.Mamaroon.onTrigger', function(player, npc)
     xi.shop.general(player, stock)
 end)
 
-----------------------------
--- Other Vendor Overrides --
-----------------------------
+-----------------------------------
+-- Other Vendor Overrides
+-----------------------------------
 
 m:addOverride('xi.zones.Northern_San_dOria.npcs.Pirvidiauce.onTrigger', function(player, npc)
     local stock =
