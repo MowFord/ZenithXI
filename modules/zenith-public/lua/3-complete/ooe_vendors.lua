@@ -17,6 +17,9 @@ local m = Module:new('ooe_vendors')
 xi.module.ensureTable("xi.zones.Lower_Jeuno.npcs.Taza")
 
 m:addOverride('xi.zones.Lower_Jeuno.npcs.Taza.onTrigger', function(player, npc)
+    -- force default action to trigger
+    InteractionGlobal.lookup:onTrigger(player, npc)
+
     local stock = {
         { xi.item.SCROLL_OF_SLEEP_II,      18720 },
         { xi.item.SCROLL_OF_SLEEPGA,       11200 },
@@ -69,7 +72,13 @@ m:addOverride('xi.zones.Bastok_Markets.npcs.Hortense.onTrigger', function(player
     xi.shop.general(player, stock)
 end)
 
-m:addOverride('xi.zones.Port_Bastok.npcs.Valeriano.onTrigger', function(player, npc)
+m:addOverride('xi.shop.handleValerianoShop', function(player, npc)
+    local zoneTable =
+    {
+        [xi.zone.SOUTHERN_SAN_DORIA] = { xi.nation.SANDORIA, xi.fameArea.SANDORIA },
+        [xi.zone.PORT_BASTOK       ] = { xi.nation.BASTOK,   xi.fameArea.BASTOK   },
+        [xi.zone.WINDURST_WOODS    ] = { xi.nation.WINDURST, xi.fameArea.WINDURST },
+    }
     local stock =
     {
         { xi.item.GINGER_COOKIE,                  12 },
@@ -82,42 +91,61 @@ m:addOverride('xi.zones.Port_Bastok.npcs.Valeriano.onTrigger', function(player, 
         { xi.item.SCROLL_OF_GODDESSS_HYMNUS,  104000 },
     }
 
-    player:showText(npc, zones[player:getZoneID()].text.VALERIANO_SHOP_DIALOG)
-    xi.shop.general(player, stock, xi.fameArea.BASTOK)
+    local zoneId = player:getZoneID()
+
+    -- fail-safe in case npc didnt despawn.
+    if GetNationRank(zoneTable[zoneId][1]) ~= 1 then
+        return
+    end
+
+    player:showText(npc, zones[zoneId].text.VALERIANO_SHOP_DIALOG)
+    xi.shop.general(player, stock, zoneTable[zoneId][2])
 end)
 
-m:addOverride('xi.zones.Southern_San_dOria.npcs.Valeriano.onTrigger', function(player, npc)
+m:addOverride('xi.zones.Port_Jeuno.npcs.Gekko.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.GINGER_COOKIE,                  12 },
-        { xi.item.FLUTE,                          49 },
-        { xi.item.PICCOLO,                      1144 },
-        { xi.item.SCROLL_OF_SCOPS_OPERETTA,      677 },
-        { xi.item.SCROLL_OF_PUPPETS_OPERETTA,  19552 },
-        { xi.item.SCROLL_OF_FOWL_AUBADE,        3369 },
-        { xi.item.SCROLL_OF_ADVANCING_MARCH,    2379 },
-        { xi.item.SCROLL_OF_GODDESSS_HYMNUS,  104000 },
+        { xi.item.FLASK_OF_EYE_DROPS,                2595 },
+        { xi.item.ANTIDOTE,                           316 },
+        { xi.item.FLASK_OF_ECHO_DROPS,                800 },
+        { xi.item.POTION,                             910 },
+        { xi.item.ETHER,                             4832 },
+        { xi.item.ROLANBERRY,                         120 },
+        { xi.item.COPY_OF_AUTUMNS_END_IN_GUSTABERG, 36000 },
+        { xi.item.COPY_OF_ACOLYTES_GRIEF,           31224 },
     }
 
-    player:showText(npc, zones[player:getZoneID()].text.VALERIANO_SHOP_DIALOG)
-    xi.shop.general(player, stock, xi.fameArea.SANDORIA)
+    player:showText(npc, zones[player:getZoneID()].text.DUTY_FREE_SHOP_DIALOG)
+    xi.shop.general(player, stock)
 end)
 
-m:addOverride('xi.zones.Windurst_Woods.npcs.Valeriano.onTrigger', function(player, npc)
+m:addOverride('xi.zones.Lower_Jeuno.npcs.Susu.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.GINGER_COOKIE,                  12 },
-        { xi.item.FLUTE,                          49 },
-        { xi.item.PICCOLO,                      1144 },
-        { xi.item.SCROLL_OF_SCOPS_OPERETTA,      677 },
-        { xi.item.SCROLL_OF_PUPPETS_OPERETTA,  19552 },
-        { xi.item.SCROLL_OF_FOWL_AUBADE,        3369 },
-        { xi.item.SCROLL_OF_ADVANCING_MARCH,    2379 },
-        { xi.item.SCROLL_OF_GODDESSS_HYMNUS,  104000 },
+        { xi.item.SCROLL_OF_BARSLEEP,       244 },
+        { xi.item.SCROLL_OF_BARPOISON,      400 },
+        { xi.item.SCROLL_OF_BARPARALYZE,    780 },
+        { xi.item.SCROLL_OF_BARBLIND,      2030 },
+        { xi.item.SCROLL_OF_BARSILENCE,    4608 },
+        { xi.item.SCROLL_OF_BARVIRUS,      9600 },
+        { xi.item.SCROLL_OF_BARPETRIFY,   15120 },
+        { xi.item.SCROLL_OF_BARSLEEPRA,     244 },
+        { xi.item.SCROLL_OF_BARPOISONRA,    400 },
+        { xi.item.SCROLL_OF_BARPALARYZRA,   780 },
+        { xi.item.SCROLL_OF_BARBLINDRA,    2030 },
+        { xi.item.SCROLL_OF_BARSILENCERA,  4608 },
+        { xi.item.SCROLL_OF_BARVIRA,       9600 },
+        { xi.item.SCROLL_OF_BARPETRA,     15120 },
+        { xi.item.SCROLL_OF_SILENA,        2330 },
+        { xi.item.SCROLL_OF_CURSNA,        8586 },
+        { xi.item.SCROLL_OF_VIRUNA,       13300 },
+        { xi.item.SCROLL_OF_STONA,        19200 },
+        { xi.item.SCROLL_OF_BANISHGA_II,  20000 },
+        { xi.item.SCROLL_OF_HOLY,         35000 },
     }
 
-    player:showText(npc, zones[player:getZoneID()].text.VALERIANO_SHOP_DIALOG)
-    xi.shop.general(player, stock, xi.fameArea.WINDURST)
+    player:showText(npc, zones[player:getZoneID()].text.WAAG_DEEG_SHOP_DIALOG)
+    xi.shop.general(player, stock)
 end)
 
 m:addOverride('xi.zones.Lower_Jeuno.npcs.Susu.onTrigger', function(player, npc)
@@ -283,7 +311,7 @@ m:addOverride('xi.zones.Selbina.npcs.Dohdjuma.onTrigger', function(player, npc)
         { xi.item.POTION,                     946 },
         { xi.item.LUGWORM,                     12 },
         { xi.item.JUG_OF_SELBINA_MILK,         62 },
-        { xi.item.PICKLED_HERRING,           1296 }, -- *
+        { xi.item.PICKLED_HERRING,           1497 }, -- *
         { xi.item.SERVING_OF_HERB_QUUS,      5183 },
 -- { xi.item.SELBINA_WAYSTONE,         10500 },
     }
@@ -360,7 +388,7 @@ m:addOverride('xi.zones.Rabao.npcs.Brave_Ox.onTrigger', function(player, npc)
         { xi.item.SCROLL_OF_SACRIFICE,     70304 },
         { xi.item.SCROLL_OF_ESUNA,         73008 },
         { xi.item.SCROLL_OF_AUSPICE,       35006 },
-        { xi.item.SCROLL_OF_CRUSADE,      162162 },
+        { xi.item.SCROLL_OF_CRUSADE,      163705 },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.BRAVEOX_SHOP_DIALOG)
@@ -522,6 +550,31 @@ m:addOverride('xi.zones.Bastok_Mines.npcs.Boytz.onTrigger', function(player, npc
 
     player:showText(npc, zones[player:getZoneID()].text.BOYTZ_SHOP_DIALOG)
     xi.shop.nation(player, stock, xi.nation.BASTOK)
+end)
+
+m:addOverride('xi.zones.Port_Bastok.npcs.Numa.onTrigger', function(player, npc)
+    local stock =
+    {
+        { xi.item.HACHIMAKI,                 866, 2 },
+        { xi.item.COTTON_HACHIMAKI,         5079, 1 },
+        { xi.item.KENPOGI,                  1307, 2 },
+        { xi.item.COTTON_DOGI,              7654, 1 },
+        { xi.item.TEKKO,                     719, 2 },
+        { xi.item.COTTON_TEKKO,             4212, 1 },
+        { xi.item.SITABAKI,                 1044, 2 },
+        { xi.item.COTTON_SITABAKI,          6133, 1 },
+        { xi.item.KYAHAN,                    666, 2 },
+        { xi.item.COTTON_KYAHAN,            3924, 1 },
+        { xi.item.SILVER_OBI,               3825, 1 },
+        { xi.item.BAMBOO_STICK,              151, 2 },
+        { xi.item.TOOLBAG_INOSHISHINOFUDA, 17325, 3 }, -- *
+        { xi.item.TOOLBAG_SHIKANOFUDA,     21000, 3 },
+        { xi.item.TOOLBAG_CHONOFUDA,       21000, 3 },
+        { xi.item.PICKAXE,                   210, 3 },
+    }
+
+    player:showText(npc, zones[player:getZoneID()].text.NUMA_SHOP_DIALOG)
+    xi.shop.general(player, stock)
 end)
 
 m:addOverride('xi.zones.Windurst_Waters.npcs.Ness_Rugetomal.onTrigger', function(player, npc)
