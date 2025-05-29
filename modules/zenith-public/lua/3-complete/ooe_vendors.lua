@@ -697,11 +697,11 @@ end)
 m:addOverride('xi.zones.Windurst_Woods.npcs.Wije_Tiren.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.FLASK_OF_EYE_DROPS,     2724, 3 },
-        { xi.item.ANTIDOTE,                331, 3 },
-        { xi.item.FLASK_OF_ECHO_DROPS,     840, 2 },
-        { xi.item.POTION,                  955, 2 },
-        { xi.item.ETHER,                  5025, 1 },
+        { xi.item.FLASK_OF_EYE_DROPS,        2724 },
+        { xi.item.ANTIDOTE,                   331 },
+        { xi.item.FLASK_OF_ECHO_DROPS,        840 },
+        { xi.item.POTION,                     955 },
+        { xi.item.ETHER,                     5025 },
         { xi.item.SCROLL_OF_HERB_PASTORAL,    112 },
         { xi.item.FLASK_OF_DISTILLED_WATER,    12 },
 -- { xi.item.FEDERATION_WAYSTONE,      10400 },
