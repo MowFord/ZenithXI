@@ -229,8 +229,8 @@ m:addOverride('xi.zones.Lower_Jeuno.npcs.Yoskolo.onTrigger', function(player, np
         { xi.item.BOTTLE_OF_APPLE_JUICE,         430 }, -- *
         { xi.item.BOTTLE_OF_MELON_JUICE,        1200 }, -- *
         { xi.item.BOTTLE_OF_GRAPE_JUICE,         967 },
-        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,     770 }, -- *
-        { xi.item.SERVING_OF_ICECAP_ROLANBERRY, 5544 },
+        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,     624 }, -- *
+        { xi.item.SERVING_OF_ICECAP_ROLANBERRY, 3880 }, -- *
         { xi.item.SCROLL_OF_FIRE_CAROL,         6380 },
         { xi.item.SCROLL_OF_ICE_CAROL,          7440 },
         { xi.item.SCROLL_OF_WIND_CAROL,         5940 },
@@ -260,7 +260,7 @@ m:addOverride('xi.zones.Lower_Jeuno.npcs.Amalasanda.onTrigger', function(player,
         { xi.item.JAR_OF_GROUND_WASABI,    2724 },
         { xi.item.BOTTLE_OF_RICE_VINEGAR,   210 },
         { xi.item.BUNDLE_OF_SHIRATAKI,      516 },
-        { xi.item.BAG_OF_BUCKWHEAT_FLOUR,  5250 },
+        { xi.item.BAG_OF_BUCKWHEAT_FLOUR,  2250 }, -- *
         { xi.item.SCROLL_OF_KATON_ICHI,    2447 },
         { xi.item.SCROLL_OF_HYOTON_ICHI,   2447 },
         { xi.item.SCROLL_OF_HUTON_ICHI,    2447 },
@@ -664,7 +664,7 @@ m:addOverride('xi.zones.Port_Bastok.npcs.Sawyer.onTrigger', function(player, npc
         { xi.item.BOWL_OF_EGG_SOUP,          3432, 1 },
         { xi.item.FLASK_OF_DISTILLED_WATER,    12, 3 },
         { xi.item.BOTTLE_OF_MELON_JUICE,     1200, 2 }, -- *
-        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  770, 1 }, -- *
+        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  624, 1 }, -- *
         { xi.item.SLICE_OF_ROAST_MUTTON,      756, 2 },
     }
 
@@ -684,7 +684,7 @@ m:addOverride('xi.zones.Port_Bastok.npcs.Melloa.onTrigger', function(player, npc
         { xi.item.BOWL_OF_EGG_SOUP,          3432, 1 },
         { xi.item.FLASK_OF_DISTILLED_WATER,    12, 3 },
         { xi.item.BOTTLE_OF_MELON_JUICE,     1200, 2 }, -- *
-        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  770, 1 }, -- *
+        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  624, 1 }, -- *
         { xi.item.SLICE_OF_ROAST_MUTTON,      756, 2 },
     }
 
@@ -717,7 +717,7 @@ m:addOverride('xi.zones.Bastok_Mines.npcs.Griselda.onTrigger', function(player, 
         { xi.item.STRIP_OF_MEAT_JERKY,        126, 3 },
         { xi.item.PICKLED_HERRING,           1497, 2 }, -- *
         { xi.item.FLASK_OF_DISTILLED_WATER,    12, 3 },
-        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  770, 1 }, -- *
+        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  624, 1 }, -- *
         { xi.item.BOTTLE_OF_MELON_JUICE,     1200, 2 }, -- *
     }
 
@@ -738,7 +738,7 @@ m:addOverride('xi.zones.Metalworks.npcs.Tomasa.onTrigger', function(player, npc)
         { xi.item.BOWL_OF_EGG_SOUP,          3432, 1 },
         { xi.item.FLASK_OF_DISTILLED_WATER,    12, 3 },
         { xi.item.BOTTLE_OF_MELON_JUICE,     1155, 2 },
-        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  770, 1 }, -- *
+        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  624, 1 }, -- *
     }
 
     player:showText(npc, zones[player:getZoneID()].text.TOMASA_SHOP_DIALOG)
@@ -785,7 +785,7 @@ m:addOverride('xi.zones.Windurst_Waters.npcs.Ness_Rugetomal.onTrigger', function
         { xi.item.BOTTLE_OF_ORANGE_JUICE,    208, 2 },
         { xi.item.BOTTLE_OF_TOMATO_JUICE,    332, 1 },
         { xi.item.ROAST_PIPIRA,             2868, 3 }, -- *
-        { xi.item.BOILED_CRAB,              2340, 2 },
+        { xi.item.BOILED_CRAB,              1540, 2 }, -- *
         { xi.item.NEBIMONITE_BAKE,          1872, 1 },
     }
 
@@ -1043,17 +1043,17 @@ m:addOverride('xi.zones.Upper_Jeuno.npcs.Glyke.onTrigger', function(player, npc)
         { xi.item.LOAF_OF_WHITE_BREAD,        200 },
         { xi.item.BOWL_OF_PEA_SOUP,          1400 },
         { 4420,                              2510 }, -- *Tomato Soup
-        { 5686,                               900 }, -- *Cheese Sandwich
-        { xi.item.BOILED_CRAB,               2340 },
+        { 5686,                               820 }, -- *Cheese Sandwich
+        { xi.item.BOILED_CRAB,               1540 }, -- *
         { xi.item.SLICE_OF_ROAST_MUTTON,      756 },
         { xi.item.PICKLED_HERRING,           1497 }, -- *
-        { xi.item.BAKED_APPLE,                640 }, -- *
+        { xi.item.BAKED_APPLE,                540 }, -- *
         { 5653,                               910 }, -- *Cherry Muffin
         { xi.item.WINDURST_SALAD,            1934 },
         { xi.item.SERVING_OF_HERB_QUUS,      4984 },
         { xi.item.BOTTLE_OF_ORANGE_JUICE,     200 },
         { xi.item.BOTTLE_OF_APPLE_JUICE,      410 }, -- *
-        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  750 }, -- *
+        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  600 }, -- *
         { xi.item.BOTTLE_OF_MELON_JUICE,     1180 }, -- *
         { xi.item.BOTTLE_OF_GRAPE_JUICE,      967 },
         { xi.item.FLASK_OF_ORANGE_AU_LAIT,    360 }, -- *
@@ -1088,7 +1088,7 @@ m:addOverride('xi.zones.Kazham.npcs.Nuh_Celodehki.onTrigger', function(player, n
         { xi.item.BLACKENED_FROG,            3576 },
         { xi.item.ROAST_MUSHROOM,             722 }, -- *
         { xi.item.EEL_KABOB,                 3150 },
-        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  770 }, -- *
+        { xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  624 }, -- *
         { xi.item.WINDURST_SALAD,            1934 }, -- *
     }
 
@@ -1340,16 +1340,23 @@ m:addOverride('xi.shop.outpost', function(player, npc)
         { xi.item.FLASK_OF_EYE_DROPS,       1294 }, -- *
         { xi.item.POTION,                    910 },
         { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
-        { xi.item.BOTTLE_OF_ORANGE_JUICE,    215 }, -- *
-        { 5737,                              200 }, -- *Salted Hare
-        { 5738,                              200 }, -- *Sweet Lizard
-        { 5739,                              200 }, -- *Honeyed Egg
+        { xi.item.BOTTLE_OF_ORANGE_JUICE,    210 }, -- *
+        { 5737,                              150 }, -- *Salted Hare
+        { 5738,                              150 }, -- *Sweet Lizard
+        { 5739,                              150 }, -- *Honeyed Egg
         { xi.item.PET_FOOD_ALPHA_BISCUIT,     20 }, -- *
         { xi.item.PET_FOOD_BETA_BISCUIT,     110 }, -- *
         { xi.item.PET_FOOD_GAMMA_BISCUIT,    415 }, -- *
         { xi.item.PET_FOOD_DELTA_BISCUIT,    680 }, -- *
-        { xi.item.PET_FOOD_EPSILON_BISCUIT, 1160 }, -- *
     }
+    -- Bonus wares if Rank 6 or higher
+    if player:getRank(player:getNation()) >= 6 then
+        table.insert(stock, 8, { xi.item.BOTTLE_OF_PINEAPPLE_JUICE, 650 }) -- *
+        table.insert(stock, 10, { xi.item.STRIP_OF_MEAT_JERKY, 300 }) -- *
+        table.insert(stock, 12, { xi.item.BOILED_CRAYFISH, 450 }) -- *
+        table.insert(stock, 14, { xi.item.BAKED_APPLE, 560 }) -- *
+        table.insert(stock, 19, { xi.item.PET_FOOD_EPSILON_BISCUIT, 1160 }) -- *
+    end
 
     xi.shop.general(player, stock)
 end)
@@ -1365,10 +1372,10 @@ m:addOverride('xi.zones.Southern_San_dOria_[S].npcs.Geltpix.onTrigger', function
         { xi.item.HI_ETHER,                 5025 }, -- *
         { xi.item.HATCHET,                   500 },
         { xi.item.ASPHODEL,                  100 },
+        { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
         { xi.item.BAG_OF_HORO_FLOUR,          40 }, -- *
         { xi.item.LOAF_OF_GOBLIN_BREAD,      300 }, -- *
         { 4465,                             3900 }, -- *Goblin Stew
-        { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
     }
 
     player:showText(npc, zones[player:getZoneID()].text.DONT_HURT_GELTPIX)
@@ -1382,10 +1389,10 @@ m:addOverride('xi.zones.Bastok_Markets_[S].npcs.Blingbrix.onTrigger', function(p
         { xi.item.HI_ETHER,                 5025 }, -- *
         { xi.item.PICKAXE,                   200 },
         { xi.item.SICKLE,                    300 },
+        { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
         { xi.item.BAG_OF_HORO_FLOUR,          40 }, -- *
         { xi.item.LOAF_OF_GOBLIN_BREAD,      300 }, -- *
         { 4465,                             3900 }, -- *Goblin Stew
-        { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
     }
 
     player:showText(npc, zones[player:getZoneID()].text.BLINGBRIX_SHOP_DIALOG)
@@ -1399,17 +1406,22 @@ m:addOverride('xi.zones.Windurst_Waters_[S].npcs.Pelftrix.onTrigger', function(p
         { xi.item.HI_ETHER,                 5025 }, -- *
         { xi.item.SICKLE,                    300 },
         { xi.item.HATCHET,                   500 },
+        { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
         { xi.item.BAG_OF_HORO_FLOUR,          40 }, -- *
         { xi.item.LOAF_OF_GOBLIN_BREAD,      300 }, -- *
         { 4465,                             3900 }, -- *Goblin Stew
-        { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
     }
+
+    if player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HEALING_HERBS) == xi.questStatus.QUEST_COMPLETED then
+        table.insert(stock, 9, { 5418, 1500 }) -- *Tincture
+    end
 
     player:showText(npc, zones[player:getZoneID()].text.PELFTRIX_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end)
 
-m:addOverride('xi.zones.Fort_Karugo_[S].npcs.Spondulix.onTrigger', function(player, npc)
+-- TODO: Spondulix is not yet implemented.
+m:addOverride('xi.zones.Fort_Karugo-Narugo_[S].npcs.Spondulix.onTrigger', function(player, npc)
     local stock =
     {
         { xi.item.HI_POTION,            2500 }, -- *
