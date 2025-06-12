@@ -14,7 +14,7 @@
 
 -- MISAREAUX_COAST (Zone 25)
 -----------------------------------
-UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 25 AND `name` = 'Seaboard_Vulture';
+UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 25 AND `name` = 'Seaboard_Vulture'; -- *
 
 -- PHOMIUNA_AQUEDUCTS (Zone 27)
 -----------------------------------
@@ -58,7 +58,7 @@ UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 27 AND `name` IN (
 
 -- SACRARIUM (Zone 28)
 -----------------------------------
-UPDATE `mob_groups` SET, `respawntime` = 960, `minLevel` = 57, `maxLevel` = 59 WHERE `zoneid` = 28 AND `name` = 'Aqueduct_Spider';
+UPDATE `mob_groups` SET `respawntime` = 960, `minLevel` = 57, `maxLevel` = 59 WHERE `zoneid` = 28 AND `name` = 'Aqueduct_Spider';
 
 UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 28 AND `name` IN (
     'Gazer',
@@ -68,11 +68,11 @@ UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 28 AND `name` IN (
 
 -- RIVERNE_SITE_B01 (Zone 29)
 -----------------------------------
-UPDATE `mob_groups` SET, `minLevel` = 58, `maxLevel` = 60 WHERE `zoneid` = 29 AND `name` = 'Blazedrake';
+UPDATE `mob_groups` SET `minLevel` = 58, `maxLevel` = 60 WHERE `zoneid` = 29 AND `name` = 'Blazedrake';
 
 -- RIVERNE_SITE_A01 (Zone 30)
 -----------------------------------
-UPDATE `mob_groups` SET, `minLevel` = 46, `maxLevel` = 49 WHERE `zoneid` = 29 AND `name` = 'Darner';
+UPDATE `mob_groups` SET `minLevel` = 46, `maxLevel` = 49 WHERE `zoneid` = 29 AND `name` = 'Darner';
 
 -- DYNAMIS_VALKURM (Zone 39)
 -----------------------------------
@@ -110,8 +110,8 @@ UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 51 AND `name` IN (
 
 -- BHAFLAU_THICKETS (Zone 52)
 -----------------------------------
-UPDATE `mob_groups` SET, `minLevel` = 81, `maxLevel` = 82 WHERE `zoneid` = 52 AND `name` = 'Locus_Colibri';
-UPDATE `mob_groups` SET, `minLevel` = 81, `maxLevel` = 83 WHERE `zoneid` = 52 AND `name` = 'Locus_Wivre';
+UPDATE `mob_groups` SET `minLevel` = 81, `maxLevel` = 82 WHERE `zoneid` = 52 AND `name` = 'Locus_Colibri';
+UPDATE `mob_groups` SET `minLevel` = 81, `maxLevel` = 83 WHERE `zoneid` = 52 AND `name` = 'Locus_Wivre';
 
 -- Address inconsistent respawn times in database.
 UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 52 AND `name` IN (
@@ -127,15 +127,170 @@ UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 52 AND `name` IN (
 
 -- ARRAPAGO_REEF (Zone 54)
 -----------------------------------
-UPDATE `mob_groups` SET, `minLevel` = 81, `maxLevel` = 83 WHERE `zoneid` = 54 AND `name` = 'Naraka_Bat';
-UPDATE `mob_groups` SET, `minLevel` = 82, `maxLevel` = 84 WHERE `zoneid` = 54 AND `name` = 'Nirgali';
-UPDATE `mob_groups` SET, `minLevel` = 84, `maxLevel` = 86 WHERE `zoneid` = 54 AND `name` = 'Nostokulshedra';
-UPDATE `mob_groups` SET, `minLevel` = 83, `maxLevel` = 85 WHERE `zoneid` = 54 AND `name` = 'Dweomershell';
+UPDATE `mob_groups` SET `minLevel` = 81, `maxLevel` = 83 WHERE `zoneid` = 54 AND `name` = 'Naraka_Bat';
+UPDATE `mob_groups` SET `minLevel` = 82, `maxLevel` = 84 WHERE `zoneid` = 54 AND `name` = 'Nirgali';
+UPDATE `mob_groups` SET `minLevel` = 84, `maxLevel` = 86 WHERE `zoneid` = 54 AND `name` = 'Nostokulshedra';
+UPDATE `mob_groups` SET `minLevel` = 83, `maxLevel` = 85 WHERE `zoneid` = 54 AND `name` = 'Dweomershell';
+UPDATE `mob_groups` SET `minLevel` = 88, `maxLevel` = 90 WHERE `zoneid` = 54 AND `name` = 'Medusa'; -- *85-85
 
 -- MOUNT_ZHAYOLM (Zone 61)
 -----------------------------------
-UPDATE `mob_groups` SET, `minLevel` = 70, `maxLevel` = 72 WHERE `zoneid` = 61 AND `name` = 'Wootzshell'; -- *70-71
-UPDATE `mob_groups` SET, `minLevel` = 73, `maxLevel` = 76 WHERE `zoneid` = 61 AND `name` = 'Assassin_Fly'; -- *71-76
-UPDATE `mob_groups` SET, `minLevel` = 71, `maxLevel` = 74 WHERE `zoneid` = 61 AND `name` = 'Magmatic_Eruca'; -- *71-75
-UPDATE `mob_groups` SET, `minLevel` = 81, `maxLevel` = 83 WHERE `zoneid` = 61 AND `name` = 'Sulphuric_Jagil';
-UPDATE `mob_groups` SET, `minLevel` = 84, `maxLevel` = 86 WHERE `zoneid` = 61 AND `name` = 'Orichalcumshell';
+UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 72 WHERE `zoneid` = 61 AND `name` = 'Wootzshell'; -- *70-71
+UPDATE `mob_groups` SET `minLevel` = 73, `maxLevel` = 76 WHERE `zoneid` = 61 AND `name` = 'Assassin_Fly'; -- *71-76
+UPDATE `mob_groups` SET `minLevel` = 71, `maxLevel` = 74 WHERE `zoneid` = 61 AND `name` = 'Magmatic_Eruca'; -- *71-75
+UPDATE `mob_groups` SET `minLevel` = 81, `maxLevel` = 83 WHERE `zoneid` = 61 AND `name` = 'Sulphuric_Jagil';
+UPDATE `mob_groups` SET `minLevel` = 84, `maxLevel` = 86 WHERE `zoneid` = 61 AND `name` = 'Orichalcumshell';
+UPDATE `mob_groups` SET `minLevel` = 75, `maxLevel` = 78 WHERE `zoneid` = 61 AND `name` = 'Sweeping_Cluster'; -- *73-78
+
+UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 61 AND `name` = 'Ebony_Pudding'; -- *
+
+-- HALVUNG (Zone 62)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 88, `maxLevel` = 90 WHERE `zoneid` = 62 AND `name` = 'Gurfurlur_the_Menacing'; -- *85-90
+
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 62 AND `name` = 'Ebony_Pudding'; -- *
+
+-- MAMOOK (Zone 65)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 73 WHERE `zoneid` = 65 AND `name` = 'Colibri'; -- *70-71
+UPDATE `mob_groups` SET `minLevel` = 88, `maxLevel` = 90 WHERE `zoneid` = 65 AND `name` = 'Gulool_Ja_Ja'; -- *85-88
+
+-- Address inconsistent respawn times in database.
+UPDATE `mob_groups` SET `respawntime`= 960 WHERE `zoneid` = 65 AND `name` IN (
+    'Mamool_Ja_Mimicker',
+    'Mamool_Ja_Zenist',
+    'Mamool_Ja_Savant',
+    'Mamool_Ja_Sophist',
+    'Mamool_Ja_Bounder',
+    'Mamool_Ja_Strapper',
+    'Mamool_Ja_Spearman',
+    'Mamool_Ja_Frogman',
+    'Mamool_Ja_Lurker',
+    'Mamool_Ja_Philosopher',
+    'Mamool_Ja_Infiltrator',
+    'Mamool_Ja_Blusterer',
+    'Mamool_Ja_Pikeman',
+    'Mamool_Ja_Stabler'
+);
+
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 65 AND `name` IN (
+    'Colibri',
+    'Carriage_Lizard',
+    'Puk_M',
+    'Sea_Puk',
+    'Nipper',
+    'Suhur_Mas'
+);
+
+-- AYDEEWA_SUBTERRANE (Zone 68)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 73 WHERE `zoneid` = 68 AND `name` = 'Defoliator'; -- *68-73
+UPDATE `mob_groups` SET `minLevel` = 71, `maxLevel` = 74 WHERE `zoneid` = 68 AND `name` = 'Aydeewa_Diremite'; -- *70-74
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 68 AND `name` = 'Deforester';
+UPDATE `mob_groups` SET `minLevel` = 81, `maxLevel` = 82 WHERE `zoneid` = 68 AND `name` = 'Mycoskulker';
+UPDATE `mob_groups` SET `minLevel` = 80, `maxLevel` = 83 WHERE `zoneid` = 68 AND `name` = 'Slime_Eater';
+
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 68 AND `name` IN (
+    'Treant_Sapling',
+    'Puktrap',
+    'Qiqirn_Enterpriser',
+    'Qiqirn_Lieuter',
+    'Defoliator',
+    'Qiqirn_Archaeologist',
+    'Qiqirn_Mosstrooper',
+    'Mold_Eater'
+);
+
+-- CAEDARVA_MIRE (Zone 79)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 66, `maxLevel` = 65 WHERE `zoneid` = 79 AND `name` = 'Marsh_Murre'; -- *64-68
+UPDATE `mob_groups` SET `minLevel` = 66, `maxLevel` = 68 WHERE `zoneid` = 79 AND `name` = 'Orderly_Imp'; -- *63-68
+UPDATE `mob_groups` SET `minLevel` = 75, `maxLevel` = 77 WHERE `zoneid` = 79 AND `name` = 'Jnun'; -- *72-77
+UPDATE `mob_groups` SET `minLevel` = 80, `maxLevel` = 82 WHERE `zoneid` = 79 AND `name` = 'Heraldic_Imp'; -- *79-82
+UPDATE `mob_groups` SET `minLevel` = 78, `maxLevel` = 80 WHERE `zoneid` = 79 AND `name` = 'Spongilla_Fly'; -- *78-79
+UPDATE `mob_groups` SET `minLevel` = 86, `maxLevel` = 88 WHERE `zoneid` = 79 AND `name` = 'Slough_Skua';
+UPDATE `mob_groups` SET `minLevel` = 82, `maxLevel` = 84 WHERE `zoneid` = 79 AND `name` = 'Vauxia_Fly';
+
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 79 AND `name` IN (
+    'Qiqirn_Rock_Hound',
+    'Qiqirn_Mireguide'
+);
+
+-- EAST_RONFAURE_S (Zone 81)
+-----------------------------------
+-- TODO
+
+-- JUGNER_FOREST_S (Zone 82)
+-----------------------------------
+-- TODO
+
+-- VUNKERL_INLET_S (Zone 83)
+-----------------------------------
+-- TODO
+
+-- BATALLIA_DOWNS_S (Zone 84)
+-----------------------------------
+-- TODO
+
+-- LA_VAULE_S (Zone 85)
+-----------------------------------
+-- TODO
+
+-- NORTH_GUSTABERG_S (Zone 88)
+-----------------------------------
+-- TODO
+
+-- GRAUBERG_S (Zone 89)
+-----------------------------------
+-- TODO
+
+-- PASHHOW_MARSHLANDS_S (Zone 90)
+-----------------------------------
+-- TODO
+
+-- ROLANBERRY_FIELDS_S (Zone 91)
+-----------------------------------
+-- TODO
+
+-- BEADEAUX_S (Zone 92)
+-----------------------------------
+-- TODO
+
+-- WEST_SARUTABARUTA_S (Zone 95)
+-----------------------------------
+-- TODO
+
+-- FORT_KARUGO_NARUGO_S (Zone 96)
+-----------------------------------
+-- TODO
+
+-- MERIPHATAUD_MOUNTAINS_S (Zone 97)
+-----------------------------------
+-- TODO
+
+-- SAUROMUGUE_CHAMPAIGN_S (Zone 98)
+-----------------------------------
+-- TODO
+
+-- CASTLE_OZTROJA_S (Zone 99)
+-----------------------------------
+-- TODO
+
+-- WEST_RONFAURE (Zone 100)
+-----------------------------------
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 100 AND `name` IN (
+    'Wild_Rabbit',
+    'Tunnel_Worm'
+);
+
+-- EAST_RONFAURE (Zone 101)
+-----------------------------------
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 101 AND `name` IN (
+    'Wild_Rabbit',
+    'Tunnel_Worm'
+);
