@@ -294,3 +294,84 @@ UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 101 AND `name` IN (
     'Wild_Rabbit',
     'Tunnel_Worm'
 );
+
+-- LA_THEINE_PLATEAU (Zone 102)
+-----------------------------------
+-- Custom level changes.
+UPDATE `mob_groups` SET `minLevel` = 13, `maxLevel` = 16 WHERE `zoneid` = 102 AND `name` IN ( -- *12-16
+    'Orcish_Grunt',
+    'Orcish_Stonechucker',
+    'Orcish_Neckchopper',
+    'Goblin_Ambusher',
+    'Goblin_Tinkerer',
+    'Goblin_Butcher'
+);
+
+-- VALKURM_DUNES (Zone 103)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 19, `maxLevel` = 22 WHERE `zoneid` = 103 AND `name` = 'Snipper'; -- *18-22
+UPDATE `mob_groups` SET `minLevel` = 20, `maxLevel` = 22 WHERE `zoneid` = 103 AND `name` = 'Ghoul_war'; -- *18-22
+UPDATE `mob_groups` SET `minLevel` = 20, `maxLevel` = 22 WHERE `zoneid` = 103 AND `name` = 'Ghoul_blm'; -- *18-22
+UPDATE `mob_groups` SET `minLevel` = 16, `maxLevel` = 19 WHERE `zoneid` = 103 AND `name` = 'Hill_Lizard'; -- *15-19
+UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 25 WHERE `zoneid` = 103 AND `name` = 'Thread_Leech'; -- *21-25
+UPDATE `mob_groups` SET `minLevel` = 20, `maxLevel` = 22 WHERE `zoneid` = 103 AND `name` = 'Goblin_Bounty_Hunter'; -- *17-20
+
+-- JUGNER_FOREST (Zone 104)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 25 WHERE `zoneid` = 104 AND `name` = 'Jugner_Funguar'; -- *21-25
+
+UPDATE `mob_groups` SET `minLevel` = 17, `maxLevel` = 20 WHERE `zoneid` = 104 AND `name` IN ( -- *16-20
+    'Orcish_Grunt',
+    'Orcish_Stonechucker',
+    'Orcish_Neckchopper',
+    'Goblin_Ambusher',
+    'Goblin_Tinkerer',
+    'Goblin_Butcher'
+);
+
+UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 25 WHERE `zoneid` = 104 AND `name` IN ( -- *21-25
+    'Orcish_Fighter',
+    'Orcish_Cursemaker',
+    'Orcish_Serjeant',
+    'Goblin_Mugger',
+    'Goblin_Leecher',
+    'Goblin_Gambler'
+);
+
+-- BATALLIA_DOWNS (Zone 105)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 23, `maxLevel` = 26 WHERE `zoneid` = 105 AND `name` = 'May_Fly'; -- *22-26
+UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 24 WHERE `zoneid` = 105 AND `name` = 'Stalking_Sapling'; -- *20-24
+UPDATE `mob_groups` SET `minLevel` = 29, `maxLevel` = 32 WHERE `zoneid` = 105 AND `name` = 'Sabertooth_Tiger'; -- *28-32
+UPDATE `mob_groups` SET `minLevel` = 30, `maxLevel` = 32 WHERE `zoneid` = 105 AND `name` = 'Mauthe_Doog'; -- *28-32
+UPDATE `mob_groups` SET `minLevel` = 28, `maxLevel` = 31 WHERE `zoneid` = 105 AND `name` = 'Wight_war'; -- *26-36
+UPDATE `mob_groups` SET `minLevel` = 24, `maxLevel` = 26 WHERE `zoneid` = 105 AND `name` = 'Goblin_Bounty_Hunter'; -- *30-26
+
+UPDATE `mob_groups` SET `minLevel` = 27, `maxLevel` = 30 WHERE `zoneid` = 105 AND `name` IN ( -- *26-30
+    'Goblin_Mugger',
+    'Goblin_Leecher',
+    'Goblin_Gambler',
+    'Orcish_Fighter',
+    'Orcish_Cursemaker',
+    'Orcish_Serjeant'
+);
+
+UPDATE `mob_groups` SET `minLevel` = 31, `maxLevel` = 34 WHERE `zoneid` = 105 AND `name` IN ( -- *28-36
+    'Goblin_Pathfinder',
+    'Goblin_Furrier',
+    'Goblin_Smithy',
+    'Goblin_Shaman'
+);
+
+UPDATE `mob_groups` SET `minLevel` = 33, `maxLevel` = 36 WHERE `zoneid` = 105 AND `name` IN ( -- *30-36
+    'Orcish_Impaler',
+    'Orcish_Beastrider',
+    'Orcish_Nightraider',
+    'Orcish_Brawler'
+);
+
+-- NORTH_GUSTABERG (Zone 106)
+-----------------------------------
+
+-- SOUTH_GUSTABERG (Zone 107)
+-----------------------------------
