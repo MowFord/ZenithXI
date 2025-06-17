@@ -14,7 +14,7 @@
 
 -- CARPENTERS_LANDING (Zone 2)
 -----------------------------------
-UPDATE `mob_groups` SET `minLevel` = 21, `maxLevel` = 24 WHERE `zoneid` = 2 AND `name` = 'Battrap'; -- *20-24
+UPDATE `mob_groups` SET `minLevel` = 21, `maxLevel` = 24 WHERE `zoneid` = 2 AND `name` = 'Marsh_Funguar'; -- *20-24
 UPDATE `mob_groups` SET `minLevel` = 24, `maxLevel` = 27 WHERE `zoneid` = 2 AND `name` = 'Battrap'; -- *23-27
 UPDATE `mob_groups` SET `minLevel` = 17, `maxLevel` = 20 WHERE `zoneid` = 2 AND `name` IN ( -- *16-20
     'Orcish_Grunt',
@@ -295,8 +295,8 @@ UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 52 AND `name` IN (
 
 -- ARRAPAGO_REEF (Zone 54)
 -----------------------------------
-UPDATE `mob_groups` SET `minLevel` = 81, `maxLevel` = 83 WHERE `zoneid` = 54 AND `name` = 'Naraka_Bat';
-UPDATE `mob_groups` SET `minLevel` = 82, `maxLevel` = 84 WHERE `zoneid` = 54 AND `name` = 'Nirgali';
+UPDATE `mob_groups` SET `minLevel` = 81, `maxLevel` = 83 WHERE `zoneid` = 54 AND `name` = 'Nirgali';
+UPDATE `mob_groups` SET `minLevel` = 82, `maxLevel` = 84 WHERE `zoneid` = 54 AND `name` = 'Naraka_Bat';
 UPDATE `mob_groups` SET `minLevel` = 83, `maxLevel` = 85 WHERE `zoneid` = 54 AND `name` = 'Dweomershell';
 UPDATE `mob_groups` SET `minLevel` = 84, `maxLevel` = 86 WHERE `zoneid` = 54 AND `name` = 'Nostokulshedra';
 UPDATE `mob_groups` SET `minLevel` = 78, `maxLevel` = 80 WHERE `zoneid` = 54 AND `name` = 'Lamia_No19'; -- *78-78
@@ -304,22 +304,62 @@ UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 54 AND
 UPDATE `mob_groups` SET `minLevel` = 87, `maxLevel` = 89 WHERE `zoneid` = 54 AND `name` = 'Euryale'; -- *87-87
 UPDATE `mob_groups` SET `minLevel` = 88, `maxLevel` = 90 WHERE `zoneid` = 54 AND `name` = 'Medusa'; -- *85-85
 
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 54 AND `name` IN (
+    'Arrapago_Apkallu',
+    'Purgatory_Bat',
+    'Nipper',
+    'Heraldic_Imp'
+);
+
 -- MOUNT_ZHAYOLM (Zone 61)
 -----------------------------------
 UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 72 WHERE `zoneid` = 61 AND `name` = 'Wootzshell'; -- *70-71
 UPDATE `mob_groups` SET `minLevel` = 71, `maxLevel` = 74 WHERE `zoneid` = 61 AND `name` = 'Magmatic_Eruca'; -- *71-75
+UPDATE `mob_groups` SET `minLevel` = 71, `maxLevel` = 74 WHERE `zoneid` = 61 AND `name` = 'Zhayolm_Apkallu'; -- *70-74
 UPDATE `mob_groups` SET `minLevel` = 73, `maxLevel` = 76 WHERE `zoneid` = 61 AND `name` = 'Assassin_Fly'; -- *71-76
 UPDATE `mob_groups` SET `minLevel` = 75, `maxLevel` = 78 WHERE `zoneid` = 61 AND `name` = 'Sweeping_Cluster'; -- *73-78
-UPDATE `mob_groups` SET `minLevel` = 81, `maxLevel` = 83 WHERE `zoneid` = 61 AND `name` = 'Sulphuric_Jagil'; -- *
-UPDATE `mob_groups` SET `minLevel` = 84, `maxLevel` = 86 WHERE `zoneid` = 61 AND `name` = 'Orichalcumshell'; -- *
+UPDATE `mob_groups` SET `minLevel` = 80, `maxLevel` = 82 WHERE `zoneid` = 61 AND `name` = 'Scoriaceous_Eruca';
+UPDATE `mob_groups` SET `minLevel` = 81, `maxLevel` = 83 WHERE `zoneid` = 61 AND `name` = 'Sulphuric_Jagil';
+UPDATE `mob_groups` SET `minLevel` = 84, `maxLevel` = 86 WHERE `zoneid` = 61 AND `name` = 'Orichalcumshell';
 
 UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 61 AND `name` = 'Ebony_Pudding'; -- *
 
 -- HALVUNG (Zone 62)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 72, `maxLevel` = 75 WHERE `zoneid` = 62 AND `name` = 'Magmatic_Eruca'; -- *71-75
+UPDATE `mob_groups` SET `minLevel` = 73, `maxLevel` = 76 WHERE `zoneid` = 62 AND `name` = 'Friars_Lantern'; -- *72-76
+UPDATE `mob_groups` SET `minLevel` = 74, `maxLevel` = 76 WHERE `zoneid` = 62 AND `name` = 'Wamouracampa'; -- *72-76
+UPDATE `mob_groups` SET `minLevel` = 79, `maxLevel` = 81 WHERE `zoneid` = 62 AND `name` = 'Dahak'; -- *79-79
 UPDATE `mob_groups` SET `minLevel` = 88, `maxLevel` = 90 WHERE `zoneid` = 62 AND `name` = 'Gurfurlur_the_Menacing'; -- *85-90
+UPDATE `mob_groups` SET `minLevel` = 73, `maxLevel` = 75 WHERE `zoneid` = 62 AND `name` IN ( -- *71-75
+    'Troll_Gemologist',
+    'Troll_Stoneworker',
+    'Troll_Lapidarist',
+    'Troll_Smelter',
+    'Troll_Engraver',
+    'Troll_Cameist',
+    'Troll_Ironworker'
+);
+UPDATE `mob_groups` SET `minLevel` = 80, `maxLevel` = 83 WHERE `zoneid` = 62 AND `name` IN ( -- *78-83
+    'Troll_Artilleryman',
+    'Troll_Combatant',
+    'Troll_Targeteer',
+    'Troll_Machinist',
+    'Troll_Scrimer',
+    'Troll_Grenadier',
+    'Troll_Cuirasser'
+);
 
-UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 62 AND `name` = 'Ebony_Pudding'; -- *
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 62 AND `name` IN (
+    'Volcanic_Bats',
+    'Purgatory_Bat',
+    'Black_Pudding',
+    'Ebony_Pudding',
+    'Wamouracampa',
+    'Magmatic_Eruca'
+);
 
 -- MAMOOK (Zone 65)
 -----------------------------------
@@ -492,6 +532,9 @@ UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 101 AND `name` IN (
 -- LA_THEINE_PLATEAU (Zone 102)
 -----------------------------------
 -- Custom level changes.
+UPDATE `mob_groups` SET `minLevel` = 8, `maxLevel` = 11 WHERE `zoneid` = 102 AND `name` = 'Rock_Eater'; -- *7-11
+UPDATE `mob_groups` SET `minLevel` = 9, `maxLevel` = 12 WHERE `zoneid` = 102 AND `name` = 'Huge_Wasp'; -- *8-12
+UPDATE `mob_groups` SET `minLevel` = 10, `maxLevel` = 13 WHERE `zoneid` = 102 AND `name` = 'Akbaba'; -- *9-13
 UPDATE `mob_groups` SET `minLevel` = 13, `maxLevel` = 16 WHERE `zoneid` = 102 AND `name` IN ( -- *12-16
     'Orcish_Grunt',
     'Orcish_Stonechucker',
@@ -512,8 +555,8 @@ UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 25 WHERE `zoneid` = 103 AN
 
 -- JUGNER_FOREST (Zone 104)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 16, `maxLevel` = 18 WHERE `zoneid` = 104 AND `name` = 'Screamer'; -- *15-18
 UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 25 WHERE `zoneid` = 104 AND `name` = 'Jugner_Funguar'; -- *21-25
-
 UPDATE `mob_groups` SET `minLevel` = 17, `maxLevel` = 20 WHERE `zoneid` = 104 AND `name` IN ( -- *16-20
     'Orcish_Grunt',
     'Orcish_Stonechucker',
@@ -522,7 +565,6 @@ UPDATE `mob_groups` SET `minLevel` = 17, `maxLevel` = 20 WHERE `zoneid` = 104 AN
     'Goblin_Tinkerer',
     'Goblin_Butcher'
 );
-
 UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 25 WHERE `zoneid` = 104 AND `name` IN ( -- *21-25
     'Orcish_Fighter',
     'Orcish_Cursemaker',
