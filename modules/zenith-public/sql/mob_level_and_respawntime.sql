@@ -597,7 +597,6 @@ UPDATE `mob_groups` SET `minLevel` = 31, `maxLevel` = 34 WHERE `zoneid` = 105 AN
     'Goblin_Smithy',
     'Goblin_Shaman'
 );
-
 UPDATE `mob_groups` SET `minLevel` = 33, `maxLevel` = 36 WHERE `zoneid` = 105 AND `name` IN ( -- *30-36
     'Orcish_Impaler',
     'Orcish_Beastrider',
@@ -637,9 +636,110 @@ UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 106 AND `name` IN (
 
 -- SOUTH_GUSTABERG (Zone 107)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 2, `maxLevel` = 4 WHERE `zoneid` = 107 AND `name` = 'Ding_Bats'; -- *1-4
+UPDATE `mob_groups` SET `minLevel` = 3, `maxLevel` = 5 WHERE `zoneid` = 107 AND `name` = 'River_Crab'; -- *1-5
+UPDATE `mob_groups` SET `minLevel` = 3, `maxLevel` = 6 WHERE `zoneid` = 107 AND `name` = 'Stone_Eater'; -- *2-6
+UPDATE `mob_groups` SET `minLevel` = 3, `maxLevel` = 6 WHERE `zoneid` = 107 AND `name` = 'Walking_Sapling'; -- *2-6
+UPDATE `mob_groups` SET `minLevel` = 4, `maxLevel` = 6 WHERE `zoneid` = 107 AND `name` = 'Maneating_Hornet'; -- *2-6
+UPDATE `mob_groups` SET `minLevel` = 4, `maxLevel` = 7 WHERE `zoneid` = 107 AND `name` = 'Vulture'; -- *2-7
+UPDATE `mob_groups` SET `minLevel` = 5, `maxLevel` = 8 WHERE `zoneid` = 107 AND `name` = 'Rock_Lizard'; -- *3-8
+UPDATE `mob_groups` SET `minLevel` = 5, `maxLevel` = 8 WHERE `zoneid` = 107 AND `name` IN ( -- *3/4-8
+    'Young_Quadav',
+    'Amber_Quadav',
+    'Amethyst_Quadav',
+    'Goblin_Thug',
+    'Goblin_Weaver'
+);
+
 -- Custom respawn changes.
 UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 107 AND `name` IN (
     'Huge_Hornet',
     'Tunnel_Worm'
 );
 
+-- KONSCHTAT_HIGHLANDS (Zone 108)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 8, `maxLevel` = 11 WHERE `zoneid` = 108 AND `name` = 'Strolling_Sapling'; -- *7-11
+UPDATE `mob_groups` SET `minLevel` = 8, `maxLevel` = 11 WHERE `zoneid` = 108 AND `name` = 'Rock_Eater'; -- *7-11
+UPDATE `mob_groups` SET `minLevel` = 8, `maxLevel` = 11 WHERE `zoneid` = 108 AND `name` = 'Huge_Wasp'; -- *7-11
+UPDATE `mob_groups` SET `minLevel` = 13, `maxLevel` = 16 WHERE `zoneid` = 108 AND `name` IN ( -- *10/12-16
+    'Goblin_Ambusher',
+    'Goblin_Butcher',
+    'Onyx_Quadav',
+    'Veteran_Quadav',
+    'Greater_Quadav',
+    'Goblin_Tinkerer'
+);
+
+-- PASHHOW_MARSHLANDS (Zone 109)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 16, `maxLevel` = 18 WHERE `zoneid` = 109 AND `name` = 'Water_Wasp'; -- *15-18
+UPDATE `mob_groups` SET `minLevel` = 18, `maxLevel` = 20 WHERE `zoneid` = 109 AND `name` = 'Snipper'; -- *17-20
+UPDATE `mob_groups` SET `minLevel` = 18, `maxLevel` = 20 WHERE `zoneid` = 109 AND `name` = 'Land_Pugil'; -- *17-20
+UPDATE `mob_groups` SET `minLevel` = 20, `maxLevel` = 23 WHERE `zoneid` = 109 AND `name` = 'Bog_Dog'; -- *18-25
+UPDATE `mob_groups` SET `minLevel` = 20, `maxLevel` = 23 WHERE `zoneid` = 109 AND `name` = 'Ghoul_war'; -- *18-25
+UPDATE `mob_groups` SET `minLevel` = 20, `maxLevel` = 23 WHERE `zoneid` = 109 AND `name` = 'Zombie_blm'; -- *16-26
+UPDATE `mob_groups` SET `minLevel` = 20, `maxLevel` = 23 WHERE `zoneid` = 109 AND `name` = 'Zombie_blm'; -- *16-26
+UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 25 WHERE `zoneid` = 109 AND `name` = 'Marsh_Funguar'; -- *21-25
+UPDATE `mob_groups` SET `minLevel` = 17, `maxLevel` = 20 WHERE `zoneid` = 109 AND `name` IN ( -- *16-20
+    'Veteran_Quadav',
+    'Greater_Quadav',
+    'Onyx_Quadav',
+    'Goblin_Ambusher',
+    'Goblin_Tinkerer',
+    'Goblin_Butcher'
+);
+UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 25 WHERE `zoneid` = 109 AND `name` IN ( -- *21-25
+    'Goblin_Mugger',
+    'Goblin_Leecher',
+    'Goblin_Gambler'
+);
+UPDATE `mob_groups` SET `minLevel` = 23, `maxLevel` = 26 WHERE `zoneid` = 109 AND `name` IN ( -- *20-26
+    'Old_Quadav',
+    'Copper_Quadav',
+    'Brass_Quadav'
+);
+
+-- ROLANBERRY_FIELDS (Zone 110)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 23, `maxLevel` = 26 WHERE `zoneid` = 110 AND `name` = 'Death_Wasp'; -- *22-26
+UPDATE `mob_groups` SET `minLevel` = 26, `maxLevel` = 28 WHERE `zoneid` = 110 AND `name` = 'Berry_Grub'; -- *25-28
+UPDATE `mob_groups` SET `minLevel` = 27, `maxLevel` = 30 WHERE `zoneid` = 110 AND `name` IN ( -- *26-30
+    'Old_Quadav',
+    'Copper_Quadav',
+    'Brass_Quadav',
+    'Goblin_Mugger',
+    'Goblin_Leecher',
+    'Goblin_Gambler'
+);
+UPDATE `mob_groups` SET `minLevel` = 31, `maxLevel` = 34 WHERE `zoneid` = 110 AND `name` IN ( -- *30-36
+    'Bronze_Quadav',
+    'Silver_Quadav',
+    'Zircon_Quadav',
+    'Garnet_Quadav',
+    'Goblin_Pathfinder',
+    'Goblin_Furrier',
+    'Goblin_Smithy',
+    'Goblin_Shaman',
+    'Wight_war',
+    'Wight_blm'
+);
+
+-- BEAUCEDINE_GLACIER (Zone 111)
+-----------------------------------
+
+-- XARCABARD (Zone 112)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 49, `maxLevel` = 52 WHERE `zoneid` = 112 AND `name` IN ( -- *48-52
+    'Demon_Pawn',
+    'Demon_Wizard',
+    'Demon_Knight'
+);
+UPDATE `mob_groups` SET `minLevel` = 58, `maxLevel` = 58 WHERE `zoneid` = 112 AND `name` IN ( -- *53
+    'Boreal_Hound',
+    'Boreal_Coeurl',
+    'Boreal_Tiger'
+);
+
+-- CAPE_TERIGGAN (Zone 113)
+-----------------------------------
