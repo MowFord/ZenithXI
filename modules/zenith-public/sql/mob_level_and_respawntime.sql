@@ -743,3 +743,138 @@ UPDATE `mob_groups` SET `minLevel` = 58, `maxLevel` = 58 WHERE `zoneid` = 112 AN
 
 -- CAPE_TERIGGAN (Zone 113)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 63, `maxLevel` = 65 WHERE `zoneid` = 113 AND `name` = 'Beach_Bunny'; -- *62-65
+UPDATE `mob_groups` SET `minLevel` = 63, `maxLevel` = 66 WHERE `zoneid` = 113 AND `name` = 'Sand_Lizard'; -- *62-66
+UPDATE `mob_groups` SET `minLevel` = 66, `maxLevel` = 69 WHERE `zoneid` = 113 AND `name` = 'Terror_Pugil'; -- *66-70
+UPDATE `mob_groups` SET `minLevel` = 67, `maxLevel` = 70 WHERE `zoneid` = 113 AND `name` = 'Doom_Soldier'; -- *66-70
+UPDATE `mob_groups` SET `minLevel` = 67, `maxLevel` = 70 WHERE `zoneid` = 113 AND `name` = 'Doom_Mage'; -- *67-71
+UPDATE `mob_groups` SET `minLevel` = 71, `maxLevel` = 73 WHERE `zoneid` = 113 AND `name` = 'Sand_Cockatrice'; -- *71-74
+
+-- EASTERN_ALTEPA_DESERT (Zone 114)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 31, `maxLevel` = 34 WHERE `zoneid` = 114 AND `name` = 'Giant_Spider'; -- *30-34
+UPDATE `mob_groups` SET `minLevel` = 37, `maxLevel` = 40 WHERE `zoneid` = 114 AND `name` = 'Sand_Beetle'; -- *36-40
+UPDATE `mob_groups` SET `minLevel` = 39, `maxLevel` = 42 WHERE `zoneid` = 114 AND `name` = 'Flesh_Eater'; -- *37-42
+UPDATE `mob_groups` SET `minLevel` = 41, `maxLevel` = 44 WHERE `zoneid` = 114 AND `name` = 'Desert_Dhalmel'; -- *39-44
+UPDATE `mob_groups` SET `minLevel` = 44, `maxLevel` = 46 WHERE `zoneid` = 114 AND `name` = 'Lost_Soul_war'; -- *44-48
+UPDATE `mob_groups` SET `minLevel` = 44, `maxLevel` = 46 WHERE `zoneid` = 114 AND `name` = 'Lost_Soul_blm'; -- *44-48
+UPDATE `mob_groups` SET `minLevel` = 36, `maxLevel` = 39 WHERE `zoneid` = 114 AND `name` IN ( -- *35-39
+    'Antican_Auxiliarius',
+    'Antican_Funditor',
+    'Antican_Faber'
+);
+UPDATE `mob_groups` SET `minLevel` = 46, `maxLevel` = 49 WHERE `zoneid` = 114 AND `name` IN ( -- *44/45-49
+    'Antican_Decurio',
+    'Antican_Sagittarius',
+    'Antican_Speculator',
+    'Goblin_Robber',
+    'Goblin_Poacher',
+    'Goblin_Reaper',
+    'Goblin_Trader',
+    'Goblin_Digger'
+);
+
+-- WEST_SARUTABARUTA (Zone 115)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 2, `maxLevel` = 5 WHERE `zoneid` = 115 AND `name` = 'Savanna_Rarab'; -- *1-5
+UPDATE `mob_groups` SET `minLevel` = 2, `maxLevel` = 5 WHERE `zoneid` = 115 AND `name` = 'River_Crab'; -- *1-3
+UPDATE `mob_groups` SET `minLevel` = 3, `maxLevel` = 6 WHERE `zoneid` = 115 AND `name` = 'Goblin_Fisher'; -- *3-4
+UPDATE `mob_groups` SET `minLevel` = 3, `maxLevel` = 6 WHERE `zoneid` = 115 AND `name` = 'Carrion_Crow'; -- *2-6
+UPDATE `mob_groups` SET `minLevel` = 5, `maxLevel` = 8 WHERE `zoneid` = 115 AND `name` = 'Crawler'; -- *3-8
+UPDATE `mob_groups` SET `minLevel` = 5, `maxLevel` = 8 WHERE `zoneid` = 115 AND `name` IN ( -- *4-8
+    'Yagudo_Initiate',
+    'Yagudo_Acolyte',
+    'Yagudo_Scribe',
+    'Magicked_Bones_war',
+    'Magicked_Bones_blm'
+);
+
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 115 AND `name` IN (
+    'Tiny_Mandragora',
+    'Bumblebee'
+);
+
+-- EAST_SARUTABARUTA (Zone 116)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 2, `maxLevel` = 5 WHERE `zoneid` = 116 AND `name` = 'Savanna_Rarab'; -- *1-5
+UPDATE `mob_groups` SET `minLevel` = 3, `maxLevel` = 6 WHERE `zoneid` = 116 AND `name` = 'River_Crab'; -- *2-6
+UPDATE `mob_groups` SET `minLevel` = 4, `maxLevel` = 7 WHERE `zoneid` = 116 AND `name` = 'Pug_Pugil'; -- *4-8
+UPDATE `mob_groups` SET `minLevel` = 6, `maxLevel` = 8 WHERE `zoneid` = 116 AND `name` = 'Goblin_Fisher'; -- *4-8
+UPDATE `mob_groups` SET `minLevel` = 5, `maxLevel` = 8 WHERE `zoneid` = 116 AND `name` IN ( -- *1/3-8
+    'Yagudo_Initiate',
+    'Yagudo_Acolyte',
+    'Yagudo_Scribe',
+    'Goblin_Thug',
+    'Goblin_Weaver',
+    'Mad_Fox',
+    'Magicked_Bones_war',
+    'Magicked_Bones_blm'
+);
+UPDATE `mob_groups` SET `minLevel` = 10, `maxLevel` = 12, `HP` = 0, `MP` = 200 WHERE `zoneid` = 116 AND `name` = 'Duke_Decapod'; -- *8-8
+
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 116 AND `name` IN (
+    'Tiny_Mandragora',
+    'Bumblebee'
+);
+
+-- TAHRONGI_CANYON (Zone 117)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 8, `maxLevel` = 11 WHERE `zoneid` = 117 AND `name` = 'Canyon_Rarab'; -- *7-11
+UPDATE `mob_groups` SET `minLevel` = 8, `maxLevel` = 11 WHERE `zoneid` = 117 AND `name` = 'Strolling_Sapling'; -- *7-11
+UPDATE `mob_groups` SET `minLevel` = 9, `maxLevel` = 11 WHERE `zoneid` = 117 AND `name` = 'Pygmaioi'; -- *7-11
+UPDATE `mob_groups` SET `minLevel` = 10, `maxLevel` = 13 WHERE `zoneid` = 117 AND `name` = 'Akbaba'; -- *9-13
+UPDATE `mob_groups` SET `minLevel` = 13, `maxLevel` = 16 WHERE `zoneid` = 117 AND `name` IN ( -- *12-16
+    'Goblin_Ambusher',
+    'Goblin_Tinkerer',
+    'Goblin_Butcher',
+    'Yagudo_Mendicant',
+    'Yagudo_Piper',
+    'Yagudo_Persecutor'
+);
+UPDATE `mob_groups` SET `minLevel` = 29, `maxLevel` = 31 WHERE `zoneid` = 117 AND `name` = 'Herbage_Hunter'; -- *29-29
+
+-- BUBURIMU_PENINSULA (Zone 118)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 16, `maxLevel` = 19 WHERE `zoneid` = 118 AND `name` = 'Sylvestre'; -- *15-19
+UPDATE `mob_groups` SET `minLevel` = 20, `maxLevel` = 22 WHERE `zoneid` = 118 AND `name` = 'Zombie_war'; -- *18-22
+UPDATE `mob_groups` SET `minLevel` = 21, `maxLevel` = 23 WHERE `zoneid` = 118 AND `name` = 'Goblin_Bounty_Hunter'; -- *17-20
+UPDATE `mob_groups` SET `minLevel` = 21, `maxLevel` = 23 WHERE `zoneid` = 118 AND `name` = 'Snipper'; -- *18-23
+UPDATE `mob_groups` SET `minLevel` = 21, `maxLevel` = 24 WHERE `zoneid` = 118 AND `name` = 'Zu'; -- *20-24
+UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 24 WHERE `zoneid` = 118 AND `name` = 'Bull_Dhalmel'; -- *20-24
+UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 24 WHERE `zoneid` = 118 AND `name` = 'Ghoul_blm'; -- *20-24
+UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 25 WHERE `zoneid` = 118 AND `name` = 'Poison_Leech'; -- *21-25
+UPDATE `mob_groups` SET `minLevel` = 24, `maxLevel` = 26 WHERE `zoneid` = 118 AND `name` = 'Shoal_Pugil'; -- *24-28
+UPDATE `mob_groups` SET `minLevel` = 18, `maxLevel` = 20 WHERE `zoneid` = 118 AND `name` IN ( -- *17-20
+    'Goblin_Ambusher',
+    'Goblin_Tinkerer',
+    'Goblin_Butcher'
+);
+
+-- MERIPHATAUD_MOUNTAINS (Zone 119)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 14, `maxLevel` = 16 WHERE `zoneid` = 119 AND `name` = 'Wandering_Sapling'; -- *13-16
+UPDATE `mob_groups` SET `minLevel` = 19, `maxLevel` = 21 WHERE `zoneid` = 119 AND `name` = 'Zombie_war'; -- *16-26
+UPDATE `mob_groups` SET `minLevel` = 19, `maxLevel` = 21 WHERE `zoneid` = 119 AND `name` = 'Zombie_blm'; -- *16-26
+UPDATE `mob_groups` SET `minLevel` = 23, `maxLevel` = 26 WHERE `zoneid` = 119 AND `name` = 'Coeurl'; -- *22-26
+UPDATE `mob_groups` SET `minLevel` = 17, `maxLevel` = 20 WHERE `zoneid` = 119 AND `name` IN ( -- *16-20
+    'Goblin_Ambusher',
+    'Goblin_Tinkerer',
+    'Goblin_Butcher',
+    'Yagudo_Mendicant',
+    'Yagudo_Piper',
+    'Yagudo_Persecutor'
+);
+UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 25 WHERE `zoneid` = 119 AND `name` IN ( -- *21-25
+    'Raptor',
+    'Goblin_Mugger',
+    'Goblin_Leecher',
+    'Goblin_Gambler',
+    'Yagudo_Votary',
+    'Yagudo_Theologist',
+    'Yagudo_Priest'
+);
+
+-- SAUROMUGUE_CHAMPAIGN (Zone 120)
+-----------------------------------
