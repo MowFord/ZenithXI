@@ -929,9 +929,93 @@ UPDATE `mob_groups` SET `minLevel` = 43, `maxLevel` = 46 WHERE `zoneid` = 121 AN
 
 -- ROMAEVE (Zone 122)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 62, `maxLevel` = 64 WHERE `zoneid` = 122 AND `name` = 'Killing_Weapon'; -- *60-64
+UPDATE `mob_groups` SET `minLevel` = 62, `maxLevel` = 65 WHERE `zoneid` = 122 AND `name` = 'Ominous_Weapon'; -- *61-65
+UPDATE `mob_groups` SET `minLevel` = 65, `maxLevel` = 68 WHERE `zoneid` = 122 AND `name` = 'Magic_Flagon'; -- *64-69
+UPDATE `mob_groups` SET `minLevel` = 66, `maxLevel` = 69 WHERE `zoneid` = 122 AND `name` = 'Cursed_Puppet'; -- *65-69
+UPDATE `mob_groups` SET `minLevel` = 80, `maxLevel` = 82 WHERE `zoneid` = 122 AND `name` = 'Shikigami_Weapon'; -- *77-80
 
 -- YUHTUNGA_JUNGLE (Zone 123)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 30, `maxLevel` = 33 WHERE `zoneid` = 123 AND `name` = 'Yuhtunga_Mandragora'; -- *29-33
+UPDATE `mob_groups` SET `minLevel` = 32, `maxLevel` = 35 WHERE `zoneid` = 123 AND `name` = 'Goblin_Smithy'; -- *32-37
+UPDATE `mob_groups` SET `minLevel` = 34, `maxLevel` = 37 WHERE `zoneid` = 123 AND `name` = 'Death_Jacket'; -- *33-37
+UPDATE `mob_groups` SET `minLevel` = 35, `maxLevel` = 37 WHERE `zoneid` = 123 AND `name` = 'Goblin_Furrier'; -- *32-37
+UPDATE `mob_groups` SET `minLevel` = 36, `maxLevel` = 38 WHERE `zoneid` = 123 AND `name` = 'Makara'; -- *35-38
+UPDATE `mob_groups` SET `minLevel` = 38, `maxLevel` = 41 WHERE `zoneid` = 123 AND `name` = 'Soldier_Crawler'; -- *37-41
+UPDATE `mob_groups` SET `minLevel` = 38, `maxLevel` = 41 WHERE `zoneid` = 123 AND `name` = 'Goblin_Reaper'; -- *42-47
+UPDATE `mob_groups` SET `minLevel` = 39, `maxLevel` = 42 WHERE `zoneid` = 123 AND `name` = 'Goblin_Robber'; -- *42-47
+UPDATE `mob_groups` SET `minLevel` = 39, `maxLevel` = 42 WHERE `zoneid` = 123 AND `name` = 'Goblin_Poacher'; -- *42-47
+UPDATE `mob_groups` SET `minLevel` = 35, `maxLevel` = 38 WHERE `zoneid` = 123 AND `name` IN ( -- *34-38
+    'Creek_Sahagin',
+    'River_Sahagin',
+    'Stream_Sahagin'
+);
 
 -- YHOATOR_JUNGLE (Zone 124)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 38, `maxLevel` = 41 WHERE `zoneid` = 124 AND `name` = 'Goblin_Reaper'; -- *41-45
+UPDATE `mob_groups` SET `minLevel` = 42, `maxLevel` = 44 WHERE `zoneid` = 124 AND `name` = 'Young_Opo-opo'; -- *40-44
+UPDATE `mob_groups` SET `minLevel` = 52, `maxLevel` = 55 WHERE `zoneid` = 124 AND `name` = 'Goblin_Bouncer'; -- *51-55
+UPDATE `mob_groups` SET `minLevel` = 52, `maxLevel` = 55 WHERE `zoneid` = 124 AND `name` = 'Goblin_Hunter'; -- *51-55
+UPDATE `mob_groups` SET `minLevel` = 36, `maxLevel` = 38 WHERE `zoneid` = 124 AND `name` IN ( -- *35-39
+    'Goblin_Smithy',
+    'Goblin_Pathfinder',
+    'Goblin_Shaman'
+);
+UPDATE `mob_groups` SET `minLevel` = 45, `maxLevel` = 48 WHERE `zoneid` = 124 AND `name` IN ( -- *45-49
+    'Goblin_Robber',
+    'Goblin_Trader',
+    'Goblin_Poacher',
+    'Tonberry_Creeper',
+    'Tonberry_Hexer',
+    'Tonberry_Harasser'
+);
+
+-- WESTERN_ALTEPA_DESERT (Zone 125)
+-----------------------------------
+
+-- QUFIM_ISLAND (Zone 126)
+-----------------------------------
+
+-- BEHEMOTHS_DOMINION (Zone 127)
+-----------------------------------
+
+-- VALLEY_OF_SORROWS (Zone 128)
+-----------------------------------
+
+-- RUAUN_GARDENS (Zone 130)
+-----------------------------------
+
+-- ABYSSEA_LA_THEINE (Zone 132)
+-----------------------------------
+-- TODO
+
+-- DYNAMIS_BEAUCEDINE (Zone 134)
+-----------------------------------
+-- TODO
+
+-- DYNAMIS_XARCABARD (Zone 135)
+-----------------------------------
+-- TODO
+
+-- BEAUCEDINE_GLACIER_S (Zone 136)
+-----------------------------------
+-- TODO
+
+-- XARCABARD_S (Zone 137)
+-----------------------------------
+-- TODO
+
+-- CASTLE_ZVAHL_BAILEYS_S (Zone 138)
+-----------------------------------
+-- TODO
+
+-- GHELSBA_OUTPOST (Zone 140)
+-----------------------------------
+
+-- FORT_GHELSBA (Zone 141)
+-----------------------------------
+
+-- YUGHOTT_GROTTO (Zone 142)
 -----------------------------------
