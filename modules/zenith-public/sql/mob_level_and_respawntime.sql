@@ -956,6 +956,7 @@ UPDATE `mob_groups` SET `minLevel` = 35, `maxLevel` = 38 WHERE `zoneid` = 123 AN
 -----------------------------------
 UPDATE `mob_groups` SET `minLevel` = 38, `maxLevel` = 41 WHERE `zoneid` = 124 AND `name` = 'Goblin_Reaper'; -- *41-45
 UPDATE `mob_groups` SET `minLevel` = 42, `maxLevel` = 44 WHERE `zoneid` = 124 AND `name` = 'Young_Opo-opo'; -- *40-44
+UPDATE `mob_groups` SET `minLevel` = 44, `maxLevel` = 47 WHERE `zoneid` = 124 AND `name` = 'Big_Jaw'; -- *43-47
 UPDATE `mob_groups` SET `minLevel` = 52, `maxLevel` = 55 WHERE `zoneid` = 124 AND `name` = 'Goblin_Bouncer'; -- *51-55
 UPDATE `mob_groups` SET `minLevel` = 52, `maxLevel` = 55 WHERE `zoneid` = 124 AND `name` = 'Goblin_Hunter'; -- *51-55
 UPDATE `mob_groups` SET `minLevel` = 36, `maxLevel` = 38 WHERE `zoneid` = 124 AND `name` IN ( -- *35-39
@@ -974,15 +975,56 @@ UPDATE `mob_groups` SET `minLevel` = 45, `maxLevel` = 48 WHERE `zoneid` = 124 AN
 
 -- WESTERN_ALTEPA_DESERT (Zone 125)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 41, `maxLevel` = 44 WHERE `zoneid` = 125 AND `name` = 'Desert_Spider'; -- *40-44
+UPDATE `mob_groups` SET `minLevel` = 42, `maxLevel` = 45 WHERE `zoneid` = 125 AND `name` = 'Antican_Essedarius'; -- *41-45
+UPDATE `mob_groups` SET `minLevel` = 43, `maxLevel` = 46 WHERE `zoneid` = 125 AND `name` = 'Desert_Worm'; -- *43-47
+UPDATE `mob_groups` SET `minLevel` = 45, `maxLevel` = 48 WHERE `zoneid` = 125 AND `name` = 'Desert_Dhalmel'; -- *44-48
+UPDATE `mob_groups` SET `minLevel` = 46, `maxLevel` = 49 WHERE `zoneid` = 125 AND `name` = 'Antican_Retiarius'; -- *45-49
+UPDATE `mob_groups` SET `minLevel` = 46, `maxLevel` = 49 WHERE `zoneid` = 125 AND `name` = 'Antican_Eques'; -- *45-49
+UPDATE `mob_groups` SET `minLevel` = 48, `maxLevel` = 51 WHERE `zoneid` = 125 AND `name` = 'Desert_Beetle'; -- *47-51
+UPDATE `mob_groups` SET `minLevel` = 50, `maxLevel` = 53 WHERE `zoneid` = 125 AND `name` = 'Cactuar'; -- *48-53
+UPDATE `mob_groups` SET `minLevel` = 54, `maxLevel` = 57 WHERE `zoneid` = 125 AND `name` = 'Desert_Manticore'; -- *53-57
+UPDATE `mob_groups` SET `minLevel` = 52, `maxLevel` = 55 WHERE `zoneid` = 125 AND `name` IN ( -- *51-55
+    'Goblin_Welldigger',
+    'Goblin_Bouncer',
+    'Goblin_Enchanter',
+    'Goblin_Hunter',
+    'Goblin_Digger'
+);
+UPDATE `mob_groups` SET `minLevel` = 54, `maxLevel` = 57 WHERE `zoneid` = 125 AND `name` IN ( -- *54-58
+    'Antican_Secutor',
+    'Antican_Lanista',
+    'Antican_Hoplomachus'
+);
+UPDATE `mob_groups` SET `minLevel` = 61, `maxLevel` = 63 WHERE `zoneid` = 125 AND `name` = 'Dahu'; -- *57-57
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 85 WHERE `zoneid` = 125 AND `name` = 'King_Vinegarroon'; -- *80-85
+
+UPDATE `mob_groups` SET `HP` = 2500 WHERE `zoneid` = 125 AND `name` = 'Celphie';
 
 -- QUFIM_ISLAND (Zone 126)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 26, `maxLevel` = 29 WHERE `zoneid` = 126 AND `name` = 'Clipper'; -- *25-29
+UPDATE `mob_groups` SET `minLevel` = 21, `maxLevel` = 23 WHERE `zoneid` = 126 AND `groupid` = 15 AND `name` = 'Gigass_Leech'; -- *21-30
 
 -- BEHEMOTHS_DOMINION (Zone 127)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 44, `maxLevel` = 46 WHERE `zoneid` = 127 AND `name` = 'Demonic_Weapon'; -- *45-46
+UPDATE `mob_groups` SET `minLevel` = 44, `maxLevel` = 47 WHERE `zoneid` = 127 AND `name` = 'Lost_Soul_blm'; -- *45-47
+UPDATE `mob_groups` SET `minLevel` = 44, `maxLevel` = 47 WHERE `zoneid` = 127 AND `name` = 'Lost_Soul_war'; -- *45-47
+UPDATE `mob_groups` SET `minLevel` = 45, `maxLevel` = 47 WHERE `zoneid` = 127 AND `name` = 'Master_Coeurl'; -- *45-50
+
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 127 AND `name` IN (
+    'Lesser_Gaylas',
+    'Greater_Gayla',
+    'Demonic_Weapon',
+    'Master_Coeurl',
+    'Lost_Soul_war'
+);
 
 -- VALLEY_OF_SORROWS (Zone 128)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 68, `maxLevel` = 70 WHERE `zoneid` = 128 AND `name` = 'Velociraptor'; -- *66-69
 
 -- RUAUN_GARDENS (Zone 130)
 -----------------------------------
@@ -1013,9 +1055,127 @@ UPDATE `mob_groups` SET `minLevel` = 45, `maxLevel` = 48 WHERE `zoneid` = 124 AN
 
 -- GHELSBA_OUTPOST (Zone 140)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 12, `maxLevel` = 15 WHERE `zoneid` = 140 AND `name` IN ( -- *11-15
+    'Orcish_Grunt',
+    'Orcish_Stonechucker',
+    'Orcish_Neckchopper'
+);
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 480 WHERE `zoneid` = 140 AND `name` IN (
+    'Orcish_Fodder',
+    'Orcish_Mesmerizer',
+    'Orcish_Grappler',
+    'Spectacled_Bats',
+    'Orcish_Stonelauncher',
+    'Orcish_Grunt',
+    'Watch_Lizard',
+    'Toadstool',
+    'Cheiroptera',
+    'Orcish_Stonechucker',
+    'Orcish_Neckchopper',
+    'Ghelsba_Pugil'
+);
 
 -- FORT_GHELSBA (Zone 141)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 14, `maxLevel` = 17 WHERE `zoneid` = 141 AND `name` IN ( -- *11-17
+    'Orcish_Grunt',
+    'Orcish_Stonechucker',
+    'Orcish_Neckchopper'
+);
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 480 WHERE `zoneid` = 141 AND `name` IN (
+    'Orcish_Fodder',
+    'Orcish_Mesmerizer',
+    'Orcish_Grappler',
+    'Spectacled_Bats',
+    'Cheiroptera',
+    'Orcish_Flamethrower',
+    'Orcish_Grunt',
+    'Orcish_Stonechucker',
+    'Orcish_Neckchopper',
+    'Sentry_Lizard',
+    'Toadstool',
+    'Ghelsba_Pugil'
+);
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 141 AND `name` IN (
+    'Orcish_Fighter',
+    'Orcish_Cursemaker',
+    'Orcish_Serjeant'
+);
 
 -- YUGHOTT_GROTTO (Zone 142)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 15, `maxLevel` = 18 WHERE `zoneid` = 142 AND `name` IN ( -- *14-18
+    'Orcish_Grunt',
+    'Orcish_Stonechucker',
+    'Orcish_Neckchopper'
+);
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 480 WHERE `zoneid` = 142 AND `name` IN (
+    'Orcish_Grunt',
+    'Orcish_Stonechucker',
+    'Orcish_Neckchopper',
+    'Grotto_Bats',
+    'Riding_Lizard',
+    'Stealth_Bat'
+);
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 142 AND `name` IN (
+    'Orcish_Fighter',
+    'Orcish_Cursemaker',
+    'Orcish_Serjeant'
+);
+
+-- PALBOROUGH_MINES (Zone 143)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 4, `maxLevel` = 6 WHERE `zoneid` = 143 AND `name` = 'Pit_Hare'; -- *2-6
+UPDATE `mob_groups` SET `minLevel` = 10, `maxLevel` = 12 WHERE `zoneid` = 143 AND `name` = 'Copper_Beetle'; -- *9-12
+UPDATE `mob_groups` SET `minLevel` = 7, `maxLevel` = 10 WHERE `zoneid` = 143 AND `name` IN ( -- *3-10
+    'Young_Quadav',
+    'Amethyst_Quadav',
+    'Amber_Quadav'
+);
+UPDATE `mob_groups` SET `minLevel` = 14, `maxLevel` = 18 WHERE `zoneid` = 143 AND `name` IN ( -- *11-18
+    'Young_Quadav',
+    'Amethyst_Quadav',
+    'Amber_Quadav'
+);
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 480 WHERE `zoneid` = 143 AND `name` IN (
+    'Young_Quadav',
+    'Amethyst_Quadav',
+    'Amber_Quadav',
+    'Pit_Hare',
+    'Cave_Funguar',
+    'Veteran_Quadav',
+    'Greater_Quadav',
+    'Onyx_Quadav',
+    'Copper_Beetle',
+    'Mine_Scorpion',
+    'Rabid_Rat',
+    'Scimitar_Scorpion'
+);
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 143 AND `name` IN (
+    'Old_Quadav',
+    'Copper_Quadav',
+    'Brass_Quadav'
+);
+
+-- GIDDEUS (Zone 145)
+-----------------------------------
+
+-- BEADEAUX (Zone 147)
+-----------------------------------
+
+-- QULUN_DOME (Zone 148)
+-----------------------------------
+
+-- DAVOI (Zone 149)
+-----------------------------------
+
+-- MONASTIC_CAVERN (Zone 150)
 -----------------------------------
