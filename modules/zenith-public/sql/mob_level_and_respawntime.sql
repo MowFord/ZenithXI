@@ -263,6 +263,7 @@ UPDATE `mob_groups` SET `minLevel` = 46, `maxLevel` = 49 WHERE `zoneid` = 29 AND
 -----------------------------------
 UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 72 WHERE `zoneid` = 51 AND `name` = 'Carmine_Eruca'; -- *70
 UPDATE `mob_groups` SET `minLevel` = 73, `maxLevel` = 75 WHERE `zoneid` = 51 AND `name` = 'Great_Ameretat'; -- *71-75
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 51 AND `name` = 'Hydra'; -- *80-80
 
 -- Address inconsistent respawn times across zone.
 UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 51 AND `name` IN (
@@ -322,6 +323,7 @@ UPDATE `mob_groups` SET `minLevel` = 75, `maxLevel` = 78 WHERE `zoneid` = 61 AND
 UPDATE `mob_groups` SET `minLevel` = 80, `maxLevel` = 82 WHERE `zoneid` = 61 AND `name` = 'Scoriaceous_Eruca';
 UPDATE `mob_groups` SET `minLevel` = 81, `maxLevel` = 83 WHERE `zoneid` = 61 AND `name` = 'Sulphuric_Jagil';
 UPDATE `mob_groups` SET `minLevel` = 84, `maxLevel` = 86 WHERE `zoneid` = 61 AND `name` = 'Orichalcumshell';
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 61 AND `name` = 'Cerberus'; -- *85-85
 
 UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 61 AND `name` = 'Ebony_Pudding'; -- *
 
@@ -421,8 +423,9 @@ UPDATE `mob_groups` SET `minLevel` = 66, `maxLevel` = 68 WHERE `zoneid` = 79 AND
 UPDATE `mob_groups` SET `minLevel` = 75, `maxLevel` = 77 WHERE `zoneid` = 79 AND `name` = 'Jnun'; -- *72-77
 UPDATE `mob_groups` SET `minLevel` = 78, `maxLevel` = 80 WHERE `zoneid` = 79 AND `name` = 'Spongilla_Fly'; -- *78-79
 UPDATE `mob_groups` SET `minLevel` = 80, `maxLevel` = 82 WHERE `zoneid` = 79 AND `name` = 'Heraldic_Imp'; -- *79-82
-UPDATE `mob_groups` SET `minLevel` = 86, `maxLevel` = 88 WHERE `zoneid` = 79 AND `name` = 'Slough_Skua';
 UPDATE `mob_groups` SET `minLevel` = 82, `maxLevel` = 84 WHERE `zoneid` = 79 AND `name` = 'Vauxia_Fly';
+UPDATE `mob_groups` SET `minLevel` = 86, `maxLevel` = 88 WHERE `zoneid` = 79 AND `name` = 'Slough_Skua';
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 79 AND `name` = 'Khimaira'; -- *85-85
 
 -- Custom respawn changes.
 UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 79 AND `name` IN (
@@ -1012,6 +1015,8 @@ UPDATE `mob_groups` SET `minLevel` = 44, `maxLevel` = 46 WHERE `zoneid` = 127 AN
 UPDATE `mob_groups` SET `minLevel` = 44, `maxLevel` = 47 WHERE `zoneid` = 127 AND `name` = 'Lost_Soul_blm'; -- *45-47
 UPDATE `mob_groups` SET `minLevel` = 44, `maxLevel` = 47 WHERE `zoneid` = 127 AND `name` = 'Lost_Soul_war'; -- *45-47
 UPDATE `mob_groups` SET `minLevel` = 45, `maxLevel` = 47 WHERE `zoneid` = 127 AND `name` = 'Master_Coeurl'; -- *45-50
+UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 72 WHERE `zoneid` = 127 AND `name` = 'Behemoth'; -- *70-70
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 127 AND `name` = 'King_Behemoth'; -- *85-85
 
 -- Custom respawn changes.
 UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 127 AND `name` IN (
@@ -1025,6 +1030,7 @@ UPDATE `mob_groups` SET `respawntime`= 300 WHERE `zoneid` = 127 AND `name` IN (
 -- VALLEY_OF_SORROWS (Zone 128)
 -----------------------------------
 UPDATE `mob_groups` SET `minLevel` = 68, `maxLevel` = 70 WHERE `zoneid` = 128 AND `name` = 'Velociraptor'; -- *66-69
+UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 72 WHERE `zoneid` = 128 AND `name` = 'Adamantoise'; -- *70-70
 
 -- RUAUN_GARDENS (Zone 130)
 -----------------------------------
@@ -1055,6 +1061,11 @@ UPDATE `mob_groups` SET `minLevel` = 68, `maxLevel` = 70 WHERE `zoneid` = 128 AN
 
 -- GHELSBA_OUTPOST (Zone 140)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 7, `maxLevel` = 9 WHERE `zoneid` = 140 AND `name` IN ( -- *3-9
+    'Orcish_Fodder',
+    'Orcish_Stonechucker',
+    'Orcish_Neckchopper'
+);
 UPDATE `mob_groups` SET `minLevel` = 12, `maxLevel` = 15 WHERE `zoneid` = 140 AND `name` IN ( -- *11-15
     'Orcish_Grunt',
     'Orcish_Stonechucker',
@@ -1167,15 +1178,455 @@ UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 143 AND `name` IN (
 
 -- GIDDEUS (Zone 145)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 12, `maxLevel` = 14 WHERE `zoneid` = 145 AND `name` = 'Giant_Pugil'; -- *9-11
+UPDATE `mob_groups` SET `minLevel` = 12, `maxLevel` = 14 WHERE `zoneid` = 145 AND `name` = 'Digger_Wasp'; -- *11-13
+UPDATE `mob_groups` SET `minLevel` = 7, `maxLevel` = 10 WHERE `zoneid` = 145 AND `name` IN ( -- *3-10
+    'Yagudo_Initiate',
+    'Yagudo_Acolyte',
+    'Yagudo_Scribe'
+);
+UPDATE `mob_groups` SET `minLevel` = 15, `maxLevel` = 18 WHERE `zoneid` = 145 AND `name` IN ( -- *11-18
+    'Yagudo_Mendicant',
+    'Yagudo_Piper',
+    'Yagudo_Persecutor'
+);
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 480 WHERE `zoneid` = 145 AND `name` IN (
+    'Yagudo_Initiate',
+    'Yagudo_Acolyte',
+    'Yagudo_Scribe',
+    'Giddeus_Bee',
+    'Giddeus_Pugil',
+    'Dirt_Eater',
+    'Yagudo_Mendicant',
+    'Yagudo_Piper',
+    'Yagudo_Persecutor',
+    'Digger_Wasp',
+    'Giant_Pugil',
+    'Earth_Eater'
+);
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 145 AND `name` IN (
+    'Yagudo_Votary',
+    'Yagudo_Theologist',
+    'Yagudo_Priest'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 145 AND `name` IN ( -- *
+    'Eyy_Mon_the_Ironbreaker',
+    'Zhuu_Buxu_the_Silent'
+);
 
 -- BEADEAUX (Zone 147)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 25, `maxLevel` = 28 WHERE `zoneid` = 147 AND `name` IN ( -- *22-26/27/28
+    'Old_Quadav',
+    'Copper_Quadav',
+    'Brass_Quadav'
+);
+UPDATE `mob_groups` SET `minLevel` = 35, `maxLevel` = 39 WHERE `zoneid` = 147 AND `name` IN ( -- *32/33/34/35-36/37/38/39
+    'Silver_Quadav',
+    'Garnet_Quadav',
+    'Zircon_Quadav',
+    'Bronze_Quadav'
+);
+UPDATE `mob_groups` SET `minLevel` = 45, `maxLevel` = 49 WHERE `zoneid` = 147 AND `name` IN ( -- *42/43/44/45-46/47/48/49
+    'Silver_Quadav',
+    'Garnet_Quadav',
+    'Zircon_Quadav',
+    'Bronze_Quadav'
+);
+UPDATE `mob_groups` SET `minLevel` = 55, `maxLevel` = 59 WHERE `zoneid` = 147 AND `name` IN ( -- *52/53/54/55-56/57/58/59
+    'Steel_Quadav',
+    'Mythril_Quadav',
+    'Gold_Quadav',
+    'Topaz_Quadav'
+);
+UPDATE `mob_groups` SET `minLevel` = 65, `maxLevel` = 69 WHERE `zoneid` = 147 AND `name` IN ( -- *62/63/64/65-66/67/68/69
+    'Ancient_Quadav',
+    'Darksteel_Quadav',
+    'Platinum_Quadav',
+    'Sapphire_Quadav'
+);
 
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 147 AND `name` IN (
+    'Old_Quadav',
+    'Copper_Quadav',
+    'Land_Pugil',
+    'Brass_Quadav',
+    'Ooze',
+    'Caterpillar',
+    'Charging_Sheep'
+);
+UPDATE `mob_groups` SET `respawntime`= 720 WHERE `zoneid` = 147 AND `name` IN (
+    'Silver_Quadav',
+    'Garnet_Quadav',
+    'Zircon_Quadav',
+    'Broo',
+    'Gloop',
+    'Big_Jaw',
+    'Larva'
+);
+UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 147 AND `name` IN (
+    'Thunder_Elemental',
+    'Water_Elemental',
+    'Elder_Quadav',
+    'Iron_Quadav',
+    'Spinel_Quadav',
+    'Emerald_Quadav',
+    'Elder_Quadav',
+    'Charging_Sheep'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 147 AND `name` IN ( -- *
+    'GoBhu_Gascon',
+    'DeVyu_Headhunter'
+);
 -- QULUN_DOME (Zone 148)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 75, `maxLevel` = 77 WHERE `zoneid` = 148 AND `name` = 'Diamond_Quadav'; -- *75-75
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 148 AND `name` = 'ZaDha_Adamantking'; -- *85-85
 
 -- DAVOI (Zone 149)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 25, `maxLevel` = 28 WHERE `zoneid` = 149 AND `name` IN ( -- *22-26/27/28
+    'Orcish_Fighter',
+    'Orcish_Cursemaker',
+    'Orcish_Serjeant'
+);
+UPDATE `mob_groups` SET `minLevel` = 35, `maxLevel` = 39 WHERE `zoneid` = 149 AND `name` IN ( -- *32/33/34/35-36/37/38/39
+    'Orcish_Impaler',
+    'Orcish_Beastrider',
+    'Orcish_Nightraider',
+    'Orcish_Brawler'
+);
+UPDATE `mob_groups` SET `minLevel` = 45, `maxLevel` = 49 WHERE `zoneid` = 149 AND `name` IN ( -- *42/43/44/45-46/47/48/49
+    'Orcish_Bowshooter',
+    'Orcish_Footsoldier',
+    'Orcish_Gladiator',
+    'Orcish_Trooper'
+);
+UPDATE `mob_groups` SET `minLevel` = 55, `maxLevel` = 59 WHERE `zoneid` = 149 AND `name` IN ( -- *52/53/54/55-56/57/58/59
+    'Orcish_Veteran',
+    'Orcish_Predator',
+    'Orcish_Zerker',
+    'Orcish_Warchief'
+);
+UPDATE `mob_groups` SET `minLevel` = 65, `maxLevel` = 69 WHERE `zoneid` = 149 AND `name` IN ( -- *62/63/64/65-66/67/68/69
+    'Orcish_Dreadnought',
+    'Orcish_Farkiller',
+    'Orcish_Champion',
+    'Orcish_Dragoon'
+);
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 149 AND `name` IN (
+    'Orcish_Fighter',
+    'Orcish_Cursemaker',
+    'Davoi_Hornet',
+    'Orcish_Serjeant',
+    'Wood_Bats',
+    'Wolf_Bat',
+    'Davoi_Pugil'
+);
+UPDATE `mob_groups` SET `respawntime`= 720 WHERE `zoneid` = 149 AND `name` IN (
+    'Orcish_Impaler',
+    'Orcish_Beastrider',
+    'Orcish_Nightraider',
+    'Orcish_Brawler',
+    'War_Lizard',
+    'Davoi_Wasp',
+    'Geezard',
+    'Morbol',
+    'Davoi_Mush'
+);
+UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 149 AND `name` IN (
+    'Thunder_Elemental',
+    'Orcish_Firebelcher',
+    'Orcish_Bowshooter',
+    'Orcish_Footsoldier',
+    'Orcish_Gladiator',
+    'Orcish_Trooper',
+    'Water_Elemental'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime` = 600 WHERE `zoneid` = 149 AND `name` = 'Dirtyhanded_Gochakzuk'; -- *
 
 -- MONASTIC_CAVERN (Zone 150)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 45, `maxLevel` = 49 WHERE `zoneid` = 150 AND `name` IN ( -- *42/43/44/45-46/47/48/49
+    'Orcish_Bowshooter',
+    'Orcish_Footsoldier',
+    'Orcish_Gladiator',
+    'Orcish_Trooper'
+);
+UPDATE `mob_groups` SET `minLevel` = 55, `maxLevel` = 59 WHERE `zoneid` = 150 AND `name` IN ( -- *52/53/54/55-56/57/58/59
+    'Orcish_Veteran',
+    'Orcish_Predator',
+    'Orcish_Zerker',
+    'Orcish_Warchief'
+);
+UPDATE `mob_groups` SET `minLevel` = 69, `maxLevel` = 72 WHERE `zoneid` = 150 AND `name` IN ( -- *62/63/64/65-72
+    'Orcish_Farkiller',
+    'Orcish_Dreadnought',
+    'Orcish_Champion',
+    'Orcish_Dragoon'
+);
+UPDATE `mob_groups` SET `minLevel` = 75, `maxLevel` = 77 WHERE `zoneid` = 150 AND `name` = 'Orcish_Overlord'; -- *75-75
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 150 AND `name` = 'Overlord_Bakgodek'; -- *85-85
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 150 AND `name` IN (
+    'Thunder_Elemental',
+    'Orcish_Firebelcher',
+    'Orcish_Bowshooter',
+    'Orcish_Footsoldier',
+    'Orcish_Gladiator',
+    'Orcish_Trooper'
+);
+
+-- CASTLE_OZTROJA (Zone 151)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 25, `maxLevel` = 28 WHERE `zoneid` = 151 AND `name` IN ( -- *22/23-26/27/28
+    'Yagudo_Votary',
+    'Yagudo_Theologist',
+    'Yagudo_Priest'
+);
+UPDATE `mob_groups` SET `minLevel` = 35, `maxLevel` = 39 WHERE `zoneid` = 151 AND `name` IN ( -- *32/33/34/35-36/37/38/39
+    'Yagudo_Herald',
+    'Yagudo_Oracle',
+    'Yagudo_Interrogator',
+    'Yagudo_Drummer'
+);
+UPDATE `mob_groups` SET `minLevel` = 45, `maxLevel` = 49 WHERE `zoneid` = 151 AND `name` IN ( -- *42/43/44/45-46/47/48/49
+    'Yagudo_Zealot',
+    'Yagudo_Prior',
+    'Yagudo_Conquistador',
+    'Yagudo_Lutenist'
+);
+UPDATE `mob_groups` SET `minLevel` = 55, `maxLevel` = 59 WHERE `zoneid` = 151 AND `name` IN ( -- *51/53/54-56/57/59
+    'Yagudo_Sentinel',
+    'Yagudo_Abbot',
+    'Yagudo_Chanter',
+    'Yagudo_Inquisitor'
+);
+UPDATE `mob_groups` SET `minLevel` = 68, `maxLevel` = 72 WHERE `zoneid` = 151 AND `name` IN ( -- *62/63/64/65-66/67/69/72
+    'Yagudo_Flagellant',
+    'Yagudo_Prelate',
+    'Yagudo_Conductor',
+    'Yagudo_Assassin'
+);
+UPDATE `mob_groups` SET `minLevel` = 75, `maxLevel` = 77 WHERE `zoneid` = 151 AND `name` = 'Yagudo_Avatar'; -- *75-75
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 151 AND `name` = 'Tzee_Xicu_the_Manifest'; -- *85-85
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 151 AND `name` IN (
+    'Yagudo_Votary',
+    'Bastion_Bats',
+    'Yagudo_Theologist',
+    'Yagudo_Priest'
+);
+UPDATE `mob_groups` SET `respawntime`= 720 WHERE `zoneid` = 151 AND `name` IN (
+    'Yagudo_Herald',
+    'Yagudo_Oracle',
+    'Yagudo_Interrogator',
+    'Meat_Maggot',
+    'Yagudo_Drummer',
+    'Cutter',
+    'Bulwark_Bat',
+    'Ooze'
+);
+UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 151 AND `name` IN (
+    'Fire_Elemental',
+    'Earth_Elemental',
+    'Yagudo_Zealot',
+    'Yagudo_Prior',
+    'Yagudo_Conquistador',
+    'Yagudo_Lutenist',
+    'Yagudo_Parasite'
+);
+
+-- THE_BOYAHDA_TREE (Zone 153)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 62, `maxLevel` = 65 WHERE `zoneid` = 153 AND `name` = 'Robber_Crab'; -- *62-66
+UPDATE `mob_groups` SET `minLevel` = 63, `maxLevel` = 66 WHERE `zoneid` = 153 AND `name` = 'Moss_Eater'; -- *62-66
+UPDATE `mob_groups` SET `minLevel` = 64, `maxLevel` = 67 WHERE `zoneid` = 153 AND `name` = 'Knight_Crawler'; -- *62-67
+UPDATE `mob_groups` SET `minLevel` = 65, `maxLevel` = 68 WHERE `zoneid` = 153 AND `name` = 'Mourioche'; -- *62-68
+UPDATE `mob_groups` SET `minLevel` = 72, `maxLevel` = 74 WHERE `zoneid` = 153 AND `name` = 'Unut'; -- *72-72
+UPDATE `mob_groups` SET `minLevel` = 76, `maxLevel` = 79 WHERE `zoneid` = 153 AND `name` = 'Bark_Tarantula'; -- *75-79
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 153 AND `name` = 'Voluptuous_Vivian'; -- *85-85
+UPDATE `mob_groups` SET `minLevel` = 82, `maxLevel` = 85 WHERE `zoneid` = 153 AND `name` = 'Snaggletooth_Peapuk'; -- *102-105
+UPDATE `mob_groups` SET `minLevel` = 82, `maxLevel` = 85 WHERE `zoneid` = 153 AND `name` = 'Viseclaw'; -- *102-105
+UPDATE `mob_groups` SET `minLevel` = 83, `maxLevel` = 85 WHERE `zoneid` = 153 AND `name` = 'Mourning_Crawler'; -- *103-105
+
+-- DRAGONS_AERY (Zone 154)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 90, `maxLevel` = 92 WHERE `zoneid` = 154 AND `name` = 'Fafnir'; -- *90-90
+UPDATE `mob_groups` SET `minLevel` = 92, `maxLevel` = 94 WHERE `zoneid` = 154 AND `name` = 'Nidhogg'; -- *90-90
+
+-- CASTLE_ZVAHL_KEEP_S (Zone 155)
+-----------------------------------
+-- TODO
+
+-- MIDDLE_DELKFUTTS_TOWER (Zone 157)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 26, `maxLevel` = 28 WHERE `zoneid` = 157 AND `name` = 'Mold_Bats'; -- *25-27
+UPDATE `mob_groups` SET `minLevel` = 27, `maxLevel` = 29 WHERE `zoneid` = 157 AND `name` = 'Tower_Bats'; -- *27-29
+UPDATE `mob_groups` SET `minLevel` = 28, `maxLevel` = 30 WHERE `zoneid` = 157 AND `name` = 'Stirge'; -- *27-29
+UPDATE `mob_groups` SET `minLevel` = 30, `maxLevel` = 32 WHERE `zoneid` = 157 AND `name` = 'Big_Bat'; -- *29-31
+UPDATE `mob_groups` SET `minLevel` = 31, `maxLevel` = 34 WHERE `zoneid` = 157 AND `name` IN ( -- *30-34
+    'Goblin_Pathfinder',
+    'Goblin_Furrier',
+    'Goblin_Smithy',
+    'Goblin_Shaman'
+);
+UPDATE `mob_groups` SET `minLevel` = 31, `maxLevel` = 34 WHERE `zoneid` = 157 AND `name` IN ( -- *30-32
+    'Giant_Gatekeeper',
+    'Giant_Guard',
+    'Giant_Sentry',
+    'Giant_Lobber'
+);
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 157 AND `name` IN (
+    'Mold_Bats',
+    'Stirge',
+    'Magic_Pot',
+    'Tower_Bats'
+);
+UPDATE `mob_groups` SET `respawntime`= 720 WHERE `zoneid` = 157 AND `name` IN (
+    'Goblin_Pathfinder',
+    'Goblin_Furrier',
+    'Goblin_Smithy',
+    'Goblin_Shaman',
+    'Giant_Gatekeeper',
+    'Giant_Guard',
+    'Giant_Sentry',
+    'Giant_Lobber',
+    'Panzer_Doll',
+    'Banshee',
+    'Evil_Spirit',
+    'Thunder_Elemental',
+    'Light_Elemental',
+    'Big_Bat',
+    'Magic_Jar',
+    'Gigas_Wallwatcher',
+    'Gigas_Jailer',
+    'Gigas_Kettlemaster',
+    'Gigas_Quarrier',
+    'Jagd_Doll'
+);
+
+-- UPPER_DELKFUTTS_TOWER (Zone 158)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 34, `maxLevel` = 36 WHERE `zoneid` = 158 AND `name` IN ( -- *34-35
+    'Gigas_Torturer',
+    'Gigas_Bonecutter',
+    'Gigas_Stonemason',
+    'Gigas_Spirekeeper',
+    'Magic_Urn'
+);
+UPDATE `mob_groups` SET `minLevel` = 36, `maxLevel` = 38 WHERE `zoneid` = 158 AND `name` = 'Mimas'; -- *36-36
+UPDATE `mob_groups` SET `minLevel` = 36, `maxLevel` = 38 WHERE `zoneid` = 158 AND `name` = 'Porphyrion'; -- *36-36
+UPDATE `mob_groups` SET `minLevel` = 73, `maxLevel` = 75 WHERE `zoneid` = 158 AND `name` = 'Pallas'; -- *72-72
+UPDATE `mob_groups` SET `minLevel` = 80, `maxLevel` = 82 WHERE `zoneid` = 158 AND `name` = 'Alkyoneus'; -- *75-75
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 720 WHERE `zoneid` = 158 AND `name` IN (
+    'Gigas_Torturer',
+    'Gigas_Bonecutter',
+    'Gigas_Stonemason',
+    'Gigas_Spirekeeper',
+    'Thunder_Elemental',
+    'Light_Elemental',
+    'Magic_Urn'
+);
+UPDATE `mob_groups` SET `respawntime`= 960 WHERE `zoneid` = 158 AND `name` IN (
+    'Demonic_Doll',
+    'Magic_Pot',
+    'Dire_Bat',
+    'Jotunn_Wallkeeper',
+    'Jotunn_Gatekeeper',
+    'Jotunn_Hallkeeper',
+    'Phasma',
+    'Incubus_Bats'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime` = 600 WHERE `zoneid` = 158 AND `name` = 'Porphyrion'; -- *
+
+-- TEMPLE_OF_UGGALEPIH (Zone 159)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 65, `maxLevel` = 68 WHERE `zoneid` = 159 AND `name` = 'Iron_Maiden'; -- *64-68
+UPDATE `mob_groups` SET `minLevel` = 55, `maxLevel` = 59 WHERE `zoneid` = 159 AND `name` IN ( -- *51-59
+    'Tonberry_Stalker',
+    'Tonberry_Cutter',
+    'Tonberry_Harrier'
+);
+UPDATE `mob_groups` SET `minLevel` = 65, `maxLevel` = 69 WHERE `zoneid` = 159 AND `name` IN ( -- *61-68/69
+    'Tonberry_Maledictor',
+    'Tonberry_Pursuer',
+    'Tonberry_Stabber',
+    'Tonberry_Dismayer'
+);
+UPDATE `mob_groups` SET `minLevel` = 65, `maxLevel` = 67 WHERE `zoneid` = 159 AND `name` = 'Temple_Guardian'; -- *65-65
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 960 WHERE `zoneid` = 159 AND `name` IN (
+    'Temple_Opo-opo',
+    'Tonberry_Stalker',
+    'Tonberry_Cutter',
+    'Tonberry_Harrier',
+    'Rumble_Crawler',
+    'Branding_Iron',
+    'Torama',
+    'Tonberry_Maledictor',
+    'Tonberry_Pursuer',
+    'Tonberry_Stabber',
+    'Tonberry_Dismayer',
+    'Hover_Tank',
+    'Fire_Elemental',
+    'Iron_Maiden',
+    'Temple_Bee',
+    'Water_Elemental'
+);
+
+-- DEN_OF_RANCOR (Zone 160)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 64, `maxLevel` = 67 WHERE `zoneid` = 160 AND `name` = 'Mousse'; -- *64-70 - Only fished Mousse exceed 67.
+UPDATE `mob_groups` SET `minLevel` = 66, `maxLevel` = 69 WHERE `zoneid` = 160 AND `name` = 'Succubus_Bats'; -- *65-69
+UPDATE `mob_groups` SET `minLevel` = 76, `maxLevel` = 79 WHERE `zoneid` = 160 AND `name` = 'Tormentor'; -- *75-79
+UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 73 WHERE `zoneid` = 160 AND `name` = 'Friar_Rush'; -- *70-70
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 160 AND `name` = 'Hakutaku'; -- *85-85
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 960 WHERE `zoneid` = 160 AND `name` IN (
+    'Tonberry_Trailer',
+    'Dire_Bat',
+    'Fire_Elemental',
+    'Tonberry_Imprecator',
+    'Tonberry_Slasher',
+    'Tonberry_Beleaguerer',
+    'Bifrons',
+    'Cave_Worm',
+    'Den_Scorpion',
+    'Water_Elemental',
+    'Succubus_Bats',
+    'Tormentor',
+    'Puck',
+    'Bullbeggar'
+    'Cutlass_Scorpion',
+    'Million_Eyes',
+    'Mousse'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 160 AND `name` IN (
+    'Demonic_Pugil',
+    'Doom_Toad'
+);
+
+-- CASTLE_ZVAHL_BAILEYS (Zone 161)
+-----------------------------------
+
+-- CASTLE_ZVAHL_KEEP (Zone 162)
 -----------------------------------
