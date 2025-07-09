@@ -5,11 +5,10 @@ local m = Module:new('garrison_improvements')
 -- Override the gil payout function to also grant outpost warps
 m:addOverride('xi.garrison.handleGilPayout', function(levelCap, players)
     super(levelCap, players)
-    
     -- Then add our custom outpost warp logic
     if #players > 0 then
+        local zone = players[1]:getZone()
         local region = zone:getRegionID()
-        
         -- User-friendly region names mapping (matching outpost teleporter display)
         local regionNames = {
             [xi.region.RONFAURE]         = 'The Ronfaure Region',
@@ -32,14 +31,12 @@ m:addOverride('xi.garrison.handleGilPayout', function(levelCap, players)
             [xi.region.MOVALPOLOS]       = 'The Movalpolos Region',
             [xi.region.TAVNAZIANARCH]    = 'The Tavnazian Archipelago Region',
         }
-        
+
         local regionName = regionNames[region] or 'Unknown Region'
-        
         -- Grant outpost warp to each player
         for _, player in ipairs(players) do
             if player ~= nil then
                 local nation = player:getNation()
-                
                 -- Check if player already has the outpost teleport for this region
                 if not player:hasTeleport(nation, region + 5) then
                     player:addTeleport(nation, region + 5)
