@@ -32,15 +32,16 @@ m:addOverride('xi.garrison.handleGilPayout', function(levelCap, players)
             [xi.region.TAVNAZIANARCH]    = 'The Tavnazian Archipelago Region',
         }
 
-        local regionName = regionNames[region] or 'Unknown Region'
+        local regionName = regionNames[region] or 'This zone\'s region'
+        local teleportBit = region + 5
         -- Grant outpost warp to each player
         for _, player in ipairs(players) do
             if player ~= nil then
                 local nation = player:getNation()
                 -- Check if player already has the outpost teleport for this region
-                if not player:hasTeleport(nation, region + 5) then
-                    player:addTeleport(nation, region + 5)
-                    player:printToPlayer(string.format('You have unlocked the outpost warp for %s!', regionName), xi.msg.channel.SYSTEM_3)
+                if not player:hasTeleport(nation, teleportBit) then
+                    player:addTeleport(nation, teleportBit)
+                    player:printToPlayer(fmt('You have unlocked the outpost warp for {}!', regionName), xi.msg.channel.SYSTEM_3)
                 end
             end
         end
