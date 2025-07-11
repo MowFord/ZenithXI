@@ -1715,11 +1715,126 @@ UPDATE `mob_groups` SET `minLevel` = 41, `maxLevel` = 44 WHERE `zoneid` = 166 AN
 );
 UPDATE `mob_groups` SET `minLevel` = 36, `maxLevel` = 38 WHERE `zoneid` = 166 AND `name` = 'Goblins_Bats';
 
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 480 WHERE `zoneid` = 166 AND `name` IN (
+    'Wind_Bats',
+    'Blade_Bat',
+    'Oil_Slick',
+    'Goblin_Thug',
+    'Goblin_Weaver'
+);
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 166 AND `name` IN (
+    'Goblin_Mugger',
+    'Goblin_Leecher',
+    'Goblin_Gambler',
+    'Seeker_Bats',
+    'Ooze'
+);
+UPDATE `mob_groups` SET `respawntime`= 720 WHERE `zoneid` = 166 AND `name` IN (
+    'Cave_Scorpion',
+    'Stirge',
+    'Taisai',
+    'Seeker_Bats',
+    'Hecteyes',
+    'Evil_Weapon'
+);
+UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 166 AND `name` IN (
+    'Hovering_Oculus',
+    'Goblin_Hoodoo',
+    'Goblin_Artificer',
+    'Goblin_Tanner',
+    'Yagudo_Conquistador',
+    'Goblin_Chaser'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime` = 330 WHERE `zoneid` = 166 AND `name` = 'Bilesucker'; -- *
+
 -- BOSTAUNIEUX_OUBLIETTE (Zone 167)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 53, `maxLevel` = 56 WHERE `zoneid` = 167 AND `name` = 'Funnel_Bats'; -- *52-55
+UPDATE `mob_groups` SET `minLevel` = 56, `maxLevel` = 59 WHERE `zoneid` = 167 AND `name` = 'Werebat'; -- *55-59
+UPDATE `mob_groups` SET `minLevel` = 60, `maxLevel` = 62 WHERE `zoneid` = 167 AND `name` = 'Mousse'; -- *58-62
+UPDATE `mob_groups` SET `minLevel` = 60, `maxLevel` = 62 WHERE `zoneid` = 167 AND `name` = 'Arioch'; -- *56-62
+-- Out of Era
+UPDATE `mob_groups` SET `minLevel` = 76, `maxLevel` = 78 WHERE `zoneid` = 167 AND `name` = 'Nachtmahr';
+UPDATE `mob_groups` SET `minLevel` = 78, `maxLevel` = 80 WHERE `zoneid` = 167 AND `name` = 'Blind_Bat';
+UPDATE `mob_groups` SET `minLevel` = 75, `maxLevel` = 77 WHERE `zoneid` = 167 AND `name` = 'Dabilla';
+UPDATE `mob_groups` SET `minLevel` = 78, `maxLevel` = 80, `MP` = 3000 WHERE `zoneid` = 167 AND `name` = 'Panna_Cotta';
+UPDATE `mob_groups` SET `minLevel` = 80, `maxLevel` = 83 WHERE `zoneid` = 167 AND `name` = 'Wurdalak';
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 960 WHERE `zoneid` = 167 AND `name` IN (
+    'Hecatomb_Hound',
+    'Haunt',
+    'Garm',
+    'Dark_Aspic',
+    'Mousse',
+    'Nachtmahr',
+    'Wurdalak',
+    'Gespenst'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 167 AND `name` IN (
+    'Funnel_Bats',
+    'Werebat',
+    'Blind_Bat',
+    'Panna_Cotta',
+    'Dabilla',
+    'Bloodsucker'
+);
 
 -- TORAIMARAI_CANAL (Zone 169)
 -----------------------------------
+-- Out of Era
+UPDATE `mob_groups` SET `minLevel` = 66, `maxLevel` = 69 WHERE `zoneid` = 169 AND `name` = 'Plunderer_Crab';
+UPDATE `mob_groups` SET `minLevel` = 67, `maxLevel` = 69 WHERE `zoneid` = 169 AND `name` = 'Blackwater_Pugil';
+UPDATE `mob_groups` SET `minLevel` = 68, `maxLevel` = 70 WHERE `zoneid` = 169 AND `name` = 'Deviling_Bats';
+UPDATE `mob_groups` SET `minLevel` = 68, `maxLevel` = 70 WHERE `zoneid` = 169 AND `name` = 'Rapier_Scorpion';
+UPDATE `mob_groups` SET `minLevel` = 68, `maxLevel` = 70 WHERE `zoneid` = 169 AND `name` = 'Starborer';
+UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 72 WHERE `zoneid` = 169 AND `name` = 'Sodden_Bones';
+UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 72 WHERE `zoneid` = 169 AND `name` = 'Drowned_Bones';
+UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 73 WHERE `zoneid` = 169 AND `name` = 'Flume_Toad';
+UPDATE `mob_groups` SET `minLevel` = 71, `maxLevel` = 73 WHERE `zoneid` = 169 AND `name` = 'Poroggo_Excavator';
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 169 AND `name` IN (
+    'Canal_Bats',
+    'Hell_Bat'
+);
+UPDATE `mob_groups` SET `respawntime`= 960 WHERE `zoneid` = 169 AND `name` IN (
+    'Bigclaw',
+    'Fallen_Knight',
+    'Lich',
+    'Dark_Aspic',
+    'Bloodsucker',
+    'Girtab',
+    'Fleshcraver',
+    'Mindcraver',
+    'Rotten_Sod',
+    'Bouncing_Ball',
+    'Mousse',
+    'Sodden_Bones',
+    'Drowned_Bones',
+    'Rapier_Scorpion',
+    'Hinge_Oil',
+    'Poroggo_Excavator',
+    'Doom_Mage',
+    'Doom_Soldier',
+    'Starmite'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 169 AND `name` IN (
+    'Scavenger_Crab',
+    'Makara',
+    'Stygian_Pugil',
+    'Blackwater_Pugil',
+    'Plunderer_Crab',
+    'Deviling_Bats',
+    'Starborer',
+    'Plunderer_Crab',
+    'Impish_Bats',
+    'Dire_Bat'
+);
 
 -- CRAWLERS_NEST_S (Zone 171)
 -----------------------------------
@@ -1727,9 +1842,61 @@ UPDATE `mob_groups` SET `minLevel` = 36, `maxLevel` = 38 WHERE `zoneid` = 166 AN
 
 -- ZERUHN_MINES (Zone 172)
 -----------------------------------
+-- Out of Era
+UPDATE `mob_groups` SET `minLevel` = 20, `maxLevel` = 23 WHERE `zoneid` = 172 AND `name` = 'Soot_Crab';
+UPDATE `mob_groups` SET `minLevel` = 21, `maxLevel` = 24 WHERE `zoneid` = 172 AND `name` = 'Burrower_Worm';
+UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 25 WHERE `zoneid` = 172 AND `name` = 'Colliery_Bat';
+UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 25 WHERE `zoneid` = 172 AND `name` = 'Veindigger_Leech';
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 480 WHERE `zoneid` = 172 AND `name` IN (
+    'Ding_Bats',
+    'River_Crab'
+);
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 172 AND `name` IN (
+    'Burrower_Worm',
+    'Colliery_Bat',
+    'Soot_Crab',
+    'Veindigger_Leech'
+);
 
 -- KORROLOKA_TUNNEL (Zone 173)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 22, `maxLevel` = 25 WHERE `zoneid` = 173 AND `name` = 'Land_Worm'; -- *20-25
+UPDATE `mob_groups` SET `minLevel` = 23, `maxLevel` = 26 WHERE `zoneid` = 173 AND `name` = 'Seeker_Bats'; -- *22-26
+UPDATE `mob_groups` SET `minLevel` = 29, `maxLevel` = 32 WHERE `zoneid` = 173 AND `name` = 'Greater_Pugil'; -- *25-32
+UPDATE `mob_groups` SET `minLevel` = 32, `maxLevel` = 33 WHERE `zoneid` = 173 AND `name` = 'Korroloka_Leech'; -- *32-32
+-- Out of Era
+UPDATE `mob_groups` SET `minLevel` = 35, `maxLevel` = 37 WHERE `zoneid` = 173 AND `name` = 'Lacerator';
+UPDATE `mob_groups` SET `minLevel` = 35, `maxLevel` = 37 WHERE `zoneid` = 173 AND `name` = 'Spool_Leech';
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 173 AND `name` IN (
+    'Land_Worm',
+    'Seeker_Bats',
+    'Thread_Leech',
+    'Huge_Spider',
+    'Combat',
+    'Jelly'
+);
+UPDATE `mob_groups` SET `respawntime`= 720 WHERE `zoneid` = 173 AND `name` IN (
+    'Thunder_Elemental',
+    'Sea_Monk',
+    'Greater_Pugil',
+    'Clipper',
+    'Water_Elemental',
+    'Bogy',
+    'Gigas_Stonemason',
+    'Gigas_Stonecarrier',
+    'Gigas_Stonegrinder',
+    'Gigas_Foreman'
+);
+UPDATE `mob_groups` SET `respawntime` = 1200 WHERE `zoneid` = 173 AND `name` = 'Jammer_Leech';
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 173 AND `name` IN (
+    'Lacerator',
+    'Spool_Leech'
+);
 
 -- KUFTAL_TUNNEL (Zone 174)
 -----------------------------------
