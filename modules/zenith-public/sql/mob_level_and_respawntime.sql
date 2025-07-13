@@ -1042,6 +1042,13 @@ UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 72 WHERE `zoneid` = 128 AN
 
 -- RUAUN_GARDENS (Zone 130)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 82, `maxLevel` = 84 WHERE `zoneid` = 130 AND `name` = 'Despot'; -- *80-82
+UPDATE `mob_groups` SET `minLevel` = 90, `maxLevel` = 92 WHERE `zoneid` = 130 AND `name` IN ( -- *88-90
+    'Genbu',
+    'Seiryu',
+    'Byakko',
+    'Suzaku'
+);
 
 -- ABYSSEA_LA_THEINE (Zone 132)
 -----------------------------------
@@ -1480,8 +1487,8 @@ UPDATE `mob_groups` SET `minLevel` = 92, `maxLevel` = 94 WHERE `zoneid` = 154 AN
 
 -- MIDDLE_DELKFUTTS_TOWER (Zone 157)
 -----------------------------------
-UPDATE `mob_groups` SET `minLevel` = 26, `maxLevel` = 28 WHERE `zoneid` = 157 AND `name` = 'Mold_Bats'; -- *25-27
-UPDATE `mob_groups` SET `minLevel` = 27, `maxLevel` = 29 WHERE `zoneid` = 157 AND `name` = 'Tower_Bats'; -- *27-29
+UPDATE `mob_groups` SET `minLevel` = 26, `maxLevel` = 29 WHERE `zoneid` = 157 AND `name` = 'Mold_Bats'; -- *25-27
+UPDATE `mob_groups` SET `minLevel` = 28, `maxLevel` = 30 WHERE `zoneid` = 157 AND `name` = 'Tower_Bats'; -- *27-29
 UPDATE `mob_groups` SET `minLevel` = 28, `maxLevel` = 30 WHERE `zoneid` = 157 AND `name` = 'Stirge'; -- *27-29
 UPDATE `mob_groups` SET `minLevel` = 30, `maxLevel` = 32 WHERE `zoneid` = 157 AND `name` = 'Big_Bat'; -- *29-31
 UPDATE `mob_groups` SET `minLevel` = 31, `maxLevel` = 34 WHERE `zoneid` = 157 AND `name` IN ( -- *30-34
@@ -1900,6 +1907,39 @@ UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 173 AND `name` IN (
 
 -- KUFTAL_TUNNEL (Zone 174)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 72 WHERE `zoneid` = 174 AND `name` = 'Devil_Manta_fished'; -- *66-68
+UPDATE `mob_groups` SET `minLevel` = 66, `maxLevel` = 68 WHERE `zoneid` = 174 AND `name` = 'Amemet'; -- *66-66
+UPDATE `mob_groups` SET `minLevel` = 82, `maxLevel` = 83 WHERE `zoneid` = 174 AND `name` = 'Pelican'; -- *80-81
+-- Out of Era
+UPDATE `mob_groups` SET `minLevel` = 79, `maxLevel` = 81 WHERE `zoneid` = 174 AND `name` = 'Kuftal_Delver';
+UPDATE `mob_groups` SET `minLevel` = 80, `maxLevel` = 82 WHERE `zoneid` = 174 AND `name` = 'Machairodus';
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 960 WHERE `zoneid` = 174 AND `name` IN (
+    'Sand_Lizard',
+    'Robber_Crab',
+    'Haunt',
+    'Cave_Worm',
+    'Fire_Elemental',
+    'Air_Elemental',
+    'Sabotender_Sediendo',
+    'Recluse_Spider',
+    'Diplopod',
+    'Ovinnik',
+    'Greater_Cockatrice',
+    'Ladon',
+    'Deinonychus',
+    'Goblin_Mercenary',
+    'Goblin_Alchemist',
+    'Goblin_Bandit',
+    'Goblin_Tamer',
+    'Kuftal_Digger'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 174 AND `name` IN (
+    'Kuftal_Delver',
+    'Machairodus'
+);
 
 -- THE_ELDIEME_NECROPOLIS_S (Zone 175)
 -----------------------------------
@@ -1907,3 +1947,345 @@ UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 173 AND `name` IN (
 
 -- SEA_SERPENT_GROTTO (Zone 176)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 43, `maxLevel` = 45 WHERE `zoneid` = 176 AND `name` = 'Vampire_Bat'; -- *42-45
+UPDATE `mob_groups` SET `minLevel` = 44, `maxLevel` = 47 WHERE `zoneid` = 176 AND `name` = 'Brook_Sahagin'; -- *41-48
+UPDATE `mob_groups` SET `minLevel` = 44, `maxLevel` = 47 WHERE `zoneid` = 176 AND `name` = 'Rivulet_Sahagin'; -- *41-48
+UPDATE `mob_groups` SET `minLevel` = 45, `maxLevel` = 48 WHERE `zoneid` = 176 AND `name` = 'Bigclaw'; -- *43-48
+UPDATE `mob_groups` SET `minLevel` = 53, `maxLevel` = 56 WHERE `zoneid` = 176 AND `name` = 'Sahagin_Parasite'; -- *50-53
+UPDATE `mob_groups` SET `minLevel` = 55, `maxLevel` = 58 WHERE `zoneid` = 176 AND `name` = 'Rock_Crab'; -- *53-58
+UPDATE `mob_groups` SET `minLevel` = 56, `maxLevel` = 58 WHERE `zoneid` = 176 AND `name` = 'Blubber_Eyes'; -- *55-58
+UPDATE `mob_groups` SET `minLevel` = 56, `maxLevel` = 59 WHERE `zoneid` = 176 AND `name` IN ( -- * 52-59
+    'Marsh_Sahagin',
+    'Swamp_Sahagin',
+    'Bog_Sahagin'
+);
+UPDATE `mob_groups` SET `minLevel` = 66, `maxLevel` = 68 WHERE `zoneid` = 176 AND `name` = 'Mousse'; -- *62-65
+UPDATE `mob_groups` SET `minLevel` = 66, `maxLevel` = 69 WHERE `zoneid` = 176 AND `name` = 'Dire_Bat'; -- *63-66
+UPDATE `mob_groups` SET `minLevel` = 67, `maxLevel` = 70 WHERE `zoneid` = 176 AND `name` = 'Robber_Crab'; -- *62-67
+UPDATE `mob_groups` SET `minLevel` = 68, `maxLevel` = 70 WHERE `zoneid` = 176 AND `name` = 'Devil_Manta'; -- *66-69
+UPDATE `mob_groups` SET `minLevel` = 69, `maxLevel` = 71 WHERE `zoneid` = 176 AND `name` = 'Mindgazer'; -- *66-69
+UPDATE `mob_groups` SET `minLevel` = 69, `maxLevel` = 71 WHERE `zoneid` = 176 AND `name` = 'Greatclaw'; -- *66-69
+UPDATE `mob_groups` SET `minLevel` = 69, `maxLevel` = 71 WHERE `zoneid` = 176 AND `name` = 'Nightmare_Bats'; -- *66-69
+UPDATE `mob_groups` SET `minLevel` = 69, `maxLevel` = 72 WHERE `zoneid` = 176 AND `name` IN ( -- * 62-72
+    'Shore_Sahagin',
+    'Coastal_Sahagin',
+    'Delta_Sahagin',
+    'Lagoon_Sahagin'
+);
+UPDATE `mob_groups` SET `minLevel` = 39, `maxLevel` = 41 WHERE `zoneid` = 176 AND `name` = 'Masan'; -- *39-39
+UPDATE `mob_groups` SET `minLevel` = 48, `maxLevel` = 50 WHERE `zoneid` = 176 AND `name` = 'Seww_the_Squidlimbed'; -- *48-48
+UPDATE `mob_groups` SET `minLevel` = 57, `maxLevel` = 59 WHERE `zoneid` = 176 AND `name` = 'Pahh_the_Gullcaller'; -- *57-57
+UPDATE `mob_groups` SET `minLevel` = 62, `maxLevel` = 64 WHERE `zoneid` = 176 AND `name` = 'Sea_Hog'; -- *62-62
+UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 72 WHERE `zoneid` = 176 AND `name` = 'Zuug_the_Shoreleaper'; -- *70-70
+UPDATE `mob_groups` SET `minLevel` = 75, `maxLevel` = 77 WHERE `zoneid` = 176 AND `name` = 'Ocean_Sahagin'; -- *75-75
+UPDATE `mob_groups` SET `minLevel` = 80, `maxLevel` = 82 WHERE `zoneid` = 176 AND `name` = 'Water_Leaper'; -- *80-80
+UPDATE `mob_groups` SET `minLevel` = 83, `maxLevel` = 84 WHERE `zoneid` = 176 AND `name` = 'Charybdis'; -- *80-81
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 720 WHERE `zoneid` = 176 AND `name` IN (
+    'Royal_Leech',
+    'Undead_Bats',
+    'Spring_Sahagin',
+    'Pond_Sahagin',
+    'Lake_Sahagin',
+    'Ironshell',
+    'Ghast_blm',
+    'Ghast_war'
+);
+UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 176 AND `name` IN (
+    'Ooze',
+    'Brook_Sahagin',
+    'Rivulet_Sahagin',
+    'Vampire_Bat',
+    'Riparian_Sahagin',
+    'Sea_Bonze'
+);
+UPDATE `mob_groups` SET `respawntime`= 960 WHERE `zoneid` = 176 AND `name` IN (
+    'Marsh_Sahagin',
+    'Sahagin_Parasite',
+    'Thunder_Elemental',
+    'Swamp_Sahagin',
+    'Bog_Sahagin',
+    'Blubber_Eyes',
+    'Mousse',
+    'Water_Elemental',
+    'Shore_Sahagin',
+    'Coastal_Sahagin',
+    'Delta_Sahagin',
+    'Lagoon_Sahagin',
+    'Devil_Manta',
+    'Mindgazer',
+    'Greatclaw',
+    'Devil_Manta',
+    'Rock_Crab'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 176 AND `name` IN (
+    'Grotto_Pugil',
+    'Bigclaw',
+    'Robber_Crab',
+    'Dire_Bat'
+);
+
+-- VELUGANNON_PALACE (Zone 177)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 75, `maxLevel` = 78 WHERE `zoneid` = 177 AND `name` = 'Mystic_Weapon'; -- *74-77
+UPDATE `mob_groups` SET `minLevel` = 83, `maxLevel` = 85 WHERE `zoneid` = 177 AND `name` = 'Steam_Cleaner'; -- *81-82
+UPDATE `mob_groups` SET `minLevel` = 84, `maxLevel` = 86 WHERE `zoneid` = 177 AND `name` = 'Brigandish_Blade'; -- *82-84
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 177 AND `name` = 'Zipacna'; -- *83-85
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 960 WHERE `zoneid` = 177 AND `name` IN (
+    'Ornamental_Weapon',
+    'Detector',
+    'Mystic_Weapon',
+    'Air_Elemental',
+    'Earth_Elemental',
+    'Dustbuster',
+    'Thunder_Elemental',
+    'Water_Elemental',
+    'Enkidu',
+    'Ice_Elemental',
+    'Fire_Elemental',
+    'Thunder_Elemental'
+);
+
+-- THE_SHRINE_OF_RUAVITAU (Zone 178)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 74, `maxLevel` = 76 WHERE `zoneid` = 178 AND `name` = 'Defender'; -- *71-76
+UPDATE `mob_groups` SET `minLevel` = 78, `maxLevel` = 80 WHERE `zoneid` = 178 AND `name` = 'Aura_Pot'; -- *75-80
+UPDATE `mob_groups` SET `minLevel` = 79, `maxLevel` = 81 WHERE `zoneid` = 178 AND `name` = 'Aura_Gear'; -- *76-81
+UPDATE `mob_groups` SET `minLevel` = 80, `maxLevel` = 82 WHERE `zoneid` = 178 AND `name` = 'Aura_Butler'; -- *77-82
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 178 AND `name` = 'Mother_Globe'; -- *83-83
+UPDATE `mob_groups` SET `minLevel` = 85, `maxLevel` = 87 WHERE `zoneid` = 178 AND `name` = 'Faust'; -- *83-85
+UPDATE `mob_groups` SET `minLevel` = 86, `maxLevel` = 88 WHERE `zoneid` = 178 AND `name` = 'Ullikummi'; -- *85-87
+UPDATE `mob_groups` SET `minLevel` = 94, `maxLevel` = 94 WHERE `zoneid` = 178 AND `name` = 'Kirin'; -- *92-92
+UPDATE `mob_groups` SET `minLevel` = 84, `maxLevel` = 85 WHERE `zoneid` = 178 AND `name` = 'Genbu_pet'; -- *83-84
+UPDATE `mob_groups` SET `minLevel` = 84, `maxLevel` = 85 WHERE `zoneid` = 178 AND `name` = 'Seiryu_pet'; -- *83-84
+UPDATE `mob_groups` SET `minLevel` = 84, `maxLevel` = 85 WHERE `zoneid` = 178 AND `name` = 'Byakko_pet'; -- *83-84
+UPDATE `mob_groups` SET `minLevel` = 84, `maxLevel` = 85 WHERE `zoneid` = 178 AND `name` = 'Suzaku_pet'; -- *83-84
+UPDATE `mob_groups` SET `HP` = 7000 WHERE `zoneid` = 178 AND `name` = 'Olla_Media'; -- *5200
+UPDATE `mob_groups` SET `HP` = 9000 WHERE `zoneid` = 178 AND `name` = 'Olla_Grande'; -- *5300
+-- Out of Era
+UPDATE `mob_groups` SET `minLevel` = 83, `maxLevel` = 85 WHERE `zoneid` = 178 AND `name` IN (
+    'Baelfyr',
+    'Gefyrst',
+    'Ungeweder',
+    'Byrgen',
+    'Aura_Sculpture'
+);
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 960 WHERE `zoneid` = 178 AND `name` IN (
+    'Aura_Weapon',
+    'Aura_Pot',
+    'Ice_Elemental',
+    'Aura_Butler',
+    'Fire_Elemental',
+    'Defender',
+    'Aura_Statue',
+    'Decorative_Weapon',
+    'Thunder_Elemental',
+    'Water_Elemental',
+    'Air_Elemental',
+    'Earth_Elemental',
+    'Dark_Elemental'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 178 AND `name` IN (
+    'Baelfyr',
+    'Gefyrst',
+    'Ungeweder',
+    'Byrgen',
+    'Aura_Sculpture'
+);
+
+-- LOWER_DELKFUTTS_TOWER (Zone 184)
+-----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 26, `maxLevel` = 28 WHERE `zoneid` = 184 AND `name` = 'Seeker_Bats'; -- *25-27
+UPDATE `mob_groups` SET `minLevel` = 28, `maxLevel` = 30 WHERE `zoneid` = 184 AND `name` = 'Ancient_Bat'; -- *27-29
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 184 AND `name` IN (
+    'Giant_Gatekeeper',
+    'Giant_Guard',
+    'Giant_Sentry',
+    'Giant_Lobber',
+    'Goblin_Mugger',
+    'Goblin_Leecher',
+    'Goblin_Gambler',
+    'Chaos_Idol',
+    'Magic_Pot'
+);
+UPDATE `mob_groups` SET `respawntime`= 720 WHERE `zoneid` = 184 AND `name` IN (
+    'Bogy',
+    'Gigas_Hallwatcher',
+    'Gigas_Punisher',
+    'Gigas_Butcher',
+    'Gigas_Sculptor',
+    'Thunder_Elemental',
+    'Light_Elemental',
+    'Magic_Urn'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 184 AND `name` IN (
+    'Seeker_Bats',
+    'Ancient_Bat'
+);
+
+-- DYNAMIS_SAN_DORIA (Zone 185)
+-----------------------------------
+-- TODO
+
+-- DYNAMIS_BASTOK (Zone 186)
+-----------------------------------
+-- TODO
+
+-- DYNAMIS_WINDURST (Zone 187)
+-----------------------------------
+-- TODO
+
+-- DYNAMIS_JEUNO (Zone 188)
+-----------------------------------
+-- TODO
+
+-- KING_RANPERRES_TOMB (Zone 190)
+-----------------------------------
+
+-- DANGRUF_WADI (Zone 191)
+-----------------------------------
+
+-- INNER_HORUTOTO_RUINS (Zone 192)
+-----------------------------------
+
+-- ORDELLES_CAVES (Zone 193)
+-----------------------------------
+
+-- OUTER_HORUTOTO_RUINS (Zone 194)
+-----------------------------------
+
+-- THE_ELDIEME_NECROPOLIS (Zone 195)
+-----------------------------------
+
+-- GUSGEN_MINES (Zone 196)
+-----------------------------------
+
+-- CRAWLERS_NEST (Zone 197)
+-----------------------------------
+
+-- MAZE_OF_SHAKHRAMI (Zone 198)
+-----------------------------------
+
+-- GARLAIGE_CITADEL (Zone 200)
+-----------------------------------
+
+-- FEIYIN (Zone 204)
+-----------------------------------
+
+-- IFRITS_CAULDRON (Zone 205)
+-----------------------------------
+
+-- QUICKSAND_CAVES (Zone 208)
+-----------------------------------
+
+-- GUSTAV_TUNNEL (Zone 212)
+-----------------------------------
+
+-- LABYRINTH_OF_ONZOZO (Zone 213)
+-----------------------------------
+
+-- ABYSSEA_ATTOHWA (Zone 215)
+-----------------------------------
+-- TODO
+
+-- ABYSSEA_MISAREAUX (Zone 216)
+-----------------------------------
+-- TODO
+
+-- ABYSSEA_VUNKERL (Zone 217)
+-----------------------------------
+-- TODO
+
+-- ABYSSEA_ALTEPA (Zone 218)
+-----------------------------------
+-- TODO
+
+-- ABYSSEA_ULEGUERAND (Zone 253)
+-----------------------------------
+-- TODO
+
+-- ABYSSEA_GRAUBERG (Zone 254)
+-----------------------------------
+-- TODO
+
+-- RALA_WATERWAYS (Zone 258)
+-----------------------------------
+-- TODO
+
+-- YAHSE_HUNTING_GROUNDS (Zone 260)
+-----------------------------------
+-- TODO
+
+-- CEIZAK_BATTLEGROUNDS (Zone 261)
+-----------------------------------
+-- TODO
+
+-- YORCIA_WEALD (Zone 262)
+-----------------------------------
+-- TODO
+
+-- FORET_DE_HENNETIEL (Zone 261)
+-----------------------------------
+-- TODO
+
+-- MORIMAR_BASALT_FIELDS (Zone 265)
+-----------------------------------
+-- TODO
+
+-- MARJAMI_RAVINE (Zone 266)
+-----------------------------------
+-- TODO
+
+-- KAMIHR_DRIFTS (Zone 267)
+-----------------------------------
+-- TODO
+
+-- SIH_GATES (Zone 268)
+-----------------------------------
+-- TODO
+
+-- MOH_GATES (Zone 269)
+-----------------------------------
+-- TODO
+
+-- CIRDAS_CAVERNS (Zone 270)
+-----------------------------------
+-- TODO
+
+-- DHO_GATES (Zone 272)
+-----------------------------------
+-- TODO
+
+-- WOH_GATES (Zone 273)
+-----------------------------------
+-- TODO
+
+-- OUTER_RAKAZNAR (Zone 274)
+-----------------------------------
+-- TODO
+
+-- RAKAZNAR_INNER_COURT (Zone 276)
+-----------------------------------
+-- TODO
+
+-- ESCHA_ZITAH (Zone 288)
+-----------------------------------
+-- TODO
+
+-- ESCHA_RUAUN (Zone 289)
+-----------------------------------
+-- TODO
+
+-- REISENJIMA (Zone 291)
+-----------------------------------
+-- TODO
