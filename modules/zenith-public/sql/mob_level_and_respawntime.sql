@@ -2829,9 +2829,6 @@ UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 192 AND `name` IN (
     'Wendigo_blm'
 );
 
--- Custom behavior
-UPDATE `mob_pools` SET `aggro` = 1 WHERE `name` = 'Deathwatch_Beetle'; -- Defunct Beady Beetles used to aggro
-
 -- ORDELLES_CAVES (Zone 193)
 -----------------------------------
 UPDATE `mob_groups` SET `minLevel` = 17, `maxLevel` = 19 WHERE `zoneid` = 193 AND `name` = 'Stink_Bats'; -- *15-18
@@ -3032,24 +3029,300 @@ UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 194 AND `name` IN (
 );
 UPDATE `mob_groups` SET `respawntime` = 4200 WHERE `zoneid` = 194 AND `name` = 'Legalox_Heftyhind';
 -- Custom respawn changes.
-UPDATE `mob_groups` SET `respawntime` = 330 WHERE `zoneid` = 194 AND `name` = 'Fuligo';
-UPDATE `mob_groups` SET `respawntime` = 330 WHERE `zoneid` = 194 AND `name` = 'Thorn_Bat';
-UPDATE `mob_groups` SET `respawntime` = 330 WHERE `zoneid` = 194 AND `name` = 'Fetor_Bats';
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 194 AND `name` IN (
+    'Fuligo',
+    'Thorn_Bat',
+    'Fetor_Bats'
+);
 
 -- THE_ELDIEME_NECROPOLIS (Zone 195)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 43, `maxLevel` = 46 WHERE `zoneid` = 195 AND `name` = 'Lost_Soul_blm'; -- *42-46
+UPDATE `mob_groups` SET `minLevel` = 43, `maxLevel` = 46 WHERE `zoneid` = 195 AND `name` = 'Lost_Soul_war'; -- *42-46
+UPDATE `mob_groups` SET `minLevel` = 52, `maxLevel` = 55 WHERE `zoneid` = 195 AND `name` = 'Lich'; -- *51-55
+UPDATE `mob_groups` SET `minLevel` = 60, `maxLevel` = 62 WHERE `zoneid` = 195 AND `name` = 'Skull_of_Gluttony'; -- *60-60
+UPDATE `mob_groups` SET `minLevel` = 60, `maxLevel` = 62 WHERE `zoneid` = 195 AND `name` = 'Skull_of_Greed'; -- *60-60
+UPDATE `mob_groups` SET `minLevel` = 60, `maxLevel` = 62 WHERE `zoneid` = 195 AND `name` = 'Skull_of_Sloth'; -- *60-60
+UPDATE `mob_groups` SET `minLevel` = 60, `maxLevel` = 62 WHERE `zoneid` = 195 AND `name` = 'Skull_of_Lust'; -- *60-60
+UPDATE `mob_groups` SET `minLevel` = 60, `maxLevel` = 62 WHERE `zoneid` = 195 AND `name` = 'Skull_of_Pride'; -- *60-60
+UPDATE `mob_groups` SET `minLevel` = 60, `maxLevel` = 62 WHERE `zoneid` = 195 AND `name` = 'Skull_of_Envy'; -- *60-60
+UPDATE `mob_groups` SET `minLevel` = 60, `maxLevel` = 62 WHERE `zoneid` = 195 AND `name` = 'Skull_of_Wrath'; -- *60-60
+UPDATE `mob_groups` SET `minLevel` = 68, `maxLevel` = 70 WHERE `zoneid` = 195 AND `name` = 'Cwn_Cyrff'; -- *68-68
+-- Out of Era
+UPDATE `mob_groups` SET `minLevel` = 57, `maxLevel` = 60 WHERE `zoneid` = 195 AND `name` = 'Hellbound_Warrior';
+UPDATE `mob_groups` SET `minLevel` = 57, `maxLevel` = 60 WHERE `zoneid` = 195 AND `name` = 'Hellbound_Warlock';
+UPDATE `mob_groups` SET `minLevel` = 57, `maxLevel` = 60 WHERE `zoneid` = 195 AND `name` = 'Nekros_Hound';
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 195 AND `name` IN (
+    'Marchosias',
+    'Lost_Soul_blm',
+    'Shade_war',
+    'Shade_rng',
+    'Shade_thf',
+    'Shade_drk',
+    'Revenant',
+    'Hell_Hound',
+    'Anemone',
+    'Gazer',
+    'Puroboros',
+    'Lost_Soul_war'
+);
+UPDATE `mob_groups` SET `respawntime`= 960 WHERE `zoneid` = 195 AND `name` IN (
+    'Mummy',
+    'Lich',
+    'Blood_Soul',
+    'Ka_war',
+    'Ka_blm',
+    'Ka_rng',
+    'Ka_thf',
+    'Tomb_Wolf',
+    'Utukku',
+    'Dark_Stalker_war',
+    'Dark_Stalker_blm',
+    'Dark_Stalker_thf',
+    'Dark_Stalker_rng',
+    'Azer',
+    'Fallen_Knight',
+    'Ice_Elemental',
+    'Earth_Elemental',
+    'Haunt',
+    'Tomb_Warrior',
+    'Tomb_Mage',
+    'Spriggan_war',
+    'Spriggan_blm',
+    'Spriggan_thf',
+    'Spriggan_rng'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 195 AND `name` IN (
+    'Hellbound_Warrior',
+    'Hellbound_Warlock',
+    'Nekros_Hound'
+);
 
 -- GUSGEN_MINES (Zone 196)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 20, `maxLevel` = 23 WHERE `zoneid` = 196 AND `name` = 'Ghoul_war'; -- *20-27
+UPDATE `mob_groups` SET `minLevel` = 27, `maxLevel` = 30 WHERE `zoneid` = 196 AND `name` = 'Wendigo_war'; -- *26-30
+UPDATE `mob_groups` SET `minLevel` = 31, `maxLevel` = 34 WHERE `zoneid` = 196 AND `name` = 'Wight_war'; -- *30-34
+UPDATE `mob_groups` SET `minLevel` = 31, `maxLevel` = 34 WHERE `zoneid` = 196 AND `name` = 'Ghast_blm'; -- *33-36
+-- Out of Era
+UPDATE `mob_groups` SET `minLevel` = 40, `maxLevel` = 43 WHERE `zoneid` = 196 AND `name` = 'Rockmill';
+UPDATE `mob_groups` SET `minLevel` = 41, `maxLevel` = 44 WHERE `zoneid` = 196 AND `name` = 'Madfly';
+UPDATE `mob_groups` SET `minLevel` = 42, `maxLevel` = 45 WHERE `zoneid` = 196 AND `name` = 'Accursed_Soldier';
+UPDATE `mob_groups` SET `minLevel` = 42, `maxLevel` = 45 WHERE `zoneid` = 196 AND `name` = 'Accursed_Sorcerer';
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 480 WHERE `zoneid` = 196 AND `name` = 'Skeleton_Warrior';
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 196 AND `name` IN (
+    'Fly_Agaric',
+    'Ghoul_war',
+    'Bandersnatch',
+    'Ore_Eater',
+    'Spunkie',
+    'Bogy',
+    'Wendigo_war',
+    'Sadfly',
+    'Jelly',
+    'Mauthe_Doog',
+    'Amphisbaena'
+);
+UPDATE `mob_groups` SET `respawntime`= 720 WHERE `zoneid` = 196 AND `name` IN (
+    'Wight_war',
+    'Myconid',
+    'Feu_Follet',
+    'Thunder_Elemental',
+    'Earth_Elemental',
+    'Rancid_Ooze',
+    'Gallinipper',
+    'Banshee',
+    'Ghast_blm',
+    'Wight_blm'
+);
+UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 196 AND `name` IN (
+    'Rockmill',
+    'Madfly',
+    'Accursed_Soldier',
+    'Accursed_Sorcerer'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 196 AND `name` = 'Greater_Pugil';
 
 -- CRAWLERS_NEST (Zone 197)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 41, `maxLevel` = 44 WHERE `zoneid` = 197 AND `name` = 'Worker_Crawler'; -- *40-44
+UPDATE `mob_groups` SET `minLevel` = 47, `maxLevel` = 49 WHERE `zoneid` = 197 AND `name` = 'Doom_Scorpion'; -- *45-47
+UPDATE `mob_groups` SET `minLevel` = 60, `maxLevel` = 62 WHERE `zoneid` = 197 AND `name` = 'Demonic_Tiphia'; -- *60-60
+UPDATE `mob_groups` SET `minLevel` = 60, `maxLevel` = 62 WHERE `zoneid` = 197 AND `name` = 'Dynast_Beetle'; -- *56-65
+-- Basket spawn Crawler level is not correctly distinguished by location. Spawning the higher location level for both.
+UPDATE `mob_groups` SET `minLevel` = 50, `maxLevel` = 50 WHERE `zoneid` = 197 AND `name` = 'Guardian_Crawler'; -- *45-50
+UPDATE `mob_groups` SET `minLevel` = 55, `maxLevel` = 55 WHERE `zoneid` = 197 AND `name` = 'Drone_Crawler'; -- *50-50
+-- Out of Era
+UPDATE `mob_groups` SET `minLevel` = 61, `maxLevel` = 64 WHERE `zoneid` = 197 AND `name` = 'Vespo';
+UPDATE `mob_groups` SET `minLevel` = 62, `maxLevel` = 65 WHERE `zoneid` = 197 AND `name` = 'Olid_Funguar';
+UPDATE `mob_groups` SET `minLevel` = 64, `maxLevel` = 67 WHERE `zoneid` = 197 AND `name` = 'Dancing_Jewel';
+UPDATE `mob_groups` SET `minLevel` = 65, `maxLevel` = 68 WHERE `zoneid` = 197 AND `name` = 'King_Crawler';
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 197 AND `name` IN (
+    'Worker_Crawler',
+    'Death_Jacket',
+    'Maze_Lizard',
+    'Killer_Mushroom',
+    'Doom_Scorpion',
+    'Caveberry',
+    'Nest_Beetle',
+    'Soul_Stinger'
+);
+UPDATE `mob_groups` SET `respawntime`= 960 WHERE `zoneid` = 197 AND `name` IN (
+    'Hornfly',
+    'Exoray',
+    'King_Crawler',
+    'Vespo',
+    'Dancing_Jewel',
+    'Olid_Funguar',
+    'Fire_Elemental',
+    'Water_Elemental',
+    'Blazer_Beetle',
+    'Dynast_Beetle',
+    'Helm_Beetle',
+    'Knight_Crawler',
+    'Labyrinth_Lizard',
+    'Witch_Hazel',
+    'Soul_Stinger',
+    'Mushussu',
+    'Dragonfly',
+    'Crawler_Hunter'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 197 AND `name` = 'Soldier_Crawler';
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 197 AND `name` = 'Rumble_Crawler';
 
 -- MAZE_OF_SHAKHRAMI (Zone 198)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 16, `maxLevel` = 19 WHERE `zoneid` = 198 AND `name` = 'Stink_Bats'; -- *15-18
+UPDATE `mob_groups` SET `minLevel` = 23, `maxLevel` = 26 WHERE `zoneid` = 198 AND `name` = 'Ghoul_war'; -- *22-26
+UPDATE `mob_groups` SET `minLevel` = 24, `maxLevel` = 27 WHERE `zoneid` = 198 AND `name` = 'Wendigo_blm'; -- *24-28
+UPDATE `mob_groups` SET `minLevel` = 24, `maxLevel` = 27 WHERE `zoneid` = 198 AND `name` = 'Maze_Scorpion'; -- *25-28
+UPDATE `mob_groups` SET `minLevel` = 25, `maxLevel` = 28 WHERE `zoneid` = 198 AND `name` = 'Poison_Leech'; -- *24-28
+UPDATE `mob_groups` SET `minLevel` = 31, `maxLevel` = 34 WHERE `zoneid` = 198 AND `name` = 'Goblin_Shaman'; -- *30-34
+UPDATE `mob_groups` SET `minLevel` = 17, `maxLevel` = 20 WHERE `zoneid` = 198 AND `name` IN ( -- *16-18
+    'Goblin_Ambusher'
+    'Goblin_Tinkerer',
+    'Goblin_Butcher'
+);
+UPDATE `mob_groups` SET `minLevel` = 23, `maxLevel` = 26 WHERE `zoneid` = 198 AND `name` IN ( -- *22-26
+    'Goblin_Mugger'
+    'Goblin_Leecher',
+    'Goblin_Gambler'
+);
+UPDATE `mob_groups` SET `minLevel` = 36, `maxLevel` = 38 WHERE `zoneid` = 198 AND `name` = 'Lesath'; -- *36-36
+UPDATE `mob_groups` SET `minLevel` = 55, `maxLevel` = 57 WHERE `zoneid` = 198 AND `name` = 'Trembler_Tabitha'; -- *55-55
+UPDATE `mob_groups` SET `minLevel` = 58, `maxLevel` = 60 WHERE `zoneid` = 198 AND `name` = 'Gloombound_Lurker'; -- *58-58
+-- Out of Era
+UPDATE `mob_groups` SET `minLevel` = 35, `maxLevel` = 38 WHERE `zoneid` = 198 AND `name` = 'Chaser_Bats';
+UPDATE `mob_groups` SET `minLevel` = 36, `maxLevel` = 39 WHERE `zoneid` = 198 AND `name` = 'Bleeder_Leech';
+UPDATE `mob_groups` SET `minLevel` = 38, `maxLevel` = 41 WHERE `zoneid` = 198 AND `name` = 'Warren_Bat';
+UPDATE `mob_groups` SET `minLevel` = 39, `maxLevel` = 42 WHERE `zoneid` = 198 AND `name` = 'Crypterpillar';
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 480 WHERE `zoneid` = 198 AND `name` IN (
+    'Stink_Bats',
+    'Goblin_Ambusher',
+    'Goblin_Tinkerer',
+    'Goblin_Butcher',
+    'Maze_Maker'
+);
+UPDATE `mob_groups` SET `respawntime`= 600 WHERE `zoneid` = 198 AND `name` IN (
+    'Combat',
+    'Carnivorous_Crawler',
+    'Goblin_Mugger',
+    'Goblin_Leecher',
+    'Goblin_Gambler',
+    'Ghoul_war',
+    'Seeker_Bats',
+    'Wendigo_blm',
+    'Poison_Leech',
+    'Goblins_Bat',
+    'Maze_Scorpion',
+    'Jelly',
+    'Ancient_Bat',
+    'Abyss_Worm'
+);
+UPDATE `mob_groups` SET `respawntime`= 720 WHERE `zoneid` = 198 AND `name` IN (
+    'Protozoan',
+    'Caterchipillar',
+    'Labyrinth_Scorpion',
+    'Goblin_Pathfinder',
+    'Goblin_Furrier',
+    'Goblin_Smithy',
+    'Goblin_Shaman',
+    'Wight_war',
+    'Wight_blm',
+    'Air_Elemental',
+    'Earth_Elemental',
+    'Bleeder_Leech',
+    'Chaser_Bats',
+    'Crypterpillar',
+    'Warren_Bat'
+);
 
 -- GARLAIGE_CITADEL (Zone 200)
 -----------------------------------
+UPDATE `mob_groups` SET `minLevel` = 52, `maxLevel` = 55 WHERE `zoneid` = 200 AND `name` = 'Funnel_Bats'; -- *51-55
+UPDATE `mob_groups` SET `minLevel` = 52, `maxLevel` = 54 WHERE `zoneid` = 200 AND `name` = 'Old_Two-Wings'; -- *52-52
+UPDATE `mob_groups` SET `minLevel` = 54, `maxLevel` = 56 WHERE `zoneid` = 200 AND `name` = 'Skewer_Sam'; -- *54-54
+UPDATE `mob_groups` SET `minLevel` = 70, `maxLevel` = 72 WHERE `zoneid` = 200 AND `name` = 'Serket'; -- *70-70
+-- Out of Era
+UPDATE `mob_groups` SET `minLevel` = 58, `maxLevel` = 61 WHERE `zoneid` = 200 AND `name` = 'Fortalice_Bats';
+UPDATE `mob_groups` SET `minLevel` = 60, `maxLevel` = 63 WHERE `zoneid` = 200 AND `name` = 'Donjon_Bat';
+UPDATE `mob_groups` SET `minLevel` = 61, `maxLevel` = 64 WHERE `zoneid` = 200 AND `name` = 'Warden_Beetle';
+UPDATE `mob_groups` SET `minLevel` = 62, `maxLevel` = 65 WHERE `zoneid` = 200 AND `name` = 'Kaboom';
+
+-- Revert to Era dungeon respawn times.
+UPDATE `mob_groups` SET `respawntime`= 840 WHERE `zoneid` = 200 AND `name` IN (
+    'Borer_Beetle',
+    'Siege_Bat',
+    'Wingrats',
+    'Fallen_Evacuee_blm',
+    'Puroboros',
+    'Oil_Spill',
+    'Clockwork_Pod',
+    'Revenant',
+    'Citadel_Bats',
+    'Demonic_Weapon',
+    'Fallen_Soldier_blm',
+    'Bhuta',
+    'Fallen_Evacuee_war',
+    'Fallen_Soldier_war'
+);
+UPDATE `mob_groups` SET `respawntime`= 960 WHERE `zoneid` = 200 AND `name` IN (
+    'Fortalice_Bats',
+    'Fetid_Flesh',
+    'Explosure',
+    'Earth_Elemental',
+    'Droma',
+    'Thunder_Elemental',
+    'Fallen_Officer_blm',
+    'Acid_Grease',
+    'Wraith',
+    'Tainted_Flesh',
+    'Hellmine',
+    'Kaboom',
+    'Over_Weapon',
+    'Vault_Weapon',
+    'Fallen_Major',
+    'Fallen_Mage',
+    'Warden_Beetle',
+    'Magic_Jug',
+    'Donjon_Bat',
+    'Warren_Bat',
+    'Fallen_Officer_war'
+);
+-- Custom respawn changes.
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 200 AND `name` = 'Chamber_Beetle';
+UPDATE `mob_groups` SET `respawntime`= 330 WHERE `zoneid` = 200 AND `name` = 'Funnel_Bats';
 
 -- FEIYIN (Zone 204)
 -----------------------------------
