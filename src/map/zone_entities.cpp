@@ -913,6 +913,20 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
             {
                 spawnList.insert(itr, SpawnIDList_t::value_type(id, PCurrentEntity));
                 PChar->updateEntityPacket(PCurrentEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
+                if (PCurrentEntity->isRenamed && PCurrentEntity->look.size == MODEL_DOOR)
+                {
+                    // Doors won't function properly if they spawn in with a custom packetname
+                    // Previous ENTITY_SPAWN didn't include the name, so now we send a small UPDATE_HP packet to fix the name
+                    PChar->PAI->QueueAction(queueAction_t(std::chrono::seconds(1), false,
+                                                          [PChar, PCurrentEntity](auto* _)
+                                                          {
+                                                              // Ensure NPC still exists
+                                                              if (PCurrentEntity)
+                                                              {
+                                                                  PChar->updateEntityPacket(PCurrentEntity, ENTITY_UPDATE, UPDATE_HP);
+                                                              }
+                                                          }));
+                }
             }
         };
 

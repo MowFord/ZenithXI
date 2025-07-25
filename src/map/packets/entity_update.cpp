@@ -559,6 +559,16 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
     // Otherwise it will revert to it's default name (if applicable).
     else if (PEntity->isRenamed)
     {
+        if (type == ENTITY_SPAWN && PEntity->look.size == MODEL_DOOR)
+        {
+            // Doors won't function properly if they spawn in with a custom packetname
+            // Don't extend this packet, but send a small UPDATE_HP packet afterwards to update the name
+            // SpawnNPCs(PChar) function updated to send the player an UPDATE_HP packet later
+            // other places where NPCs are inserted are likely not relevant as this only affects doors
+
+            return;
+        }
+
         updatemask |= UPDATE_NAME;
         ref<uint8>(0x0A) |= updatemask;
 
