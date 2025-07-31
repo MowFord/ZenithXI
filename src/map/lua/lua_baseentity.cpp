@@ -36,6 +36,7 @@
 
 #include "ability.h"
 #include "alliance.h"
+#include "aman.h"
 #include "battlefield.h"
 #include "daily_system.h"
 #include "enmity_container.h"
@@ -161,6 +162,7 @@
 #include "utils/itemutils.h"
 #include "utils/jailutils.h"
 #include "utils/mobutils.h"
+#include "utils/mountutils.h"
 #include "utils/petutils.h"
 #include "utils/puppetutils.h"
 #include "utils/trustutils.h"
@@ -188,9 +190,15 @@ CLuaBaseEntity::CLuaBaseEntity(CBaseEntity* PEntity)
  *  Notes   : Mainly used for showing retail text specific to an NPC
  ************************************************************************/
 
-void CLuaBaseEntity::showText(CLuaBaseEntity* mob, uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3)
+void CLuaBaseEntity::showText(CLuaBaseEntity* entity, uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3)
 {
-    CBaseEntity* PBaseEntity = mob->GetBaseEntity();
+    CBaseEntity* PBaseEntity = entity->GetBaseEntity();
+
+    if (PBaseEntity == nullptr)
+    {
+        ShowError("Invalid entity used on showText() function. Message ID (%i)", messageID);
+        return;
+    }
 
     if (PBaseEntity->objtype == TYPE_NPC)
     {
@@ -409,12 +417,23 @@ void CLuaBaseEntity::printToArea(std::string const& message, sol::object const& 
 
         PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CChatMessagePacket>(PChar, messageLook, message, name));
     }
+    else if (messageRange == ChatMessageArea::Assist)
+    {
+        message::send(ipc::ChatMessageAssist{
+            .senderId    = PChar->id,
+            .senderName  = name,
+            .message     = message,
+            .mentorRank  = PChar->aman().isMentor() ? PChar->aman().getMentorRank() : static_cast<uint8>(0),
+            .masteryRank = PChar->aman().getMasteryRank(),
+            .messageType = messageLook,
+        });
+
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CChatMessagePacket>(PChar, messageLook, message, name));
+    }
     else
     {
         ShowError("CLuaBaseEntity::printToArea : invalid message area/messageRange value %u given by script.", messageRange);
     }
-
-    // TODO: Assist channels
 }
 
 /************************************************************************
@@ -2538,11 +2557,11 @@ bool CLuaBaseEntity::sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 ho
  *  Example : player:openSendBox()
  ************************************************************************/
 
-void CLuaBaseEntity::openSendBox()
+void CLuaBaseEntity::openSendBox() const
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        dboxutils::OpenSendBox(PChar, 0x0D, 2);
+        dboxutils::OpenSendBox(PChar);
     }
 }
 
@@ -5300,38 +5319,36 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, sol::table const& ext
  *  Notes   : See scripts/globals/porter_moogle.lua
  ************************************************************************/
 
-sol::table CLuaBaseEntity::getRetrievableItemsForSlip(uint16 slipId)
+auto CLuaBaseEntity::getRetrievableItemsForSlip(const uint16 slipId) const -> sol::table
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    if (const auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return {};
+        const auto slipSlotId = PChar->getStorage(LOC_INVENTORY)->SearchItem(slipId);
+
+        if (slipSlotId == ERROR_SLOTID)
+        {
+            return {};
+        }
+
+        auto* slip = PChar->getStorage(LOC_INVENTORY)->GetItem(slipSlotId);
+
+        if (slip == nullptr)
+        {
+            ShowError("Slip item was null.");
+            return {};
+        }
+
+        sol::table table = lua.create_table();
+        for (int i = 0; i < CItem::extra_size; i++)
+        {
+            table.add(slip->m_extra[i]);
+        }
+
+        return table;
     }
 
-    CCharEntity* PChar      = (CCharEntity*)m_PBaseEntity;
-    auto         slipSlotId = PChar->getStorage(LOC_INVENTORY)->SearchItem(slipId);
-
-    if (slipSlotId == 255)
-    {
-        return {};
-    }
-
-    auto* slip = PChar->getStorage(LOC_INVENTORY)->GetItem(slipSlotId);
-
-    if (slip == nullptr)
-    {
-        ShowError("Slip item was null.");
-        return {};
-    }
-
-    sol::table table = lua.create_table();
-    // TODO Is extra sized defined anywhere?
-    for (int i = 0; i < 24; i++)
-    {
-        table.add(slip->m_extra[i]);
-    }
-
-    return table;
+    ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+    return {};
 }
 
 /************************************************************************
@@ -6022,7 +6039,7 @@ void CLuaBaseEntity::setNewPlayer(bool newplayer)
  *  Notes   : Test me!  Changing retval to bool
  ************************************************************************/
 
-bool CLuaBaseEntity::getMentor()
+auto CLuaBaseEntity::getMentor() const -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -6031,7 +6048,7 @@ bool CLuaBaseEntity::getMentor()
     }
 
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    return PChar->m_mentorUnlocked ? true : false;
+    return PChar->aman().hasMentorUnlocked();
 }
 
 /************************************************************************
@@ -6040,7 +6057,7 @@ bool CLuaBaseEntity::getMentor()
  *  Example : player:setMentor(true)
  ************************************************************************/
 
-void CLuaBaseEntity::setMentor(bool mentor)
+void CLuaBaseEntity::setMentor(bool mentor) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -6048,10 +6065,9 @@ void CLuaBaseEntity::setMentor(bool mentor)
         return;
     }
 
-    CCharEntity* PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
-    PChar->m_mentorUnlocked = mentor;
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->aman().setMentorUnlocked(mentor);
 
-    charutils::SaveMentorFlag(PChar);
     PChar->updatemask |= UPDATE_HP;
 }
 
@@ -6928,6 +6944,7 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
             charutils::BuildingCharTraitsTable(PChar);
             charutils::BuildingCharAbilityTable(PChar);
             charutils::CheckValidEquipment(PChar);
+            luautils::CheckForGearSet(PChar);
 
             PChar->updatemask |= UPDATE_HP;
 
@@ -11664,7 +11681,7 @@ uint16 CLuaBaseEntity::copyConfrontationEffect(uint16 targetID)
  *  Notes   : Used to check if entity is inside a battlefield
  ************************************************************************/
 
-auto CLuaBaseEntity::getBattlefield() -> CBattlefield*
+auto CLuaBaseEntity::getBattlefield() const -> CBattlefield*
 {
     return m_PBaseEntity->PBattlefield;
 }
@@ -11676,7 +11693,7 @@ auto CLuaBaseEntity::getBattlefield() -> CBattlefield*
  *  Notes   :
  ************************************************************************/
 
-int32 CLuaBaseEntity::getBattlefieldID()
+auto CLuaBaseEntity::getBattlefieldID() const -> int32
 {
     return m_PBaseEntity->PBattlefield ? m_PBaseEntity->PBattlefield->GetID() : -1;
 }
@@ -11688,8 +11705,14 @@ int32 CLuaBaseEntity::getBattlefieldID()
  *  Notes   : Returns BATTLEFIELD_RETURNCODE (see scripts/globals/battlefield.lua or src/map/battlefield.h)
  ************************************************************************/
 
-uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3)
+auto CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3) const -> uint8
 {
+    if (!m_PBaseEntity->loc.zone)
+    {
+        ShowWarning("Attempted to register %s without valid zone.", m_PBaseEntity->getName());
+        return BATTLEFIELD_RETURN_CODE_BATTLEFIELD_FULL;
+    }
+
     if (m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr)
     {
         ShowWarning("m_BattlefieldHandler was null for %s.", m_PBaseEntity->getName());
@@ -11744,7 +11767,7 @@ uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object c
     return PZone->m_BattlefieldHandler->RegisterBattlefield(PChar, registration);
 }
 
-bool CLuaBaseEntity::battlefieldAtCapacity(int battlefieldID)
+auto CLuaBaseEntity::battlefieldAtCapacity(const int battlefieldID) const -> bool
 {
     if (m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr)
     {
@@ -11783,7 +11806,7 @@ bool CLuaBaseEntity::battlefieldAtCapacity(int battlefieldID)
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::enterBattlefield(sol::object const& area)
+auto CLuaBaseEntity::enterBattlefield(sol::object const& area) const -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_PC || m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr)
     {
@@ -11811,7 +11834,7 @@ bool CLuaBaseEntity::enterBattlefield(sol::object const& area)
  *  Notes   : leaveCode can be found in scripts/globals/battlefield.lua or src/map/battlefield.h
  ************************************************************************/
 
-bool CLuaBaseEntity::leaveBattlefield(uint8 leavecode)
+auto CLuaBaseEntity::leaveBattlefield(const uint8 leavecode) const -> bool
 {
     if (m_PBaseEntity->objtype == TYPE_NPC || m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr)
     {
@@ -11829,7 +11852,7 @@ bool CLuaBaseEntity::leaveBattlefield(uint8 leavecode)
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::isInDynamis()
+auto CLuaBaseEntity::isInDynamis() const -> bool
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -11847,7 +11870,7 @@ bool CLuaBaseEntity::isInDynamis()
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::setEnteredBattlefield(bool entered)
+void CLuaBaseEntity::setEnteredBattlefield(const bool entered) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -11869,7 +11892,7 @@ void CLuaBaseEntity::setEnteredBattlefield(bool entered)
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::hasEnteredBattlefield()
+auto CLuaBaseEntity::hasEnteredBattlefield() const -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -15954,17 +15977,30 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
     }
 }
 
-void CLuaBaseEntity::registerChocobo(uint32 value)
+void CLuaBaseEntity::registerChocobo(const ChocoboColor color, sol::table const& traits) const
 {
-    if (m_PBaseEntity == nullptr || m_PBaseEntity->objtype != TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        ShowWarning("Invalid Entity");
+        const auto largeBeak   = traits.get_or("largeBeak", false);
+        const auto fullTail    = traits.get_or("fullTail", false);
+        const auto largeTalons = traits.get_or("largeTalons", false);
+
+        const ChocoboCustomProperties newChocobo{
+            .traits = ChocoboPhysicalTraits{
+                .largeBeak   = largeBeak,
+                .largeTalons = largeTalons,
+                .fullTail    = fullTail,
+            },
+            .color = color,
+        };
+
+        PChar->m_FieldChocobo = newChocobo.properties;
+        PChar->m_mountId      = 0;
+        db::preparedStmt("UPDATE char_pet SET field_chocobo = ? WHERE charid = ?", PChar->m_FieldChocobo, PChar->id);
         return;
     }
 
-    auto* PChar           = static_cast<CCharEntity*>(m_PBaseEntity);
-    PChar->m_FieldChocobo = value;
-    db::preparedStmt("UPDATE char_pet SET field_chocobo = ? WHERE charid = ?", value, PChar->id);
+    ShowWarning("Invalid Entity (PC: %s) calling function.", m_PBaseEntity->getName());
 }
 
 /************************************************************************
@@ -17969,6 +18005,47 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
 }
 
 /************************************************************************
+ *  Function: usePetAbility()
+ *  Purpose : Instruct a Pet to use a specified Job Ability
+ *  Example : pet:usePetAbility(xi.ability.PERFECT_DEFENSE, pet)
+ *  Notes   : Inserts directly into queue stack with 0ms delay,
+ *  and checks queue for immediate use.
+ ************************************************************************/
+
+void CLuaBaseEntity::usePetAbility(uint16 skillId, sol::object const& target) const
+{
+    CBattleEntity* PTarget{ nullptr };
+
+    if (!battleutils::GetPetSkill(skillId))
+    {
+        return;
+    }
+
+    if ((target != sol::lua_nil) && target.is<CLuaBaseEntity*>())
+    {
+        const auto* PLuaBaseEntity = target.as<CLuaBaseEntity*>();
+        PTarget                    = static_cast<CBattleEntity*>(PLuaBaseEntity->m_PBaseEntity);
+    }
+
+    // clang-format off
+    m_PBaseEntity->PAI->QueueAction(queueAction_t(0ms, true, [PTarget, skillId](auto PEntity)
+    {
+        if (PTarget)
+        {
+            PEntity->PAI->PetSkill(PTarget->targid, skillId);
+        }
+        else if (dynamic_cast<CMobEntity*>(PEntity))
+        {
+            PEntity->PAI->PetSkill(static_cast<CMobEntity*>(PEntity)->GetBattleTargetID(), skillId);
+        }
+    }));
+    // clang-format on
+
+    // Check queue immediately in case of 0 ms delay abilities
+    m_PBaseEntity->PAI->checkQueueImmediately();
+}
+
+/************************************************************************
  *  Function: getAbilityDistance()
  *  Purpose : Returns the distance for a specified ability from mob_skills
  *  Example : mob:getAbilityDistance(740)
@@ -19854,6 +19931,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("castSpell", CLuaBaseEntity::castSpell);
     SOL_REGISTER("useJobAbility", CLuaBaseEntity::useJobAbility);
     SOL_REGISTER("useMobAbility", CLuaBaseEntity::useMobAbility);
+    SOL_REGISTER("usePetAbility", CLuaBaseEntity::usePetAbility);
     SOL_REGISTER("getAbilityDistance", CLuaBaseEntity::getAbilityDistance);
     SOL_REGISTER("hasTPMoves", CLuaBaseEntity::hasTPMoves);
     SOL_REGISTER("drawIn", CLuaBaseEntity::drawIn);
