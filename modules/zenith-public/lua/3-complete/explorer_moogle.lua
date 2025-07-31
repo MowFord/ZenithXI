@@ -11,9 +11,9 @@ local m = Module:new('explorer_moogle')
 local canNotTeleport = function(player)
     -- Check if player is at least rank 3 in any nation
     local noRank3Nation =
-            player:getRank(player:getNation(xi.nation.BASTOK)) < 3 and
-            player:getRank(player:getNation(xi.nation.SANDORIA)) < 3 and
-            player:getRank(player:getNation(xi.nation.WINDURST)) < 3
+            player:getRank(xi.nation.BASTOK) < 3 and
+            player:getRank(xi.nation.SANDORIA) < 3 and
+            player:getRank(xi.nation.WINDURST) < 3
 
     -- Returns true if player is not rank 3 in any nation and meets the minimum level requirement
     -- The handling of not meeting the level requirement is done in the original explorerMoogleOnTrigger
@@ -35,7 +35,8 @@ m:addOverride('xi.teleport.explorerMoogleOnEventFinish', function(player, csid, 
     -- Check if the player is eligible for the teleport
     -- If they are not, we skip the event finish and do nothing
     if
-        canNotTeleport(player) and
+        (canNotTeleport(player) or
+        player:getMainLvl() < xi.settings.main.EXPLORER_MOOGLE_LV) and
         option > 0
     then
         -- If player is not eligible but managed to reach the event finish,
