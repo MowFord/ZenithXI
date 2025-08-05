@@ -350,7 +350,7 @@ m:addOverride('xi.zones.Kazham.npcs.Toji_Mumosulah.onTrigger', function(player, 
     }
 
     player:showText(npc, zones[player:getZoneID()].text.TOJIMUMOSULAH_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    xi.shop.general(player, stock, xi.fameArea.WINDURST)
 end)
 
 m:addOverride('xi.zones.Norg.npcs.Solby-Maholby.onTrigger', function(player, npc)
@@ -526,9 +526,9 @@ m:addOverride('xi.zones.Southern_San_dOria.npcs.Ostalie.onTrigger', function(pla
         { xi.item.CUFFS,                 137, 3 },
         { xi.item.SLOPS,                 199, 3 },
         { xi.item.FLASK_OF_EYE_DROPS,   1362, 3 }, -- *
-        { xi.item.ANTIDOTE,              328, 3 },
-        { xi.item.FLASK_OF_ECHO_DROPS,   832, 2 },
-        { xi.item.POTION,                946, 1 },
+        { xi.item.ANTIDOTE,              331, 3 },
+        { xi.item.FLASK_OF_ECHO_DROPS,   840, 2 },
+        { xi.item.POTION,                955, 1 },
         { xi.item.ETHER,                1658, 1 }, -- *
         { xi.item.PICKAXE,               210, 3 },
         { xi.item.HATCHET,               525, 3 },
@@ -991,13 +991,24 @@ m:addOverride('xi.zones.Upper_Jeuno.npcs.Antonia.onTrigger', function(player, np
         { xi.item.MYTHRIL_MACE,     18048 },
         { xi.item.WARHAMMER,         6558 },
         { xi.item.OAK_POLE,         37440 },
-        { xi.item.HALBERD,          44550 },
+        { xi.item.HALBERD,          40095 }, -- *44,550 (x.9)
         { xi.item.SCYTHE,           10596 },
         { xi.item.IRON_ARROW,           8 },
     }
 
+    -- Bonus wares if Rank 10
+    if
+        player:getRank(xi.nation.BASTOK) >= 10 or
+        player:getRank(xi.nation.SANDORIA) >= 10 or
+        player:getRank(xi.nation.WINDURST) >= 10
+    then
+        table.insert(stock, 2, { 17063, 53122 }) -- *Darksteel Rod
+        table.insert(stock, 5, { 17037, 62348 }) -- *Darksteel Mace
+        table.insert(stock, 9, { 16848, 68912 }) -- *Darksteel Lance
+    end
+
     player:showText(npc, zones[player:getZoneID()].text.VIETTES_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    xi.shop.general(player, stock, xi.fameArea.JEUNO)
 end)
 
 -- Restores Coumuna to pre 2016 wares
@@ -1009,14 +1020,25 @@ m:addOverride('xi.zones.Upper_Jeuno.npcs.Coumuna.onTrigger', function(player, np
         { xi.item.MYTHRIL_KNIFE,    14560 },
         { xi.item.KRIS,             12096 },
         { xi.item.MYTHRIL_DEGEN,    31000 },
-        { xi.item.KNIGHTS_SWORD,    85250 },
+        { xi.item.KNIGHTS_SWORD,    55413 }, -- * 85,250 (x.65)
         { xi.item.TWO_HANDED_SWORD, 13926 },
-        { xi.item.MYTHRIL_AXE,      48600 },
+        { xi.item.MYTHRIL_AXE,      43740 }, -- * 48,600 (x.9)
         { xi.item.GREATAXE,          4550 },
     }
 
+    -- Bonus wares if Rank 10
+    if
+        player:getRank(xi.nation.BASTOK) >= 10 or
+        player:getRank(xi.nation.SANDORIA) >= 10 or
+        player:getRank(xi.nation.WINDURST) >= 10
+    then
+        table.insert(stock, 2, { 16413, 62496 }) -- *Darksteel Claws
+        table.insert(stock, 5, { 16468, 59520 }) -- *Darksteel Knife
+        table.insert(stock, 11, { 16645, 65630 }) -- *Darksteel Axe
+    end
+
     player:showText(npc, zones[player:getZoneID()].text.VIETTES_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    xi.shop.general(player, stock, xi.fameArea.JEUNO)
 end)
 
 m:addOverride('xi.zones.Upper_Jeuno.npcs.Leillaine.onTrigger', function(player, npc)
@@ -1030,6 +1052,15 @@ m:addOverride('xi.zones.Upper_Jeuno.npcs.Leillaine.onTrigger', function(player, 
         { xi.item.ETHER,                    1575 }, -- *
         { xi.item.REMEDY,                   3360 },
     }
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
+        table.insert(stock, 6, { xi.item.POTION_P1, 1001 }) -- *
+        table.insert(stock, 8, { xi.item.ETHER_P1, 1858 }) -- *
+    end
+
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG then
+        table.insert(stock, 7, { xi.item.HI_POTION, 2500 }) -- *
+        table.insert(stock, 10, { xi.item.HI_ETHER, 4125 }) -- *
+    end
 
     player:showText(npc, zones[player:getZoneID()].text.LEILLAINE_SHOP_DIALOG)
     xi.shop.general(player, stock)
@@ -1078,7 +1109,7 @@ m:addOverride('xi.zones.Kazham.npcs.Pahya_Lolohoiv.onTrigger', function(player, 
     }
 
     player:showText(npc, zones[player:getZoneID()].text.PAHYALOLOHOIV_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    xi.shop.general(player, stock, xi.fameArea.WINDURST)
 end)
 
 m:addOverride('xi.zones.Kazham.npcs.Nuh_Celodehki.onTrigger', function(player, npc)
@@ -1093,7 +1124,7 @@ m:addOverride('xi.zones.Kazham.npcs.Nuh_Celodehki.onTrigger', function(player, n
     }
 
     player:showText(npc, zones[player:getZoneID()].text.NUHCELODENKI_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    xi.shop.general(player, stock, xi.fameArea.WINDURST)
 end)
 
 m:addOverride('xi.zones.Kazham.npcs.Ghemi_Sinterilo.onTrigger', function(player, npc)
@@ -1112,7 +1143,30 @@ m:addOverride('xi.zones.Kazham.npcs.Ghemi_Sinterilo.onTrigger', function(player,
     }
 
     player:showText(npc, zones[player:getZoneID()].text.GHEMISENTERILO_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    xi.shop.general(player, stock, xi.fameArea.WINDURST)
+end)
+
+m:addOverride('xi.zones.Kazham.npcs.Khifo_Ryuhkowa.onTrigger', function(player, npc)
+    local stock =
+    {
+        { xi.item.KUKRI,            6520 },
+        { xi.item.RAM_DAO,         96050 }, -- *174,636  (x.55)
+        { xi.item.BRONZE_SPEAR,      924 },
+        { xi.item.SPEAR,           18522 },
+        { xi.item.PARTISAN,        68972 }, -- *86,215 (x.8)
+        { xi.item.CHESTNUT_CLUB,    1827 },
+        { xi.item.BONE_CUDGEL,      5644 },
+        { xi.item.CHESTNUT_WAND,    5997 },
+        { xi.item.MAHOGANY_STAFF,  33957 },
+        { xi.item.MAHOGANY_POLE,   67914 }, -- *113,190 (x.6)
+        { xi.item.BATTLE_BOW,      45360 },
+        { xi.item.HAWKEYE,            63 },
+        { xi.item.BOOMERANG,        1837 },
+        { xi.item.WOODEN_ARROW,        4 },
+    }
+
+    player:showText(npc, zones[player:getZoneID()].text.KHIFORYUHKOWA_SHOP_DIALOG)
+    xi.shop.general(player, stock, xi.fameArea.WINDURST)
 end)
 
 m:addOverride('xi.zones.Rabao.npcs.Scamplix.onTrigger', function(player, npc)
@@ -1257,7 +1311,7 @@ m:addOverride('xi.zones.Nashmau.npcs.Poporoon.onTrigger', function(player, npc)
         { xi.item.STUDDED_BOOTS,    11172, },
         { xi.item.SOCKS,            16000, }, -- *
         { xi.item.CUIR_HIGHBOOTS,   20532, },
-        { 12958,                    95800, }, -- *Tiger Ledelsens
+        { 12958,                    86220, }, -- *Tiger Ledelsens
     }
 
     player:showText(npc, zones[player:getZoneID()].text.POPOROON_SHOP_DIALOG)
@@ -1369,7 +1423,7 @@ m:addOverride('xi.zones.Southern_San_dOria_[S].npcs.Geltpix.onTrigger', function
     local stock =
     {
         { xi.item.HI_POTION,                2500 }, -- *
-        { xi.item.HI_ETHER,                 5025 }, -- *
+        { xi.item.HI_ETHER,                 4125 }, -- *
         { xi.item.HATCHET,                   500 },
         { xi.item.ASPHODEL,                  100 },
         { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
@@ -1386,7 +1440,7 @@ m:addOverride('xi.zones.Bastok_Markets_[S].npcs.Blingbrix.onTrigger', function(p
     local stock =
     {
         { xi.item.HI_POTION,                2500 }, -- *
-        { xi.item.HI_ETHER,                 5025 }, -- *
+        { xi.item.HI_ETHER,                 4125 }, -- *
         { xi.item.PICKAXE,                   200 },
         { xi.item.SICKLE,                    300 },
         { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
@@ -1403,7 +1457,7 @@ m:addOverride('xi.zones.Windurst_Waters_[S].npcs.Pelftrix.onTrigger', function(p
     local stock =
     {
         { xi.item.HI_POTION,                2500 }, -- *
-        { xi.item.HI_ETHER,                 5025 }, -- *
+        { xi.item.HI_ETHER,                 4125 }, -- *
         { xi.item.SICKLE,                    300 },
         { xi.item.HATCHET,                   500 },
         { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
@@ -1425,7 +1479,7 @@ m:addOverride('xi.zones.Fort_Karugo-Narugo_[S].npcs.Spondulix.onTrigger', functi
     local stock =
     {
         { xi.item.HI_POTION,            2500 }, -- *
-        { xi.item.HI_ETHER,             5025 }, -- *
+        { xi.item.HI_ETHER,             4125 }, -- *
         { 2563,                         3035 }, -- Karugo Clay
     }
 
