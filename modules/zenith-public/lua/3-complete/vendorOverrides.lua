@@ -404,16 +404,9 @@ m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Nilerouche.onTrigger', function(
 -- { 2871,  10000, }, -- Safehold Waystone
     }
 
+-- Bonus wares after mission 3-5
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
-        stock =
-        {
-            { 17005,   108, }, -- Lufaise Fly
-            { 17383,  2640, }, -- Clothespole
-            { 688,      20, }, -- Arrowwood Log
-            { 690,    7800, }, -- Elm Log
-            { 4638,  66000, }, -- Banish III
--- { 2871,  10000, }, -- Safehold Waystone
-        }
+        table.insert(stock, 5, { 4638, 66000 }) -- Banish III
     end
 
     player:showText(npc, zones[player:getZoneID()].text.NILEROUCHE_SHOP_DIALOG)
@@ -430,16 +423,9 @@ m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Mazuro-Oozuro.onTrigger', functi
 -- { 2871,  10000, }, -- Safehold Waystone
     }
 
+    -- Bonus wares after mission 3-5
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
-        stock =
-        {
-            { 17005,   108, }, -- Lufaise Fly
-            { 17383,  2640, }, -- Clothespole
-            { 688,      20, }, -- Arrowwood Log
-            { 690,    7800, }, -- Elm Log
-            { 4638,  66000, }, -- Banish III
--- { 2871,  10000, }, -- Safehold Waystone
-        }
+        table.insert(stock, 5, { 4638, 66000 }) -- Banish III
     end
 
     player:showText(npc, zones[player:getZoneID()].text.MAZUROOOZURO_SHOP_DIALOG)
@@ -1005,6 +991,7 @@ m:addOverride('xi.zones.Upper_Jeuno.npcs.Antonia.onTrigger', function(player, np
         table.insert(stock, 2, { 17063, 53122 }) -- *Darksteel Rod
         table.insert(stock, 5, { 17037, 62348 }) -- *Darksteel Mace
         table.insert(stock, 9, { 16848, 68912 }) -- *Darksteel Lance
+        table.insert(stock, 12, { 17321, 20 })   -- *Silver Arrow
     end
 
     player:showText(npc, zones[player:getZoneID()].text.VIETTES_SHOP_DIALOG)
@@ -1032,12 +1019,66 @@ m:addOverride('xi.zones.Upper_Jeuno.npcs.Coumuna.onTrigger', function(player, np
         player:getRank(xi.nation.SANDORIA) >= 10 or
         player:getRank(xi.nation.WINDURST) >= 10
     then
-        table.insert(stock, 2, { 16413, 62496 }) -- *Darksteel Claws
-        table.insert(stock, 5, { 16468, 59520 }) -- *Darksteel Knife
+        table.insert(stock, 2, { 16413, 62496 })  -- *Darksteel Claws
+        table.insert(stock, 5, { 16468, 59520 })  -- *Darksteel Knife
         table.insert(stock, 11, { 16645, 65630 }) -- *Darksteel Axe
     end
 
     player:showText(npc, zones[player:getZoneID()].text.VIETTES_SHOP_DIALOG)
+    xi.shop.general(player, stock, xi.fameArea.JEUNO)
+end)
+
+m:addOverride('xi.zones.Upper_Jeuno.npcs.Deadly_Minnow.onTrigger', function(player, npc)
+        local stock =
+        {
+            { xi.item.STUDDED_BANDANA, 14326 },
+            { xi.item.SILVER_MASK,     22800 },
+            { xi.item.BANDED_HELM,     47025 },
+            { xi.item.STUDDED_VEST,    22800 },
+            { xi.item.SILVER_MAIL,     35200 },
+            { xi.item.BANDED_MAIL,     72600 },
+            { xi.item.STUDDED_GLOVES,  11970 },
+            { xi.item.SILVER_MITTENS,  18800 },
+            { xi.item.GAUNTLETS,       25920 },
+            { xi.item.MUFFLERS,        38775 },
+        }
+
+    -- Bonus wares if Rank 10
+    if
+        player:getRank(xi.nation.BASTOK) >= 10 or
+        player:getRank(xi.nation.SANDORIA) >= 10 or
+        player:getRank(xi.nation.WINDURST) >= 10
+    then
+        table.insert(stock, 4, { xi.item.BASCINET, 78968 }) --*
+        table.insert(stock, 12, { 12683, 65113 })           -- *Darksteel Mufflers
+    end
+
+    player:showText(npc, zones[player:getZoneID()].text.DURABLE_SHIELDS_SHOP_DIALOG)
+    xi.shop.general(player, stock, xi.fameArea.JEUNO)
+end)
+
+m:addOverride('xi.zones.Upper_Jeuno.npcs.Khe_Chalahko.onTrigger', function(player, npc)
+    local stock =
+    {
+        { xi.item.SALLET,         31860 },
+        { xi.item.BREASTPLATE,    49140 },
+        { xi.item.CUISSES,        37800 },
+        { xi.item.PLATE_LEGGINGS, 23760 },
+        { xi.item.BREECHES,       57750 },
+        { xi.item.SOLLERETS,      35475 },
+    }
+
+    -- Bonus wares if Rank 10
+    if
+        player:getRank(xi.nation.BASTOK) >= 10 or
+        player:getRank(xi.nation.SANDORIA) >= 10 or
+        player:getRank(xi.nation.WINDURST) >= 10
+    then
+        table.insert(stock, 6, { xi.item.DARKSTEEL_BREECHES, 96976 }) -- *
+        table.insert(stock, 8, { 12939, 59571 })                      -- *Darksteel Sollerets
+    end
+
+    player:showText(npc, zones[player:getZoneID()].text.DURABLE_SHIELDS_SHOP_DIALOG)
     xi.shop.general(player, stock, xi.fameArea.JEUNO)
 end)
 
@@ -1052,11 +1093,13 @@ m:addOverride('xi.zones.Upper_Jeuno.npcs.Leillaine.onTrigger', function(player, 
         { xi.item.ETHER,                    1575 }, -- *
         { xi.item.REMEDY,                   3360 },
     }
+-- Bonus wares after mission 3-5
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         table.insert(stock, 6, { xi.item.POTION_P1, 1001 }) -- *
         table.insert(stock, 8, { xi.item.ETHER_P1, 1858 }) -- *
     end
 
+    -- Bonus wares after mission 5-3
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG then
         table.insert(stock, 7, { xi.item.HI_POTION, 2500 }) -- *
         table.insert(stock, 10, { xi.item.HI_ETHER, 4125 }) -- *
@@ -1092,6 +1135,26 @@ m:addOverride('xi.zones.Upper_Jeuno.npcs.Glyke.onTrigger', function(player, npc)
     }
 
     player:showText(npc, zones[player:getZoneID()].text.GLYKE_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end)
+
+m:addOverride('xi.zones.Upper_Jeuno.npcs.Areebah.onTrigger', function(player, npc)
+    local stock =
+    {
+        { xi.item.CHAMOMILE,           130 },
+        { xi.item.WIJNRUIT,            120 },
+        { xi.item.CARNATION,            60 },
+        { xi.item.RED_ROSE,             80 },
+        { xi.item.RAIN_LILY,            96 },
+        { xi.item.LILAC,               120 },
+        { xi.item.AMARYLLIS,           120 },
+        { xi.item.MARGUERITE,          120 },
+-- { xi.item.BAG_OF_FLOWER_SEEDS, 520 }, Synergy synth item
+-- { xi.item.WATER_LILY,          630 }, Kaberno (Myoshu: Ichi)
+-- { xi.item.QUEEN_OF_THE_NIGHT,  690 }, Rank (Gekka: Ichi)
+    }
+
+    player:showText(npc, zones[player:getZoneID()].text.MP_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end)
 
@@ -1311,7 +1374,7 @@ m:addOverride('xi.zones.Nashmau.npcs.Poporoon.onTrigger', function(player, npc)
         { xi.item.STUDDED_BOOTS,    11172, },
         { xi.item.SOCKS,            16000, }, -- *
         { xi.item.CUIR_HIGHBOOTS,   20532, },
-        { 12958,                    86220, }, -- *Tiger Ledelsens
+        { 12958,                    65528, }, -- *Tiger Ledelsens
     }
 
     player:showText(npc, zones[player:getZoneID()].text.POPOROON_SHOP_DIALOG)
