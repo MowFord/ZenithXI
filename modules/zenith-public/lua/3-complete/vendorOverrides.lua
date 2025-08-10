@@ -259,8 +259,8 @@ m:addOverride('xi.zones.Lower_Jeuno.npcs.Amalasanda.onTrigger', function(player,
         { xi.item.ONZ_OF_CURRY_POWDER,     1039 },
         { xi.item.JAR_OF_GROUND_WASABI,    2724 },
         { xi.item.BOTTLE_OF_RICE_VINEGAR,   210 },
-        { xi.item.BUNDLE_OF_SHIRATAKI,      516 },
-        { xi.item.BAG_OF_BUCKWHEAT_FLOUR,  2250 }, -- *
+-- { xi.item.BUNDLE_OF_SHIRATAKI,      516 }, (Enable with COP)
+-- { xi.item.BAG_OF_BUCKWHEAT_FLOUR,  2250 }, -- * (Enable with WOTG)
         { xi.item.SCROLL_OF_KATON_ICHI,    2447 },
         { xi.item.SCROLL_OF_HYOTON_ICHI,   2447 },
         { xi.item.SCROLL_OF_HUTON_ICHI,    2447 },
@@ -323,8 +323,8 @@ m:addOverride('xi.zones.Mhaura.npcs.Tya_Padolih.onTrigger', function(player, npc
     local stock =
     {
         { xi.item.SCROLL_OF_SLEEPGA,    11648 },
-        { xi.item.SCROLL_OF_DISTRACT,   20384 },
-        { xi.item.SCROLL_OF_FRAZZLE,    28304 },
+        { xi.item.SCROLL_OF_DISTRACT,   71344 }, -- *
+        { xi.item.SCROLL_OF_FRAZZLE,    84912 }, -- *
     }
 
     player:showText(npc, zones[player:getZoneID()].text.TYAPADOLIH_SHOP_DIALOG)
@@ -397,16 +397,25 @@ end)
 m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Nilerouche.onTrigger', function(player, npc)
     local stock =
     {
-        { 17005,   108, }, -- Lufaise Fly
-        { 17383,  2640, }, -- Clothespole
-        { 688,      20, }, -- Arrowwood Log
-        { 690,    7800, }, -- Elm Log
--- { 2871,  10000, }, -- Safehold Waystone
+        { xi.item.LUFAISE_FLY,  108, },
+        { 17383,               2640, }, -- Clothespole
+        { xi.item.ARROWWOOD_LOG, 20, },
+        { xi.item.ELM_LOG,     7800, },
+-- { 2871,               10000, }, -- Safehold Waystone
     }
 
 -- Bonus wares after mission 3-5
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
-        table.insert(stock, 5, { 4638, 66000 }) -- Banish III
+        table.insert(stock, 2, { xi.item.LITTLE_WORM, 4 }) -- *
+        table.insert(stock, 4, { 17382,           12800 }) -- *S.H. Fishing Rod
+        table.insert(stock, 7, { xi.item.HATCHET,   500 }) -- *
+    end
+
+    -- Bonus wares for COP completion
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DAWN then
+        table.insert(stock, 8, { xi.item.ACORN,                          100 }) -- *
+        table.insert(stock, 9, { xi.item.CLUMP_OF_WINDURSTIAN_TEA_LEAVES, 26 }) -- *
+        table.insert(stock, 10, { 1630,                                 1015 }) -- *Cluster Ash
     end
 
     player:showText(npc, zones[player:getZoneID()].text.NILEROUCHE_SHOP_DIALOG)
@@ -416,19 +425,163 @@ end)
 m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Mazuro-Oozuro.onTrigger', function(player, npc)
     local stock =
     {
-        { 17005,   108, }, -- Lufaise Fly
-        { 17383,  2640, }, -- Clothespole
-        { 688,      20, }, -- Arrowwood Log
-        { 690,    7800, }, -- Elm Log
--- { 2871,  10000, }, -- Safehold Waystone
+        { xi.item.SCROLL_OF_CURE_II,    676, },
+        { xi.item.SCROLL_OF_BANISH_II, 9360, },
     }
 
     -- Bonus wares after mission 3-5
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
-        table.insert(stock, 5, { 4638, 66000 }) -- Banish III
+        table.insert(stock, 3, { xi.item.SCROLL_OF_BANISH_III, 66000 })
+        table.insert(stock, 4, { xi.item.SCROLL_OF_HOLY,       32200 })
+    end
+
+    -- Bonus wares for COP completion
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DAWN then
+        table.insert(stock, 5, { xi.item.SCROLL_OF_PROTECTRA_IV, 77500 })
+        table.insert(stock, 6, { 4741,                           82172 }) -- Shellra IV
+        table.insert(stock, 7, { xi.item.SCROLL_OF_INVISIBLE,     5984 })
+        table.insert(stock, 8, { xi.item.SCROLL_OF_SNEAK,         2600 })
+        table.insert(stock, 9, { xi.item.SCROLL_OF_DEODORIZE,     1346 })
     end
 
     player:showText(npc, zones[player:getZoneID()].text.MAZUROOOZURO_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end)
+
+m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Komalata.onTrigger', function(player, npc)
+    local stock =
+    {
+        { xi.item.STRIP_OF_MEAT_JERKY,     120, },
+        { xi.item.CHUNK_OF_ROCK_SALT,       16, },
+        { xi.item.BAG_OF_RYE_FLOUR,         40, },
+        { xi.item.FLASK_OF_DISTILLED_WATER, 12, },
+    }
+
+    -- Bonus wares after mission 3-5
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
+        stock =
+        {
+            { xi.item.BOTTLE_OF_APPLE_VINEGAR,  88, },
+            { xi.item.LOAF_OF_BLACK_BREAD,     120, },
+            { xi.item.STRIP_OF_MEAT_JERKY,     120, },
+            { xi.item.CHUNK_OF_ROCK_SALT,       16, },
+            { xi.item.BAG_OF_RYE_FLOUR,         40, },
+            { xi.item.BAG_OF_SAN_DORIAN_FLOUR,  60, },
+            { xi.item.SAN_DORIAN_CARROT,        32, },
+            { xi.item.EAR_OF_MILLIONCORN,       48, },
+            { xi.item.SPRIG_OF_APPLE_MINT,     316, },
+            { xi.item.FLASK_OF_DISTILLED_WATER, 12, },
+        }
+    end
+
+    -- Bonus wares for COP completion
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DAWN then
+        stock =
+        {
+            { xi.item.BOTTLE_OF_APPLE_VINEGAR,         88, },
+            { xi.item.FLASK_OF_OLIVE_OIL,              16, },
+            { xi.item.POT_OF_MAPLE_SUGAR,              41, },
+            { xi.item.LOAF_OF_BLACK_BREAD,            120, },
+            { xi.item.STRIP_OF_MEAT_JERKY,            120, },
+            { xi.item.SMOKED_SALMON,                  248, },
+            { xi.item.CHUNK_OF_ROCK_SALT,              16, },
+            { xi.item.BAG_OF_RYE_FLOUR,                40, },
+            { xi.item.BAG_OF_SAN_DORIAN_FLOUR,         60, },
+            { xi.item.SAN_DORIAN_CARROT,               32, },
+            { xi.item.BUNCH_OF_SAN_DORIAN_GRAPES,      80, },
+            { xi.item.EAR_OF_MILLIONCORN,              48, },
+            { xi.item.LA_THEINE_CABBAGE,               24, },
+            { xi.item.SPRIG_OF_APPLE_MINT,            316, },
+            { xi.item.SPRIG_OF_MISAREAUX_PARSLEY,     265, },
+            { xi.item.FLASK_OF_DISTILLED_WATER,        12, },
+            { xi.item.JUG_OF_SELBINA_MILK,             63, },
+        }
+    end
+
+    player:showText(npc, zones[player:getZoneID()].text.KOMALATA_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end)
+
+m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Migran.onTrigger', function(player, npc)
+    local stock =
+    {
+        { xi.item.TUNIC,         1456, }, --*
+        { xi.item.HOLLY_CLOGS,   1625, },
+    }
+
+    -- Bonus wares after mission 3-5
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
+        table.insert(stock, 3, { xi.item.BLACK_TUNIC,    10356 }) -- *
+        table.insert(stock, 4, { xi.item.CHESTNUT_SABOTS, 9180 }) -- *
+    end
+
+    -- Bonus wares for COP completion
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DAWN then
+        table.insert(stock, 5, { 15389, 8000000 }) -- Vir Subligar
+        table.insert(stock, 6, { 15390, 8000000 }) -- Femina Subligar
+    end
+
+    player:showText(npc, zones[player:getZoneID()].text.MIGRAN_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end)
+
+m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Misseulieu.onTrigger', function(player, npc)
+    local stock =
+    {
+        { xi.item.BRASS_HARNESS,  2485, },
+        { xi.item.BRASS_LEGGINGS, 1289, }, -- *
+    }
+
+    -- Bonus wares after mission 3-5
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
+        table.insert(stock, 3, { xi.item.PADDED_ARMOR, 32747 }) -- *
+        table.insert(stock, 4, { xi.item.LEGGINGS,     16373 }) -- *
+    end
+
+    -- Bonus wares for COP completion
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DAWN then
+        table.insert(stock, 5, { 14317, 284217 }) -- *Barone Cosciales
+        table.insert(stock, 6, { 15305, 295431 }) -- *Barone Gambieras
+        table.insert(stock, 7, { 14848, 341071 }) -- *Barone Manopolas
+    end
+
+    player:showText(npc, zones[player:getZoneID()].text.MISSEULIEU_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end)
+
+m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Caiphimonride.onTrigger', function(player, npc)
+    local stock =
+    {
+        { xi.item.DAGGER,    2030, },
+        { xi.item.CRUDE_ARROW,  4, }, -- *
+    }
+
+    -- Bonus wares after mission 3-5
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
+        table.insert(stock, 3, { xi.item.IRON_ARROW, 8 }) -- *
+        table.insert(stock, 4, { xi.item.BULLET,   104 }) -- *
+        table.insert(stock, 5, { 18214,          20762 }) -- Voulge
+    end
+
+    player:showText(npc, zones[player:getZoneID()].text.CAIPHIMONRIDE_SHOP_DIALOG)
+    xi.shop.general(player, stock)
+end)
+
+m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Melleupaux.onTrigger', function(player, npc)
+    local stock =
+    {
+        { xi.item.LONGSWORD, 9216, },
+        { xi.item.RUSTY_BOLT,   4, },
+    }
+
+    -- Bonus wares after mission 3-5
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
+        table.insert(stock, 3, { xi.item.MYTHRIL_BOLT, 27 }) -- *
+        table.insert(stock, 3, { xi.item.DART,         10 }) -- *
+        table.insert(stock, 4, { 18375,             37296 }) -- Falx
+    end
+
+    player:showText(npc, zones[player:getZoneID()].text.MELLEUPAUX_SHOP_DIALOG)
     xi.shop.general(player, stock)
 end)
 
@@ -877,7 +1030,7 @@ m:addOverride('xi.zones.Mhaura.npcs.Pikini-Mikini.onTrigger', function(player, n
     }
 
     player:showText(npc, zones[player:getZoneID()].text.PIKINIMIKINI_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    xi.shop.general(player, stock, xi.fameArea.WINDURST)
 end)
 
 m:addOverride('xi.zones.Ship_bound_for_Mhaura.npcs.Chhaya.onTrigger', function(player, npc)
