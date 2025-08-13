@@ -100,9 +100,7 @@ local beastmenNMs = {
 -- Helper function to set respawn time and persist it
 local function setAndPersistRespawnTime(mob, respawnTimeCalc)
     if mob then
-        local mobName = mob:getName()
-        local id = mob:getID()
-        local varName = '[Respawn]'..mobName..'_'..id
+        local varName = zxi.mobHelpers.getRespawnVarName(mob)
 
         mob:setRespawnTime(respawnTimeCalc)
         SetServerVariable(varName, os.time() + respawnTimeCalc)
@@ -115,7 +113,7 @@ local function restoreOrSetRespawnTime(mobId, respawnTimeCalc)
 
     if mob then
         local mobName = mob:getName()
-        local varName = '[Respawn]'..mobName..'_'..mobId
+        local varName = zxi.mobHelpers.getRespawnVarName(mob)
         local savedRespawnTime = GetServerVariable(varName)
         local currentTime = os.time()
 
@@ -201,7 +199,7 @@ createStandardNMOverrides(nmsToModify)
 --decide wether to spawn NQ or HQ version of beastmen NMs
 --returns true if the mob was spawned or respawn time was set, false otherwise
 local function processNqHqSpawn(primaryId, secondaryId, name, currentTime)
-    local varName = '[Respawn]'..name..'_'..primaryId
+    local varName = zxi.mobHelpers.getRespawnVarName(name, primaryId)
     local respawn   = GetServerVariable(varName)
     if respawn and respawn > 0 then
         if respawn > currentTime then

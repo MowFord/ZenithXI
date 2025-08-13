@@ -28,6 +28,7 @@ m:addOverride('xi.mob.phOnDespawn', function(ph, phList, chance, cooldown, param
     --print(phList)
     local phId = ph:getID()
     local nmId = phList[phId]
+    local respawnVarName = ''
 
     -- so these stay in scope for second half after call of super()
     -- All guaranteed to be non-nil if nm is not nil
@@ -38,6 +39,20 @@ m:addOverride('xi.mob.phOnDespawn', function(ph, phList, chance, cooldown, param
         nm = GetMobByID(nmId)
 
         if nm then
+            -- set server var so we can use it if we need it here and in DESPAWN listener below
+            respawnVarName = zxi.mobHelpers.getRespawnVarName(nm)
+            -- restore pop localvar if server rebooted
+            if nm:getLocalVar('pop') == 0 then
+                local serverPopTime = GetServerVariable(respawnVarName)
+                -- so we don't query the server vars every ph kill
+                nm:setLocalVar('pop', serverPopTime > 0 and serverPopTime or 2)
+
+                -- when nm is chosen to spawn, we will set the server variable to 1, which implies it is primed to spawn on first PH kill after server startup
+                if nm:getLocalVar('pop') == 1 then
+                    chance = 100
+                end
+            end
+
             phKills = nm:getLocalVar('phKills')
             popTime = nm:getLocalVar('pop')
             -- adjust values based on table above
@@ -92,6 +107,22 @@ m:addOverride('xi.mob.phOnDespawn', function(ph, phList, chance, cooldown, param
 
     -- reset counter if NM gets spawned
     if nm then
+        if superResults then
+            -- if the server restarts between now and the NM dying, the first PH kill after restart will have 100% chance
+            SetServerVariable(respawnVarName, 1)
+            -- we set the local var just to be consistent and avoid confusion. As far as this xi.mob function is concerned, 'pop' is irrelevant now that the nm is primed
+            nm:setLocalVar('pop', 1)
+
+            -- NM was set to spawn, add listener to save pop time after NM dies
+            nm:addListener('DESPAWN', 'PH_SAVE_COOLDOWN', function(mobArg)
+                -- super adds a despawn listener, too. The stack should resolve the same order as it was added
+                -- but if cooldowns aren't persisting properly we'll need to add a timer inside this listener
+                SetServerVariable(respawnVarName, mobArg:getLocalVar('pop'))
+
+                mobArg:removeListener('PH_SAVE_COOLDOWN')
+            end)
+        end
+
         if
             GetSystemTime() < popTime or -- NM is on cooldown, don't stack kill count until out of window
             nm:isAlive() or
