@@ -177,6 +177,8 @@ xi.mob.phOnDespawn = function(ph, phNmId, chance, cooldown, params)
     -- on PH death, replace PH repop with NM repop
     DisallowRespawn(phId, true)
     DisallowRespawn(nmId, false)
+    -- tell the NM which PH spawned you. Only accessible before spawn, in onMobSpawnCheck or onMobPreSpawn
+    nm:setLocalVar('spawnedFromPhId', phId)
 
     -- Update mob's spawn position, if available
     if not params.noPosUpdate then

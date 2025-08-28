@@ -1,6 +1,7 @@
 -----------------------------------
--- Area: RuAun Gardens
---   NM: Despot
+--  Area: RuAun Gardens
+--    NM: Despot
+-- Notes: Spawns exactly where the correct placeholder was defeated and claimed to the person who defeated it.
 -----------------------------------
 local ID = zones[xi.zone.RUAUN_GARDENS]
 -----------------------------------
@@ -44,25 +45,30 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.PETRIFY)
 end
 
-entity.onMobSpawn = function(mob)
-    local ph = GetMobByID(mob:getLocalVar('ph'))
-    if ph then
-        local pos = ph:getPos()
-        mob:setPos(pos.x, pos.y, pos.z, pos.r)
-        local killerId = ph:getLocalVar('killer')
-        if killerId ~= 0 then
+entity.onMobPreSpawn = function(mob)
+    -- localvar is set in xi.mob.phOnDespawn when PH primes Despot
+    local phId = mob:getLocalVar('spawnedFromPhId')
+    local ph = phId > 0 and GetMobByID(phId) or nil
+    -- localvar is set in a Groundskeeper "TAKE_DAMAGE" listener to store the real final attacker of the PH (if it's a PC)
+    local killerId = ph and ph:getLocalVar('killer') or 0
+    -- Ignores non-PC killers, also the killer must meet some additional conditions on spawn
+    if killerId ~= 0 then
+        mob:addListener('SPAWN', 'SPAWN_PH_KILLER', function(mobArg)
             local killer = GetPlayerByID(killerId)
+            -- "If that person is fighting something else at the time of spawn, it will spawn unclaimed."
             if
                 killer and
                 not killer:isEngaged() and
-                killer:checkDistance(mob) <= 50
+                killer:checkDistance(mobArg) <= 50
             then
-                mob:updateClaim(killer)
+                mobArg:updateClaim(killer)
             end
-        end
+
+            mobArg:removeListener('SPAWN_PH_KILLER')
+        end)
     end
 
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'PH_VAR', function(mobArg, skillID)
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'DESPOT_MOBSKILL', function(mobArg, skillID)
         -- Despot rapidly uses several Panzerfaust in a row
         local counter = mob:getLocalVar('panzerfaustCounter')
         local maxCount = mob:getLocalVar('panzerfaustMax')
@@ -105,7 +111,6 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:removeListener('PH_VAR')
 end
 
 return entity
