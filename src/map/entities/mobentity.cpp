@@ -629,6 +629,15 @@ bool CMobEntity::CanSpawnFromGroup()
 void CMobEntity::Spawn()
 {
     TracyZoneScoped;
+
+    // The underlying function in GetRandomNumber doesn't accept uint8 as <T> so use uint32
+    // https://stackoverflow.com/questions/31460733/why-arent-stduniform-int-distributionuint8-t-and-stduniform-int-distri
+    uint8 level = static_cast<uint8>(xirand::GetRandomNumber<uint32>(m_minLevel, m_maxLevel + 1));
+    SetMLevel(level);
+
+    // Pre-spawn hook to allow changing spawn position/level/etc, with access to localvars before they are wiped
+    luautils::OnMobPreSpawn(this);
+
     CBattleEntity::Spawn();
     m_giveExp        = true;
     m_HiPCLvl        = 0;
@@ -643,14 +652,9 @@ void CMobEntity::Spawn()
 
     PEnmityContainer->Clear();
 
-    // The underlying function in GetRandomNumber doesn't accept uint8 as <T> so use uint32
-    // https://stackoverflow.com/questions/31460733/why-arent-stduniform-int-distributionuint8-t-and-stduniform-int-distri
-    uint8 level = static_cast<uint8>(xirand::GetRandomNumber<uint32>(m_minLevel, m_maxLevel + 1));
-
-    TraitList.clear(); // Clear traits just in case from random levels. Traits are recalculated in mobutils::CalculateMobStat().
-                       // Note: Traits are NOT stored on DB load as of writing, so mobs won't gradually get stronger on respawn from restoreModifiers()
-    SetMLevel(level);
-    SetSLevel(level); // subjob calculated in function as appropriate
+    TraitList.clear();            // Clear traits just in case from random levels. Traits are recalculated in mobutils::CalculateMobStat().
+                                  // Note: Traits are NOT stored on DB load as of writing, so mobs won't gradually get stronger on respawn from restoreModifiers()
+    SetSLevel(this->GetMLevel()); // subjob calculated in function as appropriate
 
     mobutils::CalculateMobStats(this);
     mobutils::GetAvailableSpells(this);

@@ -3498,6 +3498,24 @@ namespace luautils
         }
     }
 
+    void OnMobPreSpawn(CBaseEntity* PMob)
+    {
+        TracyZoneScoped;
+
+        auto onMobPreSpawn = getEntityCachedFunction(PMob, "onMobPreSpawn");
+        if (!onMobPreSpawn.valid())
+        {
+            return;
+        }
+
+        auto result = onMobPreSpawn(PMob);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onMobPreSpawn: %s", err.what());
+        }
+    }
+
     int32 OnMobSpawnCheck(CBaseEntity* PMob)
     {
         TracyZoneScoped;

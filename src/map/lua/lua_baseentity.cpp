@@ -16833,13 +16833,18 @@ void CLuaBaseEntity::setMobLevel(uint8 level)
     if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
     {
         PMob->SetMLevel(level);
-        PMob->SetSLevel(level);
 
-        // Remove traits, because they were calculated in the previous CalculateMobStats and are NOT saved, so they must be recalculated.
-        PMob->TraitList.clear();
+        // all of this is recalculated once the mob spawns
+        if (PMob->PAI->IsSpawned())
+        {
+            PMob->SetSLevel(level);
 
-        mobutils::CalculateMobStats(PMob);
-        mobutils::GetAvailableSpells(PMob);
+            // Remove traits, because they were calculated in the previous CalculateMobStats and are NOT saved, so they must be recalculated.
+            PMob->TraitList.clear();
+
+            mobutils::CalculateMobStats(PMob);
+            mobutils::GetAvailableSpells(PMob);
+        }
     }
 }
 
