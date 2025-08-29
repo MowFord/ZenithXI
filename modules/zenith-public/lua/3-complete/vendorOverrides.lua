@@ -202,7 +202,7 @@ m:addOverride('xi.zones.Lower_Jeuno.npcs.Hasim.onTrigger', function(player, npc)
         { xi.item.SCROLL_OF_SHELLRA_II,     14080 },
         { xi.item.SCROLL_OF_SHELLRA_III,    26244 },
 -- { xi.item.SCROLL_OF_INUNDATION,     73500 },
-        { xi.item.SCROLL_OF_ADDLE,         130378 },
+-- { xi.item.SCROLL_OF_ADDLE,         130378 },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.WAAG_DEEG_SHOP_DIALOG)
@@ -255,12 +255,12 @@ m:addOverride('xi.zones.Lower_Jeuno.npcs.Amalasanda.onTrigger', function(player,
         { xi.item.KOMA,                     231 },
         { xi.item.LUMP_OF_TAMA_HAGANE,    12000 }, -- *
         { xi.item.POT_OF_URUSHI,          77206 },
-        { xi.item.BOX_OF_STICKY_RICE,       331 },
+-- { xi.item.BOX_OF_STICKY_RICE,       331 }, (COP)
         { xi.item.ONZ_OF_CURRY_POWDER,     1039 },
         { xi.item.JAR_OF_GROUND_WASABI,    2724 },
         { xi.item.BOTTLE_OF_RICE_VINEGAR,   210 },
--- { xi.item.BUNDLE_OF_SHIRATAKI,      516 }, (Enable with COP)
--- { xi.item.BAG_OF_BUCKWHEAT_FLOUR,  2250 }, -- * (Enable with WOTG)
+-- { xi.item.BUNDLE_OF_SHIRATAKI,      516 }, (COP)
+-- { xi.item.BAG_OF_BUCKWHEAT_FLOUR,  2250 }, -- * (WOTG)
         { xi.item.SCROLL_OF_KATON_ICHI,    2447 },
         { xi.item.SCROLL_OF_HYOTON_ICHI,   2447 },
         { xi.item.SCROLL_OF_HUTON_ICHI,    2447 },
@@ -292,7 +292,7 @@ m:addOverride('xi.zones.Selbina.npcs.Quelpia.onTrigger', function(player, npc)
         { xi.item.SCROLL_OF_ENSTONE,     2111 },
         { xi.item.SCROLL_OF_ENTHUNDER,   1575 },
         { xi.item.SCROLL_OF_ENWATER,     7356 },
-        { xi.item.SCROLL_OF_FLURRY,     34320 },
+-- { xi.item.SCROLL_OF_FLURRY,     34320 }, (SOA)
     }
 
     player:showText(npc, zones[player:getZoneID()].text.QUELPIA_SHOP_DIALOG)
@@ -323,8 +323,8 @@ m:addOverride('xi.zones.Mhaura.npcs.Tya_Padolih.onTrigger', function(player, npc
     local stock =
     {
         { xi.item.SCROLL_OF_SLEEPGA,    11648 },
-        { xi.item.SCROLL_OF_DISTRACT,   71344 }, -- *
-        { xi.item.SCROLL_OF_FRAZZLE,    84912 }, -- *
+-- { xi.item.SCROLL_OF_DISTRACT,   71344 }, -- *(SOA)
+-- { xi.item.SCROLL_OF_FRAZZLE,    84912 }, -- *(SOA)
     }
 
     player:showText(npc, zones[player:getZoneID()].text.TYAPADOLIH_SHOP_DIALOG)
@@ -397,25 +397,25 @@ end)
 m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Nilerouche.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.LUFAISE_FLY,  108, },
-        { 17383,               2640, }, -- Clothespole
-        { xi.item.ARROWWOOD_LOG, 20, },
-        { xi.item.ELM_LOG,     7800, },
--- { 2871,               10000, }, -- Safehold Waystone
+        { xi.item.LUFAISE_FLY,         108, },
+        { xi.item.CLOTHESPOLE,        2640, },
+        { xi.item.ARROWWOOD_LOG,        20, },
+        { xi.item.ELM_LOG,            7800, },
+-- { xi.item.SAFEHOLD_WAYSTONE, 10000, },
     }
 
 -- Bonus wares after mission 3-5
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
-        table.insert(stock, 2, { xi.item.LITTLE_WORM, 4 }) -- *
-        table.insert(stock, 4, { 17382,           12800 }) -- *S.H. Fishing Rod
-        table.insert(stock, 7, { xi.item.HATCHET,   500 }) -- *
+        table.insert(stock, 2, { xi.item.LITTLE_WORM,                 4 }) -- *
+        table.insert(stock, 4, { xi.item.SINGLE_HOOK_FISHING_ROD, 12800 }) -- *
+        table.insert(stock, 7, { xi.item.HATCHET,                   500 }) -- *
     end
 
     -- Bonus wares for COP completion
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DAWN then
         table.insert(stock, 8, { xi.item.ACORN,                          100 }) -- *
         table.insert(stock, 9, { xi.item.CLUMP_OF_WINDURSTIAN_TEA_LEAVES, 26 }) -- *
-        table.insert(stock, 10, { 1630,                                 1015 }) -- *Cluster Ash
+        table.insert(stock, 10, { xi.item.PINCH_OF_CLUSTER_ASH,         1015 }) -- *
     end
 
     player:showText(npc, zones[player:getZoneID()].text.NILEROUCHE_SHOP_DIALOG)
@@ -425,23 +425,23 @@ end)
 m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Mazuro-Oozuro.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.SCROLL_OF_CURE_II,    676, },
-        { xi.item.SCROLL_OF_BANISH_II, 9360, },
+        { xi.item.SCROLL_OF_CURE_II,    676, }, -- *
+        { xi.item.SCROLL_OF_BANISH_II, 9360, }, -- *
     }
 
     -- Bonus wares after mission 3-5
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         table.insert(stock, 3, { xi.item.SCROLL_OF_BANISH_III, 66000 })
-        table.insert(stock, 4, { xi.item.SCROLL_OF_HOLY,       32200 })
+        table.insert(stock, 4, { xi.item.SCROLL_OF_HOLY,       32200 }) -- *
     end
 
     -- Bonus wares for COP completion
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DAWN then
-        table.insert(stock, 5, { xi.item.SCROLL_OF_PROTECTRA_IV, 77500 })
-        table.insert(stock, 6, { 4741,                           82172 }) -- Shellra IV
-        table.insert(stock, 7, { xi.item.SCROLL_OF_INVISIBLE,     5984 })
-        table.insert(stock, 8, { xi.item.SCROLL_OF_SNEAK,         2600 })
-        table.insert(stock, 9, { xi.item.SCROLL_OF_DEODORIZE,     1346 })
+        table.insert(stock, 5, { xi.item.SCROLL_OF_PROTECTRA_IV, 77500 }) -- *
+        table.insert(stock, 6, { xi.item.SCROLL_OF_SHELLRA_IV,   82172 }) -- *
+        table.insert(stock, 7, { xi.item.SCROLL_OF_INVISIBLE,     5984 }) -- *
+        table.insert(stock, 8, { xi.item.SCROLL_OF_SNEAK,         2600 }) -- *
+        table.insert(stock, 9, { xi.item.SCROLL_OF_DEODORIZE,     1346 }) -- *
     end
 
     player:showText(npc, zones[player:getZoneID()].text.MAZUROOOZURO_SHOP_DIALOG)
@@ -505,7 +505,7 @@ end)
 m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Migran.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.TUNIC,         1456, }, --*
+        { xi.item.TUNIC,         1456, }, -- *
         { xi.item.HOLLY_CLOGS,   1625, },
     }
 
@@ -517,8 +517,8 @@ m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Migran.onTrigger', function(play
 
     -- Bonus wares for COP completion
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DAWN then
-        table.insert(stock, 5, { 15389, 8000000 }) -- Vir Subligar
-        table.insert(stock, 6, { 15390, 8000000 }) -- Femina Subligar
+        table.insert(stock, 5, { xi.item.VIR_SUBLIGAR,    8000000 })
+        table.insert(stock, 6, { xi.item.FEMINA_SUBLIGAR, 8000000 })
     end
 
     player:showText(npc, zones[player:getZoneID()].text.MIGRAN_SHOP_DIALOG)
@@ -540,9 +540,9 @@ m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Misseulieu.onTrigger', function(
 
     -- Bonus wares for COP completion
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DAWN then
-        table.insert(stock, 5, { 14317, 284217 }) -- *Barone Cosciales
-        table.insert(stock, 6, { 15305, 295431 }) -- *Barone Gambieras
-        table.insert(stock, 7, { 14848, 341071 }) -- *Barone Manopolas
+        table.insert(stock, 5, { xi.item.BARONE_COSCIALES, 284217 }) -- *
+        table.insert(stock, 6, { xi.item.BARONE_GAMBIERAS, 295431 }) -- *
+        table.insert(stock, 7, { xi.item.BARONE_MANOPOLAS, 341071 }) -- *
     end
 
     player:showText(npc, zones[player:getZoneID()].text.MISSEULIEU_SHOP_DIALOG)
@@ -560,7 +560,7 @@ m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Caiphimonride.onTrigger', functi
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         table.insert(stock, 3, { xi.item.IRON_ARROW, 8 }) -- *
         table.insert(stock, 4, { xi.item.BULLET,   104 }) -- *
-        table.insert(stock, 5, { 18214,          20762 }) -- Voulge
+        table.insert(stock, 5, { xi.item.VOULGE, 20762 })
     end
 
     player:showText(npc, zones[player:getZoneID()].text.CAIPHIMONRIDE_SHOP_DIALOG)
@@ -578,7 +578,7 @@ m:addOverride('xi.zones.Tavnazian_Safehold.npcs.Melleupaux.onTrigger', function(
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         table.insert(stock, 3, { xi.item.MYTHRIL_BOLT, 27 }) -- *
         table.insert(stock, 3, { xi.item.DART,         10 }) -- *
-        table.insert(stock, 4, { 18375,             37296 }) -- Falx
+        table.insert(stock, 4, { xi.item.FALX,      37296 })
     end
 
     player:showText(npc, zones[player:getZoneID()].text.MELLEUPAUX_SHOP_DIALOG)
@@ -599,10 +599,10 @@ m:addOverride('xi.zones.Aht_Urhgan_Whitegate.npcs.Mazween.onTrigger', function(p
         { xi.item.SCROLL_OF_FIRE_III,     33306 },
         { xi.item.SCROLL_OF_BLIZZARD_III, 39368 },
         { xi.item.SCROLL_OF_THUNDER_III,  45930 },
-        { 4883,                           27000 }, -- Absorb-TP
-        { 4854,                           30780 }, -- Drain II
-        { 4885,                           70560 }, -- Dread Spikes
--- { 4856, 79800, }, -- Aspir II
+        { xi.item.SCROLL_OF_ABSORB_TP,    27000 },
+        { xi.item.SCROLL_OF_DRAIN_II,     30780 },
+        { xi.item.SCROLL_OF_DREAD_SPIKES, 70560 },
+-- { xi.item.SCROLL_OF_ASPIR_II,    79800, },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.MAZWEEN_SHOP_DIALOG)
@@ -620,8 +620,8 @@ m:addOverride('xi.zones.Nashmau.npcs.Mamaroon.onTrigger', function(player, npc)
         { xi.item.SCROLL_OF_ENTHUNDER,    1515 },
         { xi.item.SCROLL_OF_ENWATER,      7074 },
         { xi.item.SCROLL_OF_SHOCK_SPIKES, 9360 },
-        { 2502,                          39950 }, -- *White Puppet Turban
-        { 2501,                          39950 }, -- *Black Puppet Turban
+        { xi.item.WHITE_PUPPET_TURBAN,   39950 }, -- *
+        { xi.item.BLACK_PUPPET_TURBAN,   39950 }, -- *
     }
 
     player:showText(npc, zones[player:getZoneID()].text.MAMAROON_SHOP_DIALOG)
@@ -1141,10 +1141,10 @@ m:addOverride('xi.zones.Upper_Jeuno.npcs.Antonia.onTrigger', function(player, np
         player:getRank(xi.nation.SANDORIA) >= 10 or
         player:getRank(xi.nation.WINDURST) >= 10
     then
-        table.insert(stock, 2, { 17063, 53122 }) -- *Darksteel Rod
-        table.insert(stock, 5, { 17037, 62348 }) -- *Darksteel Mace
-        table.insert(stock, 9, { 16848, 68912 }) -- *Darksteel Lance
-        table.insert(stock, 12, { 17321, 20 })   -- *Silver Arrow
+        table.insert(stock, 2, { xi.item.DARKSTEEL_ROD,   53122 }) -- *
+        table.insert(stock, 5, { xi.item.DARKSTEEL_MACE,  62348 }) -- *
+        table.insert(stock, 9, { xi.item.DARKSTEEL_LANCE, 68912 }) -- *
+        table.insert(stock, 12, { xi.item.SILVER_ARROW,      20 }) -- *
     end
 
     player:showText(npc, zones[player:getZoneID()].text.VIETTES_SHOP_DIALOG)
@@ -1172,9 +1172,9 @@ m:addOverride('xi.zones.Upper_Jeuno.npcs.Coumuna.onTrigger', function(player, np
         player:getRank(xi.nation.SANDORIA) >= 10 or
         player:getRank(xi.nation.WINDURST) >= 10
     then
-        table.insert(stock, 2, { 16413, 62496 })  -- *Darksteel Claws
-        table.insert(stock, 5, { 16468, 59520 })  -- *Darksteel Knife
-        table.insert(stock, 11, { 16645, 65630 }) -- *Darksteel Axe
+        table.insert(stock, 2, { xi.item.DARKSTEEL_CLAWS, 62496 }) -- *
+        table.insert(stock, 5, { xi.item.DARKSTEEL_KNIFE, 59520 }) -- *
+        table.insert(stock, 11, { xi.item.DARKSTEEL_AXE,  65630 }) -- *
     end
 
     player:showText(npc, zones[player:getZoneID()].text.VIETTES_SHOP_DIALOG)
@@ -1202,8 +1202,8 @@ m:addOverride('xi.zones.Upper_Jeuno.npcs.Deadly_Minnow.onTrigger', function(play
         player:getRank(xi.nation.SANDORIA) >= 10 or
         player:getRank(xi.nation.WINDURST) >= 10
     then
-        table.insert(stock, 4, { xi.item.BASCINET, 78968 }) --*
-        table.insert(stock, 12, { 12683, 65113 })           -- *Darksteel Mufflers
+        table.insert(stock, 4, { xi.item.BASCINET, 78968 }) -- *
+        table.insert(stock, 12, { xi.item.DARKSTEEL_MUFFLERS, 65113 }) -- *
     end
 
     player:showText(npc, zones[player:getZoneID()].text.DURABLE_SHIELDS_SHOP_DIALOG)
@@ -1227,8 +1227,8 @@ m:addOverride('xi.zones.Upper_Jeuno.npcs.Khe_Chalahko.onTrigger', function(playe
         player:getRank(xi.nation.SANDORIA) >= 10 or
         player:getRank(xi.nation.WINDURST) >= 10
     then
-        table.insert(stock, 6, { xi.item.DARKSTEEL_BREECHES, 96976 }) -- *
-        table.insert(stock, 8, { 12939, 59571 })                      -- *Darksteel Sollerets
+        table.insert(stock, 6, { xi.item.DARKSTEEL_BREECHES,  96976 }) -- *
+        table.insert(stock, 8, { xi.item.DARKSTEEL_SOLLERETS, 59571 }) -- *
     end
 
     player:showText(npc, zones[player:getZoneID()].text.DURABLE_SHIELDS_SHOP_DIALOG)
@@ -1269,13 +1269,13 @@ m:addOverride('xi.zones.Upper_Jeuno.npcs.Glyke.onTrigger', function(player, npc)
         { xi.item.TORTILLA,                   145 },
         { xi.item.LOAF_OF_WHITE_BREAD,        200 },
         { xi.item.BOWL_OF_PEA_SOUP,          1400 },
-        { 4420,                              2510 }, -- *Tomato Soup
-        { 5686,                               820 }, -- *Cheese Sandwich
+        { xi.item.BOWL_OF_TOMATO_SOUP,       2510 }, -- *
+        { xi.item.CHEESE_SANDWICH,            820 }, -- *
         { xi.item.BOILED_CRAB,               1540 }, -- *
         { xi.item.SLICE_OF_ROAST_MUTTON,      756 },
         { xi.item.PICKLED_HERRING,           1497 }, -- *
         { xi.item.BAKED_APPLE,                540 }, -- *
-        { 5653,                               910 }, -- *Cherry Muffin
+        { xi.item.CHERRY_MUFFIN,              910 }, -- *
         { xi.item.WINDURST_SALAD,            1934 },
         { xi.item.SERVING_OF_HERB_QUUS,      4984 },
         { xi.item.BOTTLE_OF_ORANGE_JUICE,     200 },
@@ -1410,13 +1410,16 @@ end)
 m:addOverride('xi.zones.Aht_Urhgan_Whitegate.npcs.Khaf_Jhifanm.onTrigger', function(player, npc)
     local stock =
     {
-        { 5567,                           650, }, -- *Dried Date
-        { 5576,                           400, }, -- *Ayran
-        { 5590,                          2810, }, -- *Balik Sandvici
-        { xi.item.BAG_OF_WILDGRASS_SEEDS, 320, },
-        { 5075,                          4400, }, -- Scroll of Raptor Mazurka
--- { 2872,                         10000, }, -- Empire Waystone
+        { xi.item.FLASK_OF_AYRAN,            400, }, -- *
+        { xi.item.BAG_OF_WILDGRASS_SEEDS,    320, },
+        { xi.item.SCROLL_OF_RAPTOR_MAZURKA, 4400, },
+-- { xi.item.EMPIRE_WAYSTONE,         10000, },
     }
+
+    if player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.SOCIAL_GRACES then
+        table.insert(stock, 1, { xi.item.DRIED_DATE,      650 }) -- *
+        table.insert(stock, 3, { xi.item.BALIK_SANDVICI, 2810 }) -- *
+    end
 
     player:showText(npc, zones[player:getZoneID()].text.KHAFJHIFANM_SHOP_DIALOG)
     xi.shop.general(player, stock)
@@ -1425,13 +1428,16 @@ end)
 m:addOverride('xi.zones.Aht_Urhgan_Whitegate.npcs.Fayeewah.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.CUP_OF_CHAI,             544, }, -- *
-        { 5637,                             41, }, -- Pogaca*
-        { 5584,                           3500, }, -- Ic Pilav*
+        { xi.item.CUP_OF_CHAI,        544, }, -- *
+        { xi.item.POGACA,              41, }, -- *
     }
 
+    if player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.SOCIAL_GRACES then
+        table.insert(stock, 3, { xi.item.PLATE_OF_IC_PILAV, 4600 }) -- *
+    end
+
     if player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.A_TASTE_OF_HONEY) == xi.questStatus.QUEST_COMPLETED then
-        table.insert(stock, 4, { xi.item.IRMIK_HELVASI, 4150 }) -- *
+        table.insert(stock, { xi.item.IRMIK_HELVASI, 4150 }) -- *
     end
 
     player:showText(npc, zones[player:getZoneID()].text.FAYEEWAH_SHOP_DIALOG)
@@ -1441,10 +1447,13 @@ end)
 m:addOverride('xi.zones.Aht_Urhgan_Whitegate.npcs.Yafaaf.onTrigger', function(player, npc)
     local stock =
     {
-        { 5596,                           1875, }, -- *Simit
-        { xi.item.CUP_OF_IMPERIAL_COFFEE, 1350, }, -- Imperial Coffee
         { xi.item.BOTTLE_OF_MULSUM,        785, }, -- *
+        { xi.item.CUP_OF_IMPERIAL_COFFEE, 1800, }, -- *
     }
+
+    if player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.SOCIAL_GRACES then
+        table.insert(stock, { xi.item.SIMIT, 1875 }) -- *
+    end
 
     if player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.ARTS_AND_CRAFTS) == xi.questStatus.QUEST_COMPLETED then
         table.insert(stock, 1, { xi.item.BOWL_OF_SUTLAC, 3000 }) -- *
@@ -1458,8 +1467,8 @@ m:addOverride('xi.zones.Aht_Urhgan_Whitegate.npcs.Mulnith.onTrigger', function(p
     local stock =
     {
         { xi.item.ROAST_MUSHROOM, 688, }, -- *
-        { 5598,                  3700, }, -- *Sis Kebabi (Requires Astral Candescence)
-        { 5600,                  4700, }, -- *Balik Sis (Requires Astral Candescence)
+        { xi.item.SIS_KEBABI,    3700, }, -- *
+        { xi.item.BALIK_SIS,     4700, }, -- *
     }
 
     player:showText(npc, zones[player:getZoneID()].text.MULNITH_SHOP_DIALOG)
@@ -1469,10 +1478,10 @@ end)
 m:addOverride('xi.zones.Aht_Urhgan_Whitegate.npcs.Rubahah.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.EAR_OF_MILLIONCORN, 57, }, -- *
-        { 2237,                       60, }, -- Imperial Flour (Requires Astral Candescence)
-        { 2214,                       68, }, -- Imperial Rice (Requires Astral Candescence)
-        { 2271,                      948, }, -- *Coffee Beans (Requires Astral Candescence)
+        { xi.item.EAR_OF_MILLIONCORN,    57, }, -- *
+        { xi.item.BAG_OF_IMPERIAL_FLOUR, 60, },
+        { xi.item.BAG_OF_IMPERIAL_RICE,  68, },
+        { xi.item.BAG_OF_COFFEE_BEANS,  948, }, -- *
     }
 
     player:showText(npc, zones[player:getZoneID()].text.RUBAHAH_SHOP_DIALOG)
@@ -1511,8 +1520,8 @@ m:addOverride('xi.zones.Nashmau.npcs.Pipiroon.onTrigger', function(player, npc)
         { xi.item.LITTLE_WORM,               3, }, -- *
         { xi.item.CLUMP_OF_MOKO_GRASS,      20, }, -- *
         { xi.item.HATCHET,                 500, }, -- *
-        { 5356,                           2700, }, -- *Remedy Ointment
--- { 2873,                    10000, }, -- Nashmau Waystone
+        { xi.item.JAR_OF_REMEDY_OINTMENT, 2700, }, -- *
+-- { xi.item.NASHMAU_WAYSTONE,      10000, },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.PIPIROON_SHOP_DIALOG)
@@ -1527,7 +1536,7 @@ m:addOverride('xi.zones.Nashmau.npcs.Poporoon.onTrigger', function(player, npc)
         { xi.item.STUDDED_BOOTS,    11172, },
         { xi.item.SOCKS,            16000, }, -- *
         { xi.item.CUIR_HIGHBOOTS,   20532, },
-        { 12958,                    65528, }, -- *Tiger Ledelsens
+        { xi.item.TIGER_LEDELSENS,  65528, }, -- *
     }
 
     player:showText(npc, zones[player:getZoneID()].text.POPOROON_SHOP_DIALOG)
@@ -1537,10 +1546,10 @@ end)
 m:addOverride('xi.zones.Nashmau.npcs.Chichiroon.onTrigger', function(player, npc)
     local stock =
     {
--- { 6368,  69288, }, -- Geomancer Die (SOA)
--- { 6369,  73920, }, -- Rune Fencer Die (SOA)
-        { 5498,  85500, }, -- Caster's Die
-        { 5497,  99224, }, -- Bolter's Die
+-- { xi.item.GEOMANCER_DIE,    69288, }, -- (SOA)
+-- { xi.item.RUNE_FENCER_DIE,  73920, }, -- (SOA)
+-- { xi.item.CASTERS_DIE,      85500, }, -- (Abyssea)
+        { xi.item.BOLTERS_DIE,      99224, },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.CHICHIROON_SHOP_DIALOG)
@@ -1550,22 +1559,22 @@ end)
 m:addOverride('xi.zones.Nashmau.npcs.Jajaroon.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.FIRE_CARD,    75, }, -- *
-        { xi.item.ICE_CARD,     75, }, -- *
-        { xi.item.WIND_CARD,    75, }, -- *
-        { xi.item.EARTH_CARD,   75, }, -- *
-        { xi.item.THUNDER_CARD, 75, }, -- *
-        { xi.item.WATER_CARD,   75, }, -- *
-        { xi.item.LIGHT_CARD,   75, }, -- *
-        { xi.item.DARK_CARD,    75, }, -- *
-        { xi.item.TRUMP_CARD,  151, }, -- *
-        { 5493,                316, }, -- Corsair Die
-        { 5489,                600, }, -- Ninja Die
-        { 5492,               3525, }, -- Blue Mage Die
-        { 5490,               9216, }, -- Dragoon Die
-        { 5488,              35200, }, -- Samurai Die
-        { 5491,              40000, }, -- Summoner Die
-        { 5494,              82500, }, -- Puppetmaster Die
+        { xi.item.FIRE_CARD,           75, }, -- *
+        { xi.item.ICE_CARD,            75, }, -- *
+        { xi.item.WIND_CARD,           75, }, -- *
+        { xi.item.EARTH_CARD,          75, }, -- *
+        { xi.item.THUNDER_CARD,        75, }, -- *
+        { xi.item.WATER_CARD,          75, }, -- *
+        { xi.item.LIGHT_CARD,          75, }, -- *
+        { xi.item.DARK_CARD,           75, }, -- *
+        { xi.item.TRUMP_CARD,         151, }, -- *
+        { xi.item.CORSAIR_DIE,        316, },
+        { xi.item.NINJA_DIE,          600, },
+        { xi.item.BLUE_MAGE_DIE,     3525, },
+        { xi.item.DRAGOON_DIE,       9216, },
+        { xi.item.SAMURAI_DIE,      35200, },
+        { xi.item.SUMMONER_DIE,     40000, },
+        { xi.item.PUPPETMASTER_DIE, 82500, },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.JAJAROON_SHOP_DIALOG)
@@ -1575,22 +1584,22 @@ end)
 m:addOverride('xi.zones.Nashmau.npcs.Yoyoroon.onTrigger', function(player, npc)
     local stock =
     {
-        { 2239,  9940, }, -- *Tension Spring
-        { 2243,  9940, }, -- *Loudspeaker
-        { 2246,  9940, }, -- *Accelerator
-        { 2251,  9940, }, -- *Armor Plate
-        { 2254,  9940, }, -- *Stabilizer
-        { 2258,  9940, }, -- *Mana Jammer
-        { 2262,  9940, }, -- *Auto-Repair Kit
-        { 2266,  9940, }, -- *Mana Tank
-        { 2250, 14925, }, -- *Shock Absorber
-        { 2255, 14925, }, -- *Volt Gun
-        { 2260, 14925, }, -- *Stealth Screen
-        { 2240, 19925, }, -- *Inhibitor
-        { 2242, 19925, }, -- *Mana Booster
-        { 2247, 19925, }, -- *Scope
-        { 2264, 19925, }, -- *Damage Gauge
-        { 2268, 19925, }, -- *Mana Conserver
+        { xi.item.TENSION_SPRING,  9940, }, -- *
+        { xi.item.LOUDSPEAKER,     9940, }, -- *
+        { xi.item.ACCELERATOR,     9940, }, -- *
+        { xi.item.ARMOR_PLATE,     9940, }, -- *
+        { xi.item.STABILIZER,      9940, }, -- *
+        { xi.item.MANA_JAMMER,     9940, }, -- *
+        { xi.item.AUTO_REPAIR_KIT, 9940, }, -- *
+        { xi.item.MANA_TANK,       9940, }, -- *
+        { xi.item.SHOCK_ABSORBER, 14925, }, -- *
+        { xi.item.VOLT_GUN,       14925, }, -- *
+        { xi.item.STEALTH_SCREEN, 14925, }, -- *
+        { xi.item.INHIBITOR,      19925, }, -- *
+        { xi.item.MANA_BOOSTER,   19925, }, -- *
+        { xi.item.SCOPE,          19925, }, -- *
+        { xi.item.DAMAGE_GAUGE,   19925, }, -- *
+        { xi.item.MANA_CONSERVER, 19925, }, -- *
     }
 
     player:showText(npc, zones[player:getZoneID()].text.YOYOROON_SHOP_DIALOG)
@@ -1611,9 +1620,9 @@ m:addOverride('xi.shop.outpost', function(player, npc)
         { xi.item.POTION,                    910 },
         { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
         { xi.item.BOTTLE_OF_ORANGE_JUICE,    210 }, -- *
-        { 5737,                              150 }, -- *Salted Hare
-        { 5738,                              150 }, -- *Sweet Lizard
-        { 5739,                              150 }, -- *Honeyed Egg
+        { xi.item.SLICE_OF_SALTED_HARE,      150 }, -- *
+        { xi.item.CHUNK_OF_SWEET_LIZARD,     150 }, -- *
+        { xi.item.MUG_OF_HONEYED_EGG,         50 }, -- *
         { xi.item.PET_FOOD_ALPHA_BISCUIT,     20 }, -- *
         { xi.item.PET_FOOD_BETA_BISCUIT,     110 }, -- *
         { xi.item.PET_FOOD_GAMMA_BISCUIT,    415 }, -- *
@@ -1645,7 +1654,7 @@ m:addOverride('xi.zones.Southern_San_dOria_[S].npcs.Geltpix.onTrigger', function
         { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
         { xi.item.BAG_OF_HORO_FLOUR,          40 }, -- *
         { xi.item.LOAF_OF_GOBLIN_BREAD,      300 }, -- *
-        { 4465,                             3900 }, -- *Goblin Stew
+        { xi.item.BOWL_OF_GOBLIN_STEW,      3900 }, -- *
     }
 
     player:showText(npc, zones[player:getZoneID()].text.DONT_HURT_GELTPIX)
@@ -1662,7 +1671,7 @@ m:addOverride('xi.zones.Bastok_Markets_[S].npcs.Blingbrix.onTrigger', function(p
         { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
         { xi.item.BAG_OF_HORO_FLOUR,          40 }, -- *
         { xi.item.LOAF_OF_GOBLIN_BREAD,      300 }, -- *
-        { 4465,                             3900 }, -- *Goblin Stew
+        { xi.item.BOWL_OF_GOBLIN_STEW,      3900 }, -- *
     }
 
     player:showText(npc, zones[player:getZoneID()].text.BLINGBRIX_SHOP_DIALOG)
@@ -1679,11 +1688,11 @@ m:addOverride('xi.zones.Windurst_Waters_[S].npcs.Pelftrix.onTrigger', function(p
         { xi.item.FLASK_OF_DISTILLED_WATER,   12 }, -- *
         { xi.item.BAG_OF_HORO_FLOUR,          40 }, -- *
         { xi.item.LOAF_OF_GOBLIN_BREAD,      300 }, -- *
-        { 4465,                             3900 }, -- *Goblin Stew
+        { xi.item.BOWL_OF_GOBLIN_STEW,      3900 }, -- *
     }
 
     if player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HEALING_HERBS) == xi.questStatus.QUEST_COMPLETED then
-        table.insert(stock, 9, { 5418, 1500 }) -- *Tincture
+        table.insert(stock, 9, { xi.item.VIAL_OF_TINCTURE, 1500 }) -- *
     end
 
     player:showText(npc, zones[player:getZoneID()].text.PELFTRIX_SHOP_DIALOG)
@@ -1694,9 +1703,9 @@ end)
 m:addOverride('xi.zones.Fort_Karugo-Narugo_[S].npcs.Spondulix.onTrigger', function(player, npc)
     local stock =
     {
-        { xi.item.HI_POTION,            2500 }, -- *
-        { xi.item.HI_ETHER,             4125 }, -- *
-        { 2563,                         3035 }, -- Karugo Clay
+        { xi.item.HI_POTION,                  2500 }, -- *
+        { xi.item.HI_ETHER,                   4125 }, -- *
+        { xi.item.LUMP_OF_KARUGO_NARUGO_CLAY, 3035 },
     }
 
     player:showText(npc, zones[player:getZoneID()].text.SPONDULIX_SHOP_DIALOG)
