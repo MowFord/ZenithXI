@@ -6,7 +6,7 @@
 
 require('modules/module_utils')
 
-local m = Module:new('e_x_recast')
+local m = Module:new('e_x-recast')
 
 -- Override the recast Tables
 

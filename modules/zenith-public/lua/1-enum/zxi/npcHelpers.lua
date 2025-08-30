@@ -1,7 +1,7 @@
---------------------------------------------------------------
+-----------------------------------
 -- Various helpers to manipulate npcs
---------------------------------------------------------------
-local m = Module:new('zxi-npcHelpers')
+-----------------------------------
+local m = Module:new('e_z-npcHelpers')
 
 zxi = zxi or {}
 zxi.npcHelpers = zxi.npcHelpers or {}

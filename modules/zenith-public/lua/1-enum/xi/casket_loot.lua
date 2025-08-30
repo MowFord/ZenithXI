@@ -6,7 +6,7 @@
 
 require('modules/module_utils')
 
-local m = Module:new('e_x_casketLoot')
+local m = Module:new('e_x-casketLoot')
 
 xi.casket_loot.casketItems =
 {

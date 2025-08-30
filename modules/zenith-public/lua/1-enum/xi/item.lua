@@ -6,7 +6,7 @@
 
 require('modules/module_utils')
 
-local m = Module:new('e_x_item')
+local m = Module:new('e_x-item')
 
 -- Vendor overrides
 xi.item.PINCH_OF_CLUSTER_ASH     = 1630

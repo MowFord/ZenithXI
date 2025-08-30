@@ -6,7 +6,7 @@
 
 require('modules/module_utils')
 
-local m = Module:new('e_x_maps')
+local m = Module:new('e_x-maps')
 
 -- Map vendors by region
 xi.maps.mapVendors = {
