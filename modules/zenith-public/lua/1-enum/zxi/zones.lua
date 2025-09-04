@@ -1,7 +1,7 @@
 -----------------------------------
 -- Converts zone names to IDs
 -----------------------------------
-local m = Module:new("e_z-zones")
+local m = Module:new('e_z-zones')
 
 zxi = zxi or {}
 zxi.zone =
@@ -204,7 +204,7 @@ zxi.zone =
     ['Gusgen_Mines']                   = 196,
     ['Crawlers_Nest']                  = 197,
     ['Maze_of_Shakhrami']              = 198,
-    ['Residential_Area']               = 199,
+    -- residential area
     ['Garlaige_Citadel']               = 200,
     ['Cloister_of_Gales']              = 201,
     ['Cloister_of_Storms']             = 202,
@@ -219,12 +219,12 @@ zxi.zone =
     ['Cloister_of_Tides']              = 211,
     ['Gustav_Tunnel']                  = 212,
     ['Labyrinth_of_Onzozo']            = 213,
-    ['Residential_Area']               = 214,
+    -- residential area
     ['Abyssea-Attohwa']                = 215,
     ['Abyssea-Misareaux']              = 216,
     ['Abyssea-Vunkerl']                = 217,
     ['Abyssea-Altepa']                 = 218,
-    ['Residential_Area']               = 219,
+    -- residential area
     ['Ship_bound_for_Selbina']         = 220,
     ['Ship_bound_for_Mhaura']          = 221,
     ['Provenance']                     = 222,

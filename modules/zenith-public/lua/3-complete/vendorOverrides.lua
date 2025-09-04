@@ -7,8 +7,8 @@
 local m = Module:new('ooe_vendors')
 
 -- TODO: Dibstix is not yet implemented.
-
 -- TODO: Lollyspox is not yet implemented.
+-- TODO: Spondulix is not yet implemented.
 
 -- stock tables are generally tables of rows of the form { itemid, minimum price }
 -- nation shops will have an extra column to further define the place that nation needs to be in
@@ -20,7 +20,7 @@ local npcOverrides =
         {
             removeDefault = true, -- remove default action from IF to avoid flip-flopping trigger action
             shopDialog = 'WAAG_DEEG_SHOP_DIALOG',
-            stock =
+            stock50 =
             {
                 { xi.item.SCROLL_OF_SLEEP_II,      18720 },
                 { xi.item.SCROLL_OF_SLEEPGA,       11200 },
@@ -127,11 +127,12 @@ local npcOverrides =
 -- inserts a single item or a table of items into stock
 -- optionally, inserts after a particular itemid in the stock table
 local addStockToTable = function(stock, newStock, afterItemId)
-    if not type(newStock) == 'table' then
+    if type(newStock) ~= 'table' then
         return
     end
 
-    local index = nil
+    -- if no afterItem-index is found, we will insert at the end
+    local index = #stock + 1
     if afterItemId then
         for k, v in ipairs(stock) do
             if v[1] == afterItemId then
@@ -142,20 +143,12 @@ local addStockToTable = function(stock, newStock, afterItemId)
 
     if type(newStock[1]) ~= 'table' then
         -- single item
-        if index then
-            table.insert(stock, index, newStock)
-        else
-            table.insert(stock, newStock)
-        end
+        table.insert(stock, index, newStock)
     else
         -- newStock is table of items
         for _, newStockItem in ipairs(newStock) do
-            if index then
-                table.insert(stock, index, newStockItem)
-                index = index + 1
-            else
-                table.insert(stock, newStockItem)
-            end
+            table.insert(stock, index, newStockItem)
+            index = index + 1
         end
     end
 end
@@ -164,9 +157,10 @@ for zoneId, npcs in pairs(npcOverrides) do
     local zoneName = zxi.zoneName[zoneId]
 
     for npcName, npcData in pairs(npcs) do
-        local npcMsgID   = zones[zoneId].text[shopDialog]
+        local shopDialog = npcData.shopDialog
         local nationShop = npcData.nationShop
         local fameArea   = npcData.fameArea
+        local npcMsg     = zones[zoneId].text[shopDialog]
         local npcLuaPath = fmt('xi.zones.{}.npcs.{}', zoneName, npcName)
 
         xi.module.ensureTable(npcLuaPath)
@@ -179,7 +173,7 @@ for zoneId, npcs in pairs(npcOverrides) do
         addStockToTable(stock, npcData.stock)
 
         -- add any level-cap restricted items
-        for _, lvlCap in pairs({55, 60, 65, 70, 75}) do
+        for _, lvlCap in pairs({ 50, 55, 60, 65, 70, 75 }) do
             if xi.settings.main.MAX_LEVEL >= lvlCap then
                 local keyName = fmt('stock{}', lvlCap)
                 local capStock = npcData[keyName]
@@ -198,8 +192,8 @@ for zoneId, npcs in pairs(npcOverrides) do
                 local expansionStock = npcData[keyName]
                 if
                     expansionStock and
-                    (v == 1 or
-                    v == true)
+                    ((type(v) == 'number' and v == 1) or
+                    (type(v) == 'boolean' and v))
                 then
                     addStockToTable(stock, expansionStock, npcData[keyName..'after'])
                 end
@@ -208,10 +202,11 @@ for zoneId, npcs in pairs(npcOverrides) do
 
         m:addOverride(fmt('{}.onTrigger', npcLuaPath), function(player, npc)
             if #stock == 0 then
-                player:printToPlayer(fmt('Apologies, {} I have no stock at this time', player:getName()), xi.msg.channel.SYSTEM_3, npc:getName())
+                -- TODO fix this message if 3rd parameter of this binding is fixed to utilize the sender parameter
+                player:printToPlayer(fmt('{} : Apologies, {}. I have no stock at this time', npc:getName(), player:getName()), xi.msg.channel.NS_SAY, npc:getName())
             else
-                if npcMsgID then
-                    player:showText(npc, npcMsgID)
+                if npcMsg then
+                    player:showText(npc, npcMsg)
                 end
 
                 if nationShop ~= nil then
@@ -1769,7 +1764,6 @@ m:addOverride('xi.zones.Windurst_Waters_[S].npcs.Pelftrix.onTrigger', function(p
     xi.shop.general(player, stock)
 end)
 
--- TODO: Spondulix is not yet implemented.
 m:addOverride('xi.zones.Fort_Karugo-Narugo_[S].npcs.Spondulix.onTrigger', function(player, npc)
     local stock =
     {
