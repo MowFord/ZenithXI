@@ -761,8 +761,8 @@ local npcOverrides =
             },
             stockABYSSEA =
             {
-                { xi.item.WATER_LILY,          630 }, -- Kaberno (Myoshu: Ichi)
-                { xi.item.QUEEN_OF_THE_NIGHT,  690 }, -- Ranka (Gekka: Ichi)
+                { xi.item.WATER_LILY,          1260 }, -- *Kaberno (Myoshu: Ichi)
+                { xi.item.QUEEN_OF_THE_NIGHT,  1380 }, -- *Ranka (Gekka: Ichi)
             },
         },
     },
