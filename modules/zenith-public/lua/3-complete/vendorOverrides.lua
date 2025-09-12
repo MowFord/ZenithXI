@@ -761,8 +761,8 @@ local npcOverrides =
             },
             stockABYSSEA =
             {
-                { xi.item.WATER_LILY,          630 }, -- Kaberno (Myoshu: Ichi)
-                { xi.item.QUEEN_OF_THE_NIGHT,  690 }, -- Ranka (Gekka: Ichi)
+                { xi.item.WATER_LILY,          1260 }, -- *Kaberno (Myoshu: Ichi)
+                { xi.item.QUEEN_OF_THE_NIGHT,  1380 }, -- *Ranka (Gekka: Ichi)
             },
         },
     },
@@ -854,7 +854,7 @@ local npcOverrides =
                 { xi.item.BALL_OF_INSECT_PASTE,         42 },
                 { xi.item.JUG_OF_FISH_BROTH,            94 },
                 { xi.item.JUG_OF_WORMY_BROTH,          100 }, -- *
-                { xi.item.JUG_OF_SEEDBED_SOIL,         499 },
+                { xi.item.JUG_OF_SEEDBED_SOIL,         998 }, -- *
                 { xi.item.HATCHET,                     525 },
                 { xi.item.SCROLL_OF_ARMYS_PAEON_III,  3780 },
             },
