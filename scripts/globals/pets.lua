@@ -24,15 +24,6 @@ local avatarPetIDs = set
     xi.petId.SIREN,
 }
 
-local onMasterDeath = function(mob)
-    local pet = mob:getPet()
-    if pet ~= nil and pet:isAlive() then
-        if not pet:isEngaged() then
-            DespawnMob(pet:getID(), 2)
-        end
-    end
-end
-
 local astralOnlySpellIDs = set
 {
     xi.magic.spell.ODIN,
@@ -45,6 +36,8 @@ local astralOnlySpellIDs = set
 ---@return number
 xi.pet.onMobSkillCheck = function(target, mob, skill)
     -- block mobskill if mob doesn't have an assigned pet or pet is currently spawned
+    -- TODO implement mobmods to determine if mob can call pet outside of combat
+    --      or how many total pets the mob can call after respawning
     if mob:getPet() == nil or mob:hasPet() then
         return 1
     end
@@ -72,6 +65,8 @@ xi.pet.onCastingCheck = function(caster, target, spell)
         result = xi.summon.avatarMiniFightCheck(caster, spell:getID())
     else
         -- non-pc without an attached pet
+        -- TODO implement mobmods to determine if mob can call pet outside of combat
+        --      or how many total pets the mob can call after respawning
         if caster:getPet() == nil then
             result = 1
         end
@@ -86,39 +81,51 @@ end
 ---@param target CBaseEntity?
 ---@return nil
 xi.pet.spawnPet = function(caster, petID, state, target)
-    caster:spawnPet(petID)
+    local casterType = caster:getObjType()
+    if casterType == xi.objType.PC then
+        caster:spawnPlayerPet(petID)
 
-    -- mobs don't emit message when using call beast/wyvern, activate, or summoner spells
-    if caster:getObjType() ~= xi.objType.PC and state then
-        state:setMsg(xi.msg.basic.NONE)
-
-        if state:getID() == xi.mobSkill.CALL_BEAST then
-            -- bst mob pets despawn if not engaged when owner leaves
-            caster:addListener('DEATH', 'BEASTMASTER_DEATH', onMasterDeath)
-            caster:addListener('DESPAWN', 'BEASTMASTER_DESPAWN', onMasterDeath)
-        end
-    end
-
-    if avatarPetIDs[petID] then
-        local effect = caster:getStatusEffect(xi.effect.AVATARS_FAVOR)
-        if effect then
-            effect:setPower(1) -- resummon resets effect
-            xi.avatarsFavor.applyAvatarsFavorAuraToPet(caster, effect)
-            xi.avatarsFavor.applyAvatarsFavorDebuffsToPet(caster)
-        end
-
-        if petID == xi.petId.ALEXANDER then
-            -- Use Perfect Defense 5 seconds after spawning.
-            local pet = caster:getPet()
-            if pet then
-                pet:timer(5000, function()
-                    pet:usePetAbility(xi.jobAbility.PERFECT_DEFENSE, pet)
-                end)
+        -- These should only be relevant for players
+        if avatarPetIDs[petID] then
+            local effect = caster:getStatusEffect(xi.effect.AVATARS_FAVOR)
+            if effect then
+                effect:setPower(1) -- resummon resets effect
+                xi.avatarsFavor.applyAvatarsFavorAuraToPet(caster, effect)
+                xi.avatarsFavor.applyAvatarsFavorDebuffsToPet(caster)
             end
-        elseif petID == xi.petId.ODIN then
-            if target then
-                caster:petAttack(target)
+
+            if petID == xi.petId.ALEXANDER then
+                -- Use Perfect Defense 5 seconds after spawning.
+                local pet = caster:getPet()
+                if pet then
+                    pet:timer(5000, function()
+                        pet:usePetAbility(xi.jobAbility.PERFECT_DEFENSE, pet)
+                    end)
+                end
+            elseif petID == xi.petId.ODIN then
+                if target then
+                    caster:petAttack(target)
+                end
             end
+        end
+    elseif casterType == xi.objType.MOB then
+        -- copy confrontation effect and potentially morph mob's pet based on avatar/elementals petID given
+        caster:assignMobPetProperties(petID)
+
+        -- TODO implement mobmods to decide what type of pet summon animation we do here. For the time being continue doing the default instant call
+        -- mobs don't emit message when using call beast/wyvern, activate, or summoner spells
+        if state then
+            state:setMsg(xi.msg.basic.NONE)
+        end
+
+        -- TODO utilize xi.mob.callPets(caster, nil, params) where params are determined based on the mob mods mentioned above
+        local pet = caster:getPet()
+        if pet then
+            local ownerPos = caster:getPos()
+            ownerPos.rot = caster:getRotPos()
+            local pos = NearLocation(ownerPos, 2.2, math.pi)
+            pet:setSpawn(pos.x, pos.y, pos.z, ownerPos.rot)
+            pet:spawn()
         end
     end
 

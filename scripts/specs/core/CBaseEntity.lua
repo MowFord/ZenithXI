@@ -3374,9 +3374,14 @@ end
 function CBaseEntity:handleSevereDamage(damage, isPhysical)
 end
 
----@param arg0 integer? Optional Pet ID
+---@param arg0 integer? Pet ID to spawn for player
 ---@return nil
-function CBaseEntity:spawnPet(arg0)
+function CBaseEntity:spawnPlayerPet(arg0)
+end
+
+---@param arg0 integer? Optional Pet ID to clone into mob pet
+---@return nil
+function CBaseEntity:assignMobPetProperties(arg0)
 end
 
 ---@return nil

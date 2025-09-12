@@ -15469,62 +15469,59 @@ auto CLuaBaseEntity::handleSevereDamage(int32 damage, bool isPhysical) -> int32
 }
 
 /************************************************************************
- *  Function: spawnPet()
- *  Purpose : Spawns a pet if a few correct conditions are met
- *  Example : caster:spawnPet(xi.petId.CARBUNCLE)
+ *  Function: spawnPlayerPet()
+ *  Purpose : Spawns a player pet if a few correct conditions are met
+ *  Example : player:spawnPlayerPet(xi.petId.CARBUNCLE)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::spawnPet(sol::object const& arg0)
+void CLuaBaseEntity::spawnPlayerPet(sol::object const& arg0)
 {
-    if (m_PBaseEntity->objtype == TYPE_NPC)
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (!PChar)
     {
-        ShowWarning("CLuaBaseEntity::spawnPet() - NPC calling function.");
+        ShowWarning("Non-PC (%d) calling function.", m_PBaseEntity->id);
         return;
     }
 
-    if (m_PBaseEntity->objtype == TYPE_PC)
+    if ((arg0 != sol::lua_nil) && arg0.is<int>())
     {
-        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-        if ((arg0 != sol::lua_nil) && arg0.is<int>())
+        uint32 petId = arg0.as<uint32>();
+        if (petId == PETID_HARLEQUINFRAME)
         {
-            uint32 petId = arg0.as<uint32>();
-            if (petId == PETID_HARLEQUINFRAME)
-            {
-                petId = static_cast<uint32>(PETID_HARLEQUINFRAME) + static_cast<uint32>(PChar->getAutomatonFrame()) - 0x20;
-            }
+            petId = static_cast<uint32>(PETID_HARLEQUINFRAME) + static_cast<uint32>(PChar->getAutomatonFrame()) - 0x20;
+        }
 
-            // Note: arg1 of SpawnPet below was arg0 and not petId
-            petutils::SpawnPet(static_cast<CBattleEntity*>(m_PBaseEntity), petId, false);
-        }
-        else
-        {
-            ShowError("CLuaBaseEntity::spawnPet : PetID is nullptr");
-        }
+        // Note: arg1 of SpawnPet below was arg0 and not petId
+        petutils::SpawnPet(static_cast<CBattleEntity*>(m_PBaseEntity), petId, false);
     }
-    else if (m_PBaseEntity->objtype == TYPE_MOB)
+    else
     {
-        auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+        ShowError("Player ID (%d) attempted to spawn pet with no PetID", PChar->id);
+    }
+}
 
-        if (PMob->PPet == nullptr)
-        {
-            ShowError("lua_baseentity::spawnPet PMob (%d) trying to spawn pet but its nullptr", PMob->id);
-            return;
-        }
+/************************************************************************
+ *  Function: assignMobPetProperties()
+ *  Purpose : Prepares a mob's pet to be spawned
+ *  Example : mob:assignMobPetProperties(xi.petId.CARBUNCLE)
+ *  Notes   : Clones the properties of a pet from pet_list.sql if a petid is passed
+ ************************************************************************/
 
-        CMobEntity* PPet = static_cast<CMobEntity*>(PMob->PPet);
+void CLuaBaseEntity::assignMobPetProperties(sol::object const& arg0)
+{
+    auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity);
 
-        // if a number is given its an avatar or elemental spawn
-        if ((arg0 != sol::lua_nil) && arg0.is<int>())
-        {
-            petutils::SpawnMobPet(PMob, arg0.as<uint32>());
-        }
+    if (!PMob || PMob->PPet == nullptr)
+    {
+        ShowWarning("Entity (%d) not valid or pet is a nullptr", m_PBaseEntity->id);
+        return;
+    }
 
-        // always spawn on master
-        PPet->m_SpawnPoint = nearPosition(PMob->loc.p, 2.2f, static_cast<float>(M_PI));
-
-        // setup AI
-        PPet->Spawn();
+    // if a number is given its an avatar or elemental spawn
+    if (arg0 != sol::lua_nil && arg0.is<int>())
+    {
+        petutils::AssignMobPetProperties(PMob, arg0.as<uint32>());
     }
 }
 
@@ -20029,7 +20026,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("handleSevereDamage", CLuaBaseEntity::handleSevereDamage);
 
     // Pets and Automations
-    SOL_REGISTER("spawnPet", CLuaBaseEntity::spawnPet);
+    SOL_REGISTER("spawnPlayerPet", CLuaBaseEntity::spawnPlayerPet);
+    SOL_REGISTER("assignMobPetProperties", CLuaBaseEntity::assignMobPetProperties);
     SOL_REGISTER("despawnPet", CLuaBaseEntity::despawnPet);
     SOL_REGISTER("setJugRemainingTime", CLuaBaseEntity::setJugRemainingTime);
 

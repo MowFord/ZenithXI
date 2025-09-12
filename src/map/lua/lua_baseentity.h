@@ -768,7 +768,8 @@ public:
     auto  handleSevereDamage(int32 damage, bool isPhysical) -> int32;
 
     // Pets and Automations
-    void spawnPet(sol::object const& arg0);
+    void spawnPlayerPet(sol::object const& arg0);
+    void assignMobPetProperties(sol::object const& arg0);
     void despawnPet();
     void setJugRemainingTime(uint32 remainingSeconds);
 

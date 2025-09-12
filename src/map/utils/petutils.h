@@ -212,7 +212,7 @@ namespace petutils
     void FreePetList();
 
     void  SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
-    void  SpawnMobPet(CBattleEntity* PMaster, uint32 PetID);
+    void  AssignMobPetProperties(CBattleEntity* PMaster, std::optional<uint32> PetID);
     void  DetachPet(CBattleEntity* PMaster);
     void  DespawnPet(CBattleEntity* PMaster);
     void  AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget);

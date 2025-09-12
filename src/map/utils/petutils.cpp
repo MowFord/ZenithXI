@@ -1235,20 +1235,28 @@ namespace petutils
         }
     }
 
-    void SpawnMobPet(CBattleEntity* PMaster, uint32 PetID)
+    // this is ONLY used for mob pets
+    void AssignMobPetProperties(CBattleEntity* PMaster, std::optional<uint32> PetID)
     {
-        // this is ONLY used for mob smn elementals / avatars
-        /*
-        This should eventually be merged into one big spawn pet method.
-        At the moment player pets and mob pets are totally different. We need a central place
-        to manage pet families and spawn them.
-        */
+        // Calling this function clones the mob properties from the partciular g_PPetList entry into the pet
+        // Since player pets are dynamic entities, they are handled separately from mob pets
+        // Mob pets are simply another mob whose AI relies on following the master
 
-        // grab pet info
-        Pet_t*      petData = g_PPetList.at(PetID);
-        CMobEntity* PPet    = dynamic_cast<CMobEntity*>(PMaster->PPet);
+        CMobEntity* PPet = dynamic_cast<CMobEntity*>(PMaster->PPet);
         if (PPet)
         {
+            PPet->allegiance = PMaster->allegiance;
+            PMaster->StatusEffectContainer->CopyConfrontationEffect(PPet);
+            // TODO do we need setBattleID, battlefield, instance as in the player spawnPet function?
+
+            if (!PetID.has_value())
+            {
+                return;
+            }
+
+            // grab pet info
+            Pet_t* petData = g_PPetList.at(PetID.value());
+
             PPet->look = petData->look;
             PPet->name = petData->name;
             PPet->SetMJob(petData->mJob);
@@ -1257,9 +1265,6 @@ namespace petutils
             PPet->m_Element   = petData->m_Element;
             PPet->HPscale     = petData->HPscale;
             PPet->MPscale     = petData->MPscale;
-
-            PPet->allegiance = PMaster->allegiance;
-            PMaster->StatusEffectContainer->CopyConfrontationEffect(PPet);
 
             // TODO: Lets not do this here.
             if (PPet->m_EcoSystem == ECOSYSTEM::AVATAR || PPet->m_EcoSystem == ECOSYSTEM::ELEMENTAL)

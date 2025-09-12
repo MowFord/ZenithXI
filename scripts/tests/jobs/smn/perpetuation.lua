@@ -36,10 +36,10 @@ describe('Avatar perpetuation', function()
         verifyPerpetuationCost(player, 0)
         -- Verify losing MP according to avatar perpetuation
         xi.test.world:setVanaDay(xi.day.DARKSDAY)
-        player:spawnPet(xi.petId.GARUDA)
+        player:spawnPlayerPet(xi.petId.GARUDA)
         verifyPerpetuationCost(player, 13)
         player:despawnPet()
-        player:spawnPet(xi.petId.CARBUNCLE)
+        player:spawnPlayerPet(xi.petId.CARBUNCLE)
         verifyPerpetuationCost(player, 9)
     end)
 
@@ -93,11 +93,11 @@ describe('Avatar perpetuation', function()
             player:equipItem(staff.itemId)
             -- Verify the staff increases cost for same element
             player:despawnPet()
-            player:spawnPet(staff.reduction)
+            player:spawnPlayerPet(staff.reduction)
             verifyPerpetuationCost(player, (specialBaseCost[staff.reduction] or 13) - 2)
             -- Verify the staff increases cost for opposite element
             player:despawnPet()
-            player:spawnPet(staff.increase)
+            player:spawnPlayerPet(staff.increase)
             verifyPerpetuationCost(player, (specialBaseCost[staff.increase] or 13) + 2)
         end
     end)
@@ -153,12 +153,12 @@ describe('Avatar perpetuation', function()
             xi.test.world:setVanaDay(case.day)
             player:despawnPet()
             -- Reduced cost with avatar matching day
-            player:spawnPet(case.matching)
+            player:spawnPlayerPet(case.matching)
             local cost = (specialBaseCost[case.matching] or 13) - 3
             verifyPerpetuationCost(player, cost)
             player:despawnPet()
             -- Regular cost with avatar not matching day
-            player:spawnPet(case.notMatching)
+            player:spawnPlayerPet(case.notMatching)
             cost = specialBaseCost[case.notMatching] or 13
             verifyPerpetuationCost(player, cost)
         end
@@ -216,12 +216,12 @@ describe('Avatar perpetuation', function()
             player:setWeather(case.weather)
             player:despawnPet()
             -- Reduced cost with avatar matching day
-            player:spawnPet(case.matching)
+            player:spawnPlayerPet(case.matching)
             local cost = (specialBaseCost[case.matching] or 13) - 3
             verifyPerpetuationCost(player, cost)
             player:despawnPet()
             -- Regular cost with avatar not matching day
-            player:spawnPet(case.notMatching)
+            player:spawnPlayerPet(case.notMatching)
             cost = specialBaseCost[case.notMatching] or 13
             verifyPerpetuationCost(player, cost)
         end
