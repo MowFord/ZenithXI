@@ -1247,7 +1247,7 @@ for zoneId, npcs in pairs(npcOverrides) do
         m:addOverride(fmt('{}.onTrigger', npcLuaPath), function(player, npc)
             if #stock == 0 then
                 -- TODO fix this message if 3rd parameter of this binding is fixed to utilize the sender parameter
-                player:printToPlayer(fmt('{} : Apologies, {}. I have no stock at this time', npc:getName(), player:getName()), xi.msg.channel.NS_SAY, npc:getName())
+                player:printToPlayer(fmt('Apologies, {}. I have no stock at this time', npc:getName(), player:getName()), xi.msg.channel.SAY, npc:getName())
             else
                 if npcMsg then
                     player:showText(npc, npcMsg)
