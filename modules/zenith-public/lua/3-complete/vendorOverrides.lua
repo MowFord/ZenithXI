@@ -732,7 +732,6 @@ local npcOverrides =
                 { xi.item.SLICE_OF_ROAST_MUTTON,      756 },
                 { xi.item.PICKLED_HERRING,           1497 }, -- *
                 { xi.item.BAKED_APPLE,                540 }, -- *
-                { xi.item.CHERRY_MUFFIN,              910 }, -- *
                 { xi.item.WINDURST_SALAD,            2804 }, -- *
                 { xi.item.SERVING_OF_HERB_QUUS,      4734 }, -- *
                 { xi.item.BOTTLE_OF_ORANGE_JUICE,     200 },
@@ -742,6 +741,11 @@ local npcOverrides =
                 { xi.item.BOTTLE_OF_GRAPE_JUICE,      967 },
                 { xi.item.FLASK_OF_ORANGE_AU_LAIT,    360 }, -- *
                 { xi.item.FLASK_OF_APPLE_AU_LAIT,     570 }, -- *
+            },
+            stockTOAUafter = xi.item.BAKED_APPLE,
+            stockTOAU =
+            {
+                { xi.item.CHERRY_MUFFIN,              910 }, -- *
             },
         },
         ['Areebah'] =
@@ -1013,6 +1017,36 @@ local npcOverrides =
                 { xi.item.CAN_OF_AUTOMATON_OIL_P1, 1000 }, -- *
                 { xi.item.CAN_OF_AUTOMATON_OIL_P2, 1500 }, -- *
                 { xi.item.CAN_OF_AUTOMATON_OIL_P3, 2000 }, -- *
+            },
+        },
+    },
+    [xi.zone.AL_ZAHBI] =
+    {
+        ['Chayaya'] =
+        {
+            shopDialog = 'CHAYAYA_SHOP_DIALOG',
+            stock =
+            {
+                { xi.item.DART,                       10 },
+                { xi.item.HAWKEYE,                    60 },
+                { xi.item.GRENADE,                  1204 },
+                { xi.item.IRON_ARROW,                  8 },
+                { xi.item.WARRIOR_DIE,             68000 },
+                { xi.item.MONK_DIE,                22400 },
+                { xi.item.WHITE_MAGE_DIE,           5000 },
+                { xi.item.BLACK_MAGE_DIE,         108000 },
+                { xi.item.RED_MAGE_DIE,            62000 },
+                { xi.item.THIEF_DIE,               50400 },
+                { xi.item.PALADIN_DIE,             90750 },
+                { xi.item.DARK_KNIGHT_DIE,          2205 },
+                { xi.item.BEASTMASTER_DIE,          6600 },
+                { xi.item.BARD_DIE,                12780 },
+                { xi.item.RANGER_DIE,               1300 },
+            },
+            stockWOTG =
+            {
+                { xi.item.DANCER_DIE,              63375 },
+                { xi.item.SCHOLAR_DIE,             68250 },
             },
         },
     },
