@@ -5268,22 +5268,26 @@ namespace battleutils
         return damage;
     }
 
-    int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage)
+    int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType)
     {
-        int16 skin = PDefender->getMod(Mod::STONESKIN);
-        if (damage > 0 && skin > 0)
+        if (damage <= 0 || PDefender->getMod(Mod::STONESKIN) <= 0)
         {
-            if (skin > damage)
-            {
-                PDefender->delModifier(Mod::STONESKIN, damage);
-                return 0;
-            }
-
-            PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_STONESKIN);
-            return damage - skin;
+            return damage;
         }
 
-        return damage;
+        auto adjustedDamage = damage;
+        auto stoneskinFunc  = lua["utils"]["stoneskin"];
+        if (stoneskinFunc.valid())
+        {
+            auto result = stoneskinFunc(PDefender, damage, attackType);
+
+            if (result.valid())
+            {
+                adjustedDamage = result.get<int32>();
+            }
+        }
+
+        return adjustedDamage;
     }
 
     auto HandleSevereDamage(CBattleEntity* PDefender, int32 damage, bool isPhysical) -> int32

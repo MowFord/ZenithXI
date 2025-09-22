@@ -465,28 +465,110 @@ function utils.counter(predicate)
     end
 end
 
+local compareStoneskinToDmg = function(target, skinPower, dmg)
+    if skinPower > 0 then
+        if skinPower > dmg then
+            return 0
+        else
+            target:setMod(xi.mod.STONESKIN, 0)
+            target:delStatusEffect(xi.effect.STONESKIN)
+            return dmg - skinPower
+        end
+    else
+        -- effect should not exist if it has no absorb left
+        target:setMod(xi.mod.STONESKIN, 0)
+        target:delStatusEffect(xi.effect.STONESKIN)
+
+        return dmg
+    end
+end
+
 -- returns unabsorbed damage
 ---@nodiscard
 ---@param target CBaseEntity
 ---@param dmg integer
+---@param attackType xi.attackType
 ---@return integer
-function utils.stoneskin(target, dmg)
-    --handling stoneskin
-    if dmg > 0 then
-        local skin = target:getMod(xi.mod.STONESKIN)
-        if skin > 0 then
-            if skin > dmg then --absorb all damage
-                target:delMod(xi.mod.STONESKIN, dmg)
-                return 0
-            else --absorbs some damage then wear
-                target:delStatusEffect(xi.effect.STONESKIN)
-                target:setMod(xi.mod.STONESKIN, 0)
-                return dmg - skin
-            end
-        end
+function utils.stoneskin(target, dmg, attackType)
+    -- For performance reasons, set mod > 0 even for special subType stoneskin effects
+    if
+        dmg <= 0 or
+        not target or
+        target:getMod(xi.mod.STONESKIN) <= 0
+    then
+        return dmg
     end
 
-    return dmg
+    local effect = target:getStatusEffect(xi.effect.STONESKIN)
+    if not effect then
+        return dmg
+    end
+
+    local subType = effect and effect:getSubType() or 0
+    local subPower = effect and effect:getSubPower() or 0
+
+    --handling stoneskin
+    local switchResult = switch(subType): caseof
+    {
+        -- Normal Stoneskin effect
+        [0] = function()
+            local skinPower = target:getMod(xi.mod.STONESKIN)
+            local adjustedDmg = compareStoneskinToDmg(target, skinPower, dmg)
+
+            effect = target:getStatusEffect(xi.effect.STONESKIN)
+            if effect then
+                -- effect wasn't removed, lower power
+                target:delMod(xi.mod.STONESKIN, dmg)
+            end
+
+            return adjustedDmg
+        end,
+
+        -- Stoneskin effect that absorbs only physical dmg
+        [1] = function()
+            if attackType ~= xi.attackType.PHYSICAL then
+                return dmg
+            end
+
+            local adjustedDmg = compareStoneskinToDmg(target, subPower, dmg)
+
+            effect = target:getStatusEffect(xi.effect.STONESKIN)
+            if effect then
+                -- effect wasn't removed, lower power
+                effect:setSubPower(subPower - dmg)
+            end
+
+            return adjustedDmg
+        end,
+
+        -- Stoneskin effect that absorbs only magical/breath/non-elemental dmg
+        [2] = function()
+            if
+                attackType ~= xi.attackType.MAGICAL and
+                attackType ~= xi.attackType.BREATH and
+                attackType ~= xi.attackType.SPECIAL
+            then
+                return dmg
+            end
+
+            local adjustedDmg = compareStoneskinToDmg(target, subPower, dmg)
+
+            effect = target:getStatusEffect(xi.effect.STONESKIN)
+            if effect then
+                -- effect wasn't removed, lower power
+                effect:setSubPower(subPower - dmg)
+            end
+
+            return adjustedDmg
+        end,
+    }
+
+    if switchResult then
+        return switchResult
+    end
+
+    -- no matches above means the stoneskin effect has improper subtype, delete it
+    return compareStoneskinToDmg(target, 0, dmg)
 end
 
 -- returns reduced magic damage from RUN buff, 'One for All'
