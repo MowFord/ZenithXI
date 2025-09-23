@@ -6,4 +6,4 @@
 -----------------------------------
 
 UPDATE item_basic
-SET BaseSell = GREATEST(BaseSell * 0.95, 1); -- Reduce all item base sell prices by 5%
+SET BaseSell = CEILING(BaseSell * 0.90); -- Reduce all item base sell prices by 10%
