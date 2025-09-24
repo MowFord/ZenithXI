@@ -15,6 +15,8 @@ UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'blood_r
 -- MNK
 UPDATE `abilities` SET `level` = 71, `recastTime`= 90, `content_tag`= NULL WHERE `name` = 'perfect_counter'; -- Recast changed from 60 to 90
 UPDATE `abilities` SET `level` = 75, `content_tag`= NULL WHERE `name` = 'impetus';
+UPDATE `abilities` SET `recastTime` = 300 WHERE `name` = 'focus' AND `abilityId` = 36; -- Focus: Update recast from 120 seconds (2 minutes) to 300 seconds (5 minutes)
+UPDATE `abilities` SET `recastTime` = 300 WHERE `name` = 'dodge' AND `abilityId` = 37; -- Dodge: Update recast from 120 seconds (2 minutes) to 300 seconds (5 minutes)
 
 -- WHM
 UPDATE `abilities` SET `level` = 60, `content_tag`= NULL WHERE `name` = 'divine_caress'; -- TODO: Ability needs to be corrected
