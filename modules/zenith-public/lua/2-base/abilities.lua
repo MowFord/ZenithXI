@@ -13,6 +13,22 @@ local effectAdjustments =
             power = -10, -- Changed from 20% to 10%
         },
     },
+    berserk =
+    {
+        effectId = xi.effect.BERSERK,
+        set =
+        {
+            power = 25, -- Force static 25% modifiers (ignoring BERSERK_POTENCY)
+        },
+    },
+    defender =
+    {
+        effectId = xi.effect.DEFENDER,
+        set =
+        {
+            power = 25, -- Force static 25% defense modifier
+        },
+    },
     -- Monk
     impetus =
     {
@@ -122,6 +138,21 @@ for effectName, config in pairs(effectAdjustments) do
 
         -- Only apply adjustments for fresh effects, not restored ones
         if not isRestoring then
+            -- Handle set operations (force specific values)
+            if effectConfig.set then
+                if effectConfig.set.power then
+                    effect:setPower(effectConfig.set.power)
+                end
+
+                if effectConfig.set.subpower then
+                    effect:setSubPower(effectConfig.set.subpower)
+                end
+
+                if effectConfig.set.duration then
+                    effect:setDuration(effectConfig.set.duration)
+                end
+            end
+
             -- Handle add operations
             if effectConfig.add then
                 if effectConfig.add.power then
