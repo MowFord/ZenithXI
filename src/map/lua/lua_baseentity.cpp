@@ -1782,10 +1782,12 @@ bool CLuaBaseEntity::canUseAbilities()
  *  Purpose : Forces an entity to 'look' at something like it's self-aware
  *  Example : npc:lookAt(player:getPos()) -- Make an NPC look at the PC
  *  Notes   : Expects x, y, and z and does not confirm missing!
+ *            If sending a position table, add a key for sendUpdateImmediately instead of a 4th parameter
  ************************************************************************/
 
-void CLuaBaseEntity::lookAt(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2)
+void CLuaBaseEntity::lookAt(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& sendUpdateImmediately)
 {
+    bool       sendPacket = (sendUpdateImmediately != sol::lua_nil) ? sendUpdateImmediately.as<bool>() : false;
     position_t point;
 
     if ((arg0 != sol::lua_nil) && (arg0.is<double>()))
@@ -1796,11 +1798,32 @@ void CLuaBaseEntity::lookAt(sol::object const& arg0, sol::object const& arg1, so
     }
     else
     {
-        auto position = arg0.as<std::map<std::string, float>>();
+        for (const auto& kv : arg0.as<sol::table>())
+        {
+            std::string key = kv.first.as<std::string>();
 
-        point.x = position["x"];
-        point.y = position["y"];
-        point.z = position["z"];
+            if (key == "sendUpdateImmediately" && kv.second.is<bool>())
+            {
+                sendPacket = kv.second.as<bool>();
+            }
+            else if (kv.second.is<float>())
+            {
+                auto val = kv.second.as<float>();
+
+                if (key == "x")
+                {
+                    point.x = val;
+                }
+                else if (key == "y")
+                {
+                    point.y = val;
+                }
+                else if (key == "z")
+                {
+                    point.z = val;
+                }
+            }
+        }
     }
 
     // Avoid unpredictable results if we're too close.
@@ -1808,6 +1831,11 @@ void CLuaBaseEntity::lookAt(sol::object const& arg0, sol::object const& arg1, so
     {
         m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, point);
         m_PBaseEntity->updatemask |= UPDATE_POS;
+
+        if (sendPacket)
+        {
+            m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT);
+        }
     }
 }
 

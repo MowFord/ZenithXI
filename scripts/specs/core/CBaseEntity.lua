@@ -439,8 +439,9 @@ end
 ---@param arg0 number
 ---@param arg1 number
 ---@param arg2 number
+---@param sendUpdateImmediately boolean?
 ---@return nil
-function CBaseEntity:lookAt(arg0, arg1, arg2)
+function CBaseEntity:lookAt(arg0, arg1, arg2, sendUpdateImmediately)
 end
 
 ---@param posTable table

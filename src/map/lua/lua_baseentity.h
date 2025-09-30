@@ -137,7 +137,7 @@ public:
     uint8 getCurrentAction();
     bool  canUseAbilities();
 
-    void lookAt(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2);
+    void lookAt(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& sendUpdateImmediately);
     void facePlayer(CLuaBaseEntity* PLuaBaseEntity, sol::object const& nonGlobal);
     void clearTargID();
 
