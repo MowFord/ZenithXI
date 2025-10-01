@@ -18194,14 +18194,14 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
         return;
     }
 
-    if (va.size() == 2)
+    if (va.size() >= 2)
     {
         CLuaBaseEntity* PLuaBaseEntity = va.get<CLuaBaseEntity*>(1);
         PTarget                        = PLuaBaseEntity ? (CBattleEntity*)PLuaBaseEntity->m_PBaseEntity : nullptr;
     }
 
     std::optional<timer::duration> castTimeOverride = std::nullopt;
-    if (va.size() == 3)
+    if (va.size() >= 3)
     {
         if (va.get_type(2) == sol::type::number)
         {
