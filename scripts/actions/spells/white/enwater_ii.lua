@@ -5,7 +5,7 @@
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    return 0
+    return xi.spells.enhancing.onEnhancingSpellCheck(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)

@@ -563,7 +563,7 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     end
 
     --------------------------------------------------
-    -- Calculate Spell Pottency and Duration.
+    -- Calculate Spell Potency and Duration.
     --------------------------------------------------
     local basePower  = xi.spells.enhancing.calculateEnhancingBasePower(caster, target, spell, spellId, spellEffect)
     local finalPower = xi.spells.enhancing.calculateEnhancingFinalPower(caster, target, spell, basePower, spellGroup, tier, spellEffect)
@@ -595,4 +595,36 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     end
 
     return spellEffect
+end
+
+-- determines if a mob will cast a buff on the target
+-- TODO apply to all enhancing spells check functions
+xi.spells.enhancing.onEnhancingSpellCheck = function(caster, target, spell)
+    local spellId     = spell:getID()
+    local spellGroup  = spell:getSpellGroup()
+    local effectTable = pTable[spellId]
+    if
+        caster:isPC() or
+        not effectTable
+    then
+        return 0
+    end
+
+    local tier            = effectTable[column.EFFECT_TIER]
+    local spellEffect     = effectTable[column.EFFECT_ID]
+    local alwaysOverwrite = effectTable[column.EFFECT_WILL_OVERWRITE]
+    local basePower       = xi.spells.enhancing.calculateEnhancingBasePower(caster, target, spell, spellId, spellEffect)
+    local finalPower      = xi.spells.enhancing.calculateEnhancingFinalPower(caster, target, spell, basePower, spellGroup, tier, spellEffect)
+    local targetEffect    = target:getStatusEffect(spellEffect)
+    if
+        not targetEffect or                       -- doesn't currently have effect
+        targetEffect:getPower() < finalPower or   -- has a weaker version of the effect
+        (targetEffect:getPower() > finalPower and -- has a more powerful version but table says to always overwrite
+        alwaysOverwrite)
+    then
+        return 0
+    end
+
+    -- block cast
+    return 1
 end
