@@ -817,6 +817,11 @@ end
 ---@param t table
 ---@return integer|string, any
 function utils.randomEntryIdx(t)
+    if IsTableIpairsCompatible(t) then
+        local index = math.random(1, #t)
+        return index, t[index]
+    end
+
     local keys = {}
 
     for key, _ in pairs(t) do

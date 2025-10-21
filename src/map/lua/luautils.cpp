@@ -316,6 +316,7 @@ namespace luautils
         lua.set_function("GetSynergyRecipeByID", &luautils::GetSynergyRecipeByID);
         lua.set_function("GetSynergyRecipeByTrade", &luautils::GetSynergyRecipeByTrade);
         lua.set_function("ReloadSynthRecipes", &synthutils::LoadSynthRecipes);
+        lua.set_function("IsTableIpairsCompatible", &luautils::IsTableIpairsCompatible);
 
         // Fishing Contest Functions
         lua.set_function("GetFishingContest", &luautils::GetFishingContest);
@@ -5824,5 +5825,48 @@ namespace luautils
         table["resultName"]            = result.resultName;
 
         return table;
+    }
+
+    // Determines if a table is compatible with ipairs() behavior (loop from 1 to N where N+1 is the first key that returns a nil value from the table)
+    // Also implies #tableName reliably returns the size of the table
+    bool IsTableIpairsCompatible(const sol::table& maybeSequentialTable)
+    {
+        // get "array length" of the table same as "#table" in lua
+        size_t tableLuaLength = maybeSequentialTable.size();
+
+        if (tableLuaLength == 0)
+        {
+            // don't consider an empty table valid
+            return false;
+        }
+
+        // Loop over all key-values and detect any non-numeric keys or holes
+        size_t indicesMatched = 0;
+        for (auto& kvp : maybeSequentialTable)
+        {
+            const auto& key = kvp.first;
+
+            if (!key.is<size_t>())
+            {
+                // Found non-integer key
+                return false;
+            }
+
+            size_t k = key.as<size_t>();
+            if (k < 1 || k > tableLuaLength)
+            {
+                // key is out of range of detected table size
+                return false;
+            }
+
+            // Ensure detected table length has no holes/nil values in the table
+            if (!kvp.second.is<sol::nil_t>())
+            {
+                ++indicesMatched;
+            }
+        }
+
+        // Table has all integer keys, that range from 1 to index, with no missing (or nil-valued) keys
+        return indicesMatched == tableLuaLength;
     }
 }; // namespace luautils

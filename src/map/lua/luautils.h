@@ -330,11 +330,11 @@ namespace luautils
     void OnUpdateAttachment(CBattleEntity* PEntity, CItemPuppet* attachment, uint8 maneuvers);
 
     int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem, action_t& action);
-    auto OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>;
-    void OnItemDrop(CBaseEntity* PUser, CItem* PItem);
-    void OnItemEquip(CBaseEntity* PUser, CItem* PItem);
-    void OnItemUnequip(CBaseEntity* PUser, CItem* PItem);
-    void CheckForGearSet(CBaseEntity* PTarget);
+    auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>;
+    void  OnItemDrop(CBaseEntity* PUser, CItem* PItem);
+    void  OnItemEquip(CBaseEntity* PUser, CItem* PItem);
+    void  OnItemUnequip(CBaseEntity* PUser, CItem* PItem);
+    void  CheckForGearSet(CBaseEntity* PTarget);
 
     int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);
     int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);
@@ -470,6 +470,8 @@ namespace luautils
 
     auto GetSynergyRecipeByID(uint32 id) -> sol::table;
     auto GetSynergyRecipeByTrade(CLuaTradeContainer luaTradeContainer) -> sol::table;
+
+    bool IsTableIpairsCompatible(const sol::table& maybeSequentialTable);
 }; // namespace luautils
 
 // template impl
