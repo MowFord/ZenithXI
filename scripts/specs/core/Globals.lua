@@ -433,25 +433,25 @@ end
 function RoeParseTimed(timedSchedule)
 end
 
---@return table
+---@return table
 function GetFishingContest()
 end
 
---@return nil
+---@return nil
 function InitNewFishingContest()
 end
 
---@param fishId integer
---@param measure integer
---@param criteria integer
---@return nil
+---@param fishId integer
+---@param measure integer
+---@param criteria integer
+---@return nil
 function SetContestParameters(fishId, measure, criteria)
 end
 
---@return nil
+---@return nil
 function ProgressFishingContest()
 end
 
---@return nil
+---@return nil
 function InitializeFishingContestSystem()
 end

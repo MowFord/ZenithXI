@@ -811,12 +811,65 @@ function utils.hasKey(keyVal, collection)
     return false
 end
 
+-- Determines if a table is compatible with ipairs() behavior (loop from 1 to N where N+1 is the first key that returns a nil value from the table)
+-- Also implies #tableName reliably returns the size of the table
+-- yes, there's no built-in way for lua to determine this
+---@param tbl table
+---@return boolean
+function utils.isTableIpairsCompatible(tbl)
+    local tableSize = #tbl
+    -- most basic requirement to be ipairs-compatible: 1st and Nth entry is not nil
+    if
+        tableSize == 0 or
+        tbl[1] == nil or
+        tbl[tableSize] == nil
+    then
+        return false
+    end
+
+    -- assume a table with 1000+ entries with sequential, natural-number keys starting from 1 has no other relevant entries
+    -- technically incorrect but very highly unlikely (and improves performance by a large margin)
+    if tableSize >= 1000 then
+        return true
+    end
+
+    local nonNilEntries = 0
+    -- Loop over all key-values and detect any non-numeric keys or holes
+    for k, v in pairs(tbl) do
+        -- Found non-integer key
+        if type(k) ~= 'number' or k ~= math.floor(k) then
+            return false
+        end
+
+        -- key is out of range of detected table size
+        if
+            k < 1 or
+            k > tableSize
+        then
+            return false
+        end
+
+        -- Ensure detected table length has no holes/nil values in the table
+        if v ~= nil then
+            nonNilEntries = nonNilEntries + 1
+        end
+    end
+
+    -- Table has all integer keys, that range from 1 to index, with no missing (or nil-valued) keys
+    return nonNilEntries == tableSize
+end
+
 -- Selects a random entry from a table, returns the index and the entry
 -- https://gist.github.com/jdev6/1e7ff30671edf88d03d4
 ---@nodiscard
 ---@param t table
 ---@return integer|string, any
 function utils.randomEntryIdx(t)
+    if utils.isTableIpairsCompatible(t) then
+        local index = math.random(1, #t)
+        return index, t[index]
+    end
+
     local keys = {}
 
     for key, _ in pairs(t) do
