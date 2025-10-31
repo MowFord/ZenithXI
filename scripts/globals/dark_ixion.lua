@@ -426,7 +426,7 @@ local checkHornBreak = function(mob, attacker)
     local animationSub = mob:getAnimationSub()
     if
         not xi.combat.behavior.isEntityBusy(mob) and
-        (animationSub == animationSubs.NORMAL or animationSub == animationSubs.GLOWING) and
+        (mob:getAnimationSub() == animationSubs.NORMAL or mob:getAnimationSub() == animationSubs.GLOWING) and
         (attacker ~= nil and attacker:isInfront(mob)) and
         math.random(1, 100) <= 5
     then
@@ -654,6 +654,7 @@ xi.darkixion.onMobFight = function(mob, target)
         animationSub = animationSub ~= animationSubs.NORMAL and animationSubs.NORMAL or animationSubs.GLOWING
         mob:setAnimationSub(animationSub)
         mob:stun(500)
+
     end
 
     -- Everything below deals with his charge attack (trample)
@@ -666,7 +667,6 @@ xi.darkixion.onMobFight = function(mob, target)
         mob:setTP(0)
         xi.darkixion.beginTramplePath(mob)
     end
-
     if animationSub == animationSubs.TRAMPLE then
         -- cleanly exit trample when reaching the point (TODO check explicitly for a scripted path?)
         -- runPathTime timestamp hard exit in case of navmesh abuse

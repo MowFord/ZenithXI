@@ -18,6 +18,7 @@ xi.job_utils.bard.checkClarionCall = function(player, target, ability)
     ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
 
     return 0, 0
+
 end
 
 -----------------------------------
