@@ -3,15 +3,15 @@
 
 UPDATE spell_list
 SET
-  castTime = 4000
+    `castTime` = 4000
 WHERE
-  name IN (
-    "absorb-str",
-    "absorb-dex",
-    "absorb-vit",
-    "absorb-agi",
-    "absorb-int",
-    "absorb-mnd",
-    "absorb-chr",
-    "absorb-tp"
-  );
+    name IN (
+        "absorb-str",
+        "absorb-dex",
+        "absorb-vit",
+        "absorb-agi",
+        "absorb-int",
+        "absorb-mnd",
+        "absorb-chr",
+        "absorb-tp"
+    );
