@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=40.8.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sqlfluff-lsb-rules"
+version = "1.0.0"
+requires-python = ">=3.8"
+dependencies = [
+    "sqlfluff>=2.2.2"
+]
+
+[project.entry-points.sqlfluff]
+my_custom_rules = "rules"

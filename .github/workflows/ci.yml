@@ -37,6 +37,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install --upgrade -r ./tools/requirements.txt
+          # unfortunately, requirements.txt cannot specify paths relative to it, and we cannot ensure pip install -r requirements.txt is always run from a particular path
+          # so we will install the custom plugins manually during the ci run
+          python -m pip install -e tools/ci/sanity_checks/sqlfluff_plugins
 
       - name: Run checks
         run: ./tools/ci/sanity_checks.sh origin/base

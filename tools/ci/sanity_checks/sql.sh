@@ -13,20 +13,38 @@ for file in "${targets[@]}"; do
 
     # Run tools and capture output
     bogus_comments=$(grep -En '(--\w)|^(---\s)' "$file" 2>&1 || true)
+    # TODO lint files in top-level sql folder using the same mechanisms as dbtool's function: update_sql_from_db
+    if [[ $file == modules/**/*.sql ]]; then
+        sql_lint=$(sqlfluff lint --config tools/ci/sanity_checks/sqlfluff.ini "$file" 2>&1)
+        sql_lint_exitcode=$?
+    else
+        sql_lint_exitcode=0
+    fi
 
     # Check if there were issues
-    if [[ -n "$bogus_comments" ]]; then
+    if [[ -n "$bogus_comments" || $sql_lint_exitcode -ne 0 ]]; then
         if ! $any_issues; then
             echo "## :x: SQL Checks Failed"
             any_issues=true
         fi
 
-        echo "#### Bogus comments:"
-        echo "> $file"
-        echo '```'
-        echo "$bogus_comments"
-        echo '```'
-        echo
+        if [[ -n "$bogus_comments" ]]; then
+            echo "#### Bogus comments:"
+            echo "> $file"
+            echo '```'
+            echo "$bogus_comments"
+            echo '```'
+            echo
+        fi
+
+        if [[ $sql_lint_exitcode -ne 0 ]]; then
+            echo "#### SQL Lint:"
+            # sqlfluff includes the filename in the header of the output
+            echo '```'
+            echo "$sql_lint"
+            echo '```'
+            echo
+        fi
     fi
 done
 
