@@ -103,7 +103,7 @@ local function setAndPersistRespawnTime(mob, respawnTimeCalc)
         local varName = zxi.mobHelpers.getRespawnVarName(mob)
 
         mob:setRespawnTime(respawnTimeCalc)
-        SetServerVariable(varName, os.time() + respawnTimeCalc)
+        SetServerVariable(varName, GetSystemTime() + respawnTimeCalc)
     end
 end
 
@@ -115,7 +115,7 @@ local function restoreOrSetRespawnTime(mobId, respawnTimeCalc)
         local mobName = mob:getName()
         local varName = zxi.mobHelpers.getRespawnVarName(mob)
         local savedRespawnTime = GetServerVariable(varName)
-        local currentTime = os.time()
+        local currentTime = GetSystemTime()
 
         -- Check if we have a valid saved respawn time (not 0 and not nil)
         if savedRespawnTime and savedRespawnTime > 0 then
@@ -140,7 +140,7 @@ local function restoreOrSetRespawnTime(mobId, respawnTimeCalc)
             -- No valid saved respawn time found, set a new one
             local newRespawnTime = respawnTimeCalc
             GetMobByID(mobId):setRespawnTime(newRespawnTime)
-            SetServerVariable(varName, os.time() + newRespawnTime)
+            SetServerVariable(varName, GetSystemTime() + newRespawnTime)
         end
     end
 end
@@ -172,7 +172,10 @@ local function createStandardNMOverrides(nmList)
         local respawnTimeCalc = math.random(0, 6) * (respawnWindowLengthDuration * 60) + (respawnHours * 3600)
 
         -- Zone initialization override
-        m:addOverride(fmt('xi.zones.{}.Zone.onInitialize', zoneName),
+        -- ensure path exists for multi-mapserver setups
+        local zoneInitPath = fmt('xi.zones.{}.Zone.onInitialize', zoneName)
+        xi.module.ensureTable(zoneInitPath)
+        m:addOverride(zoneInitPath,
         function(zone)
             super(zone)
             local mob = zone:queryEntitiesByName(mobName)[1]
@@ -183,8 +186,9 @@ local function createStandardNMOverrides(nmList)
         end)
 
         -- onMobDespawn override
-        xi.module.ensureTable(fmt('xi.zones.{}.mobs.{}.onMobDespawn', zoneName, mobName))
-        m:addOverride(fmt('xi.zones.{}.mobs.{}.onMobDespawn', zoneName, mobName),
+        local mobDespawnPath = fmt('xi.zones.{}.mobs.{}.onMobDespawn', zoneName, mobName)
+        xi.module.ensureTable(mobDespawnPath)
+        m:addOverride(mobDespawnPath,
         function(mob)
             super(mob)
             setAndPersistRespawnTime(mob, respawnTimeCalc)
@@ -265,7 +269,7 @@ for _, config in pairs(beastmenNMs) do
 
         local nqId = ID.mob[config.nqIdName]
         local hqId = nqId + config.hqOffset
-        local currentTime = os.time()
+        local currentTime = GetSystemTime()
         -- first attempt NQ, then HQ; if neither has a saved respawn, roll a new NQ time
         if
             not processNqHqSpawn(nqId, hqId, config.nqName, currentTime) and
@@ -365,7 +369,7 @@ function(mob)
     super(mob)
 
     local respawnTime = math.random(0, 6) * (5 * 60) + (21 * 3600) -- 21 hours, 5 minute windows
-    local respawnTimestamp = respawnTime + os.time()
+    local respawnTimestamp = respawnTime + GetSystemTime()
     -- Check if all flies are dead and a new respawn time was set
     -- If yes, set respawn time for all Carmine Dobsonflies to 21 hours, with 5 minute windows
     for i = riverneSiteA01Id.mob.CARMINE_DOBSONFLY_OFFSET, riverneSiteA01Id.mob.CARMINE_DOBSONFLY_OFFSET + 9 do
@@ -392,7 +396,7 @@ function(mob)
 
     local kingArthroID = jugnerForestId.mob.KING_ARTHRO
     local respawnTime = math.random(0, 6) * (5 * 60) + (21 * 3600) -- 21 hours, 5 minute windows
-    local respawnTimeStamp = respawnTime + os.time()
+    local respawnTimeStamp = respawnTime + GetSystemTime()
     for offset = 1, 10 do
         setAndPersistRespawnTime(GetMobByID(kingArthroID - offset), respawnTimeStamp)
     end
