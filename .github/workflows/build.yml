@@ -207,7 +207,6 @@ jobs:
           python3 tools/ci/detect_license_headers.py
 
   Linux_LuaLanguageServer:
-    if: false
     needs: Sanity_Checks
     runs-on: ubuntu-24.04
     steps:
@@ -265,7 +264,6 @@ jobs:
           fi
 
   Linux_Clang18_64bit:
-    if: false
     needs: Sanity_Checks
     runs-on: ubuntu-24.04
     steps:
@@ -302,7 +300,6 @@ jobs:
             xi_test
 
   Linux_ClangTidy18_64bit:
-    if: false
     needs: Sanity_Checks
     runs-on: ubuntu-24.04
     steps:
@@ -334,7 +331,6 @@ jobs:
           fi
 
   Linux_GCC14_64bit:
-    if: false
     needs: Sanity_Checks
     runs-on: ubuntu-24.04
     steps:
@@ -371,20 +367,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Include only public modules
-        shell: bash
-        run: |
-          sed /private/d modules/init.txt -i
-          git submodule update --init --remote --force modules/LQS || true
-      - name: Apply git Patches
-        shell: bash
-        run: |
-          cd tools
-          python3 apply_patches.py 2> git-patches.log || true
-          if grep -qi "warning\|error\|crash" git-patches.log; then
-              cat git-patches.log
-              exit -1
-          fi
       - name: Cache 'build' folder
         uses: actions/cache@v4
         with:
@@ -411,7 +393,6 @@ jobs:
             xi_test.exe
 
   Windows_64bit_Release_Tracy_Modules:
-    if: false
     needs: Sanity_Checks
     runs-on: windows-2025
     steps:
@@ -457,7 +438,6 @@ jobs:
             xi_test.exe
 
   MacOS_64bit:
-    if: false
     needs: Sanity_Checks
     # https://github.com/actions/runner-images/blob/main/images/macos/macos-15-Readme.md
     runs-on: macos-15
@@ -477,7 +457,6 @@ jobs:
           cmake --build build -j4
 
   Full_Startup_Checks_Linux:
-    if: false
     runs-on: ubuntu-24.04
     needs: Linux_Clang18_64bit
     services:
@@ -642,7 +621,6 @@ jobs:
           fi
 
   MultiInstance_Startup_Checks_Linux:
-    if: false
     runs-on: ubuntu-24.04
     needs: Linux_Clang18_64bit
     services:
@@ -736,20 +714,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Include only public modules
-        shell: bash
-        run: |
-          sed /private/d modules/init.txt -i
-          git submodule update --init --remote --force modules/LQS || true
-      - name: Apply git Patches
-        shell: bash
-        run: |
-          cd tools
-          python3 apply_patches.py 2> git-patches.log || true
-          if grep -qi "warning\|error\|crash" git-patches.log; then
-              cat git-patches.log
-              exit -1
-          fi
       - uses: actions/download-artifact@v4
         with:
           name: windows_executables
@@ -777,7 +741,6 @@ jobs:
           python3 ./tools/ci/startup_checks.py
 
   Full_Startup_Checks_Windows_Tracy_Modules:
-    if: false
     runs-on: windows-2025
     needs: Windows_64bit_Release_Tracy_Modules
     steps:
