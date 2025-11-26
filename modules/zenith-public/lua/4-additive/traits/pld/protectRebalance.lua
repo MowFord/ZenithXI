@@ -7,7 +7,7 @@
 require('modules/module_utils')
 -----------------------------------
 
-local m = Module:new('protectEnhancements')
+local m = Module:new('a-t-p_protect')
 
 -- Define the new defense values for Protect and Protectra spells
 -- Both spell lines will use the same defense values

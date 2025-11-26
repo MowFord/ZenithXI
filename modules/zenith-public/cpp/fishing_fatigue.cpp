@@ -35,7 +35,7 @@ class FishingFatigueModule : public CPPModule
     std::string CAUGHT = "[FISHING]CAUGHT";
 
     const uint8  RANK_REQUIRED = 3;
-    const uint16 FISHING_LOWER = 20;  // Lower limit for fishing
+    const uint16 FISHING_LOWER = 20;  // Lower limit for fishing (when conditions not met)
     const uint16 FISHING_UPPER = 200; // Upper limit for fishing
 
     uint16 getCaughtLimit(CCharEntity* PChar)

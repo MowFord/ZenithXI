@@ -5,4 +5,4 @@
 -----------------------------------
 
 UPDATE `zone_settings`
-SET tax = 10.00; -- Set bazaar tax to 10% for all zones (stored as percentage)
+SET tax = 10.00; -- Set bazaar tax to 10% for all zones

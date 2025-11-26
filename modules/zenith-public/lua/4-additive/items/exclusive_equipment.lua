@@ -5,7 +5,7 @@
 require('modules/module_utils')
 -----------------------------------
 
-local m = Module:new('exclusive_equipment')
+local m = Module:new('a-i_excl_equ')
 
 -- Define exclusive groups - items in the same group cannot be equipped together
 -- To add new groups, create a new entry with the group name as key and a table
