@@ -7,6 +7,8 @@
 require('modules/module_utils')
 
 local m = Module:new('e_x-maps')
+m:addOverride('xi.dummyFunc', function()
+end)
 
 -- Map vendors by region
 xi.maps.mapVendors = {

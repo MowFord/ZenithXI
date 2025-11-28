@@ -205,7 +205,7 @@ def main():
             connect()
             if cur:
                 cur.execute(
-                    "UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zoneid % 2 = 1;"
+                    "UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zoneid % 2 = 1 AND zoneip <> '0';" ## so we don't run ci on disabled zones
                 )
                 db.commit()
                 processes.insert(

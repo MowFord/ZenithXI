@@ -25,7 +25,7 @@ local removeDefaultHandler = function(zoneId, npcName)
     local actionPrio = Action.Priority.Default
 
     local foundAction = false
-    local secondLevel = InteractionGlobal.lookup.data[zoneId][npcName]
+    local secondLevel = InteractionGlobal.lookup.data[zoneId] and InteractionGlobal.lookup.data[zoneId][npcName] or nil
     if secondLevel then
         if secondLevel[secondLevelKey] then
             local entries = secondLevel[secondLevelKey]

@@ -7,6 +7,8 @@
 require('modules/module_utils')
 
 local m = Module:new('e_x-recast')
+m:addOverride('xi.dummyFunc', function()
+end)
 
 -- Override the recast Tables
 

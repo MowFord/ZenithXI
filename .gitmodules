@@ -1,16 +1,16 @@
 [submodule "navmeshes"]
-	path = navmeshes
-	url = https://github.com/LandSandBoat/xiNavmeshes.git
+    path = navmeshes
+    url = https://github.com/LandSandBoat/xiNavmeshes.git
 [submodule "losmeshes"]
-	path = losmeshes
-	url = https://github.com/LandSandBoat/losmeshes.git
+    path = losmeshes
+    url = https://github.com/LandSandBoat/losmeshes.git
 [submodule "mod-lqs"]
-	path = modules/LQS
-	url = https://github.com/LoxleyXI/LQS.git
-	branch = main
+    path = modules/LQS
+    url = https://github.com/vybsh/LQS.git
+    branch = main
     ignore = dirty
 [submodule "mod-priv"]
-	path = modules/zenith-private
-	url = https://github.com/Zenith-XI/Modules.git
+    path = modules/zenith-private
+    url = https://github.com/Zenith-XI/Modules.git
     branch = main
-	ignore = all
+    ignore = all
