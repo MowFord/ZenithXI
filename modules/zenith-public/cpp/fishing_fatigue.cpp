@@ -1,4 +1,4 @@
-/************************************************************************
+﻿/************************************************************************
  * Fishing Fatigue
  *
  * This module implements fishing fatigue, which limits the number of fish
@@ -23,83 +23,99 @@
  * up their nation and changing zones, up to the new limit. Changing
  * Allegiance won't cause you to lose your unlocked 200 daily cap.
  ************************************************************************/
-#include "map/packets/chat_message.h"
 #include "map/utils/charutils.h"
 #include "map/utils/moduleutils.h"
-
-extern uint8                                                                     PacketSize[512];
-extern std::function<void(MapSession* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
+#include <enums/chat_message_type.h>
+#include <packets/c2s/0x066_fishing.h>
+#include <packets/c2s/0x110_fishing_2.h>
+#include <packets/s2c/0x017_chat_std.h>
 
 class FishingFatigueModule : public CPPModule
 {
-    std::string CAUGHT = "[FISHING]CAUGHT";
-
-    const uint8  RANK_REQUIRED = 3;
-    const uint16 FISHING_LOWER = 20;  // Lower limit for fishing (when conditions not met)
-    const uint16 FISHING_UPPER = 200; // Upper limit for fishing
-
-    uint16 getCaughtLimit(CCharEntity* PChar)
-    {
-        uint8 rankSandoria           = PChar->profile.rank[NATION_SANDORIA];
-        uint8 rankBastok             = PChar->profile.rank[NATION_BASTOK];
-        uint8 rankWindurst           = PChar->profile.rank[NATION_WINDURST];
-        bool  isSufficientNationRank = (rankSandoria >= RANK_REQUIRED || rankBastok >= RANK_REQUIRED || rankWindurst >= RANK_REQUIRED);
-
-        return isSufficientNationRank ? FISHING_UPPER : FISHING_LOWER;
-    }
-
     void OnInit() override
     {
+    }
+
+    auto OnIncomingPacket(MapSession* session, CCharEntity* PChar, CBasicPacket& packet) -> bool override
+    {
         TracyZoneScoped;
-        /************************************************************************
-         *                        PacketParser methods
-         ************************************************************************/
+
+        std::string CAUGHT = "[FISHING]CAUGHT";
+
+        // player fishing start action
+        if (packet.getType() == 0x01A)
         {
-            auto playerAction        = PacketParser[0x01A];
-            auto playerActionFatigue = [this, playerAction](MapSession* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
+            const auto typedPacket = packet.as<GP_CLI_COMMAND_ACTION>();
+            // Only intercept for fishing action
+            if (static_cast<GP_CLI_COMMAND_ACTION_ACTIONID>(typedPacket->ActionID) != GP_CLI_COMMAND_ACTION_ACTIONID::Fish)
             {
-                TracyZoneScoped;
-                uint8 action = data.ref<uint8>(0x0A);
-                playerAction(PSession, PChar, data);
+                return false;
+            }
 
-                if (action == 0x0E)
-                {
-                    uint16 caught = charutils::GetCharVar(PChar, CAUGHT);
-                    uint16 limit  = getCaughtLimit(PChar);
+            TracyZoneScoped;
 
-                    if (caught >= limit)
-                    {
-                        if (PChar->GetLocalVar("FishingFatigueMessage") == 0)
-                        {
-                            PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3, fmt::format("You have reached your daily fishing limit. "));
-                            PChar->SetLocalVar("FishingFatigueMessage", 1);
-                        }
-                        PChar->lastCastTime += 600; // ensure first FISHACTION_CHECK auto fails and they catch nothing
-                    }
-                }
-            };
-            PacketParser[0x01A] = playerActionFatigue;
+            // process the main packet first
+            typedPacket->process(session, PChar);
 
-            auto fishingMinigame       = PacketParser[0x110];
-            auto fishingMinigameResult = [this, fishingMinigame](MapSession* const PSession, CCharEntity* const PChar, CBasicPacket& data) -> void
+            // Check if player has reached fishing limit, and if so cause the minigame to not catch anything
+            uint16       caughtToday   = charutils::GetCharVar(PChar, CAUGHT);
+            const uint8  RANK_REQUIRED = 3;
+            const uint16 FISHING_LOWER = 20;  // Lower limit for fishing (when conditions not met)
+            const uint16 FISHING_UPPER = 200; // Upper limit for fishing
+
+            uint8 rankSandoria           = PChar->profile.rank[NATION_SANDORIA];
+            uint8 rankBastok             = PChar->profile.rank[NATION_BASTOK];
+            uint8 rankWindurst           = PChar->profile.rank[NATION_WINDURST];
+            bool  isSufficientNationRank = (rankSandoria >= RANK_REQUIRED || rankBastok >= RANK_REQUIRED || rankWindurst >= RANK_REQUIRED);
+
+            uint16 limit = isSufficientNationRank ? FISHING_UPPER : FISHING_LOWER;
+
+            if (caughtToday >= limit)
             {
-                TracyZoneScoped;
-                fishingMinigame(PSession, PChar, data);
-
-                uint8 animationID = PChar->animation;
-                if (animationID == ANIMATION_FISHING_CAUGHT)
+                if (PChar->GetLocalVar("FishingFatigueMessage") == 0)
                 {
-                    uint8 catchType = PChar->hookedFish->catchtype;
-                    if (catchType >= FISHINGCATCHTYPE_SMALLFISH && catchType <= FISHINGCATCHTYPE_ITEM)
-                    {
-                        uint16 caught          = charutils::GetCharVar(PChar, CAUGHT);
-                        auto   nextJstMidnight = earth_time::jst::get_next_midnight(earth_time::now());
-                        PChar->setCharVar(CAUGHT, caught + 1, earth_time::timestamp(nextJstMidnight));
-                    }
+                    PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_SYSTEM_3, fmt::format("You have reached your daily fishing limit. "));
+                    PChar->SetLocalVar("FishingFatigueMessage", 1);
                 }
-            };
-            PacketParser[0x110] = fishingMinigameResult;
+                PChar->lastCastTime += 600; // ensure first FISHACTION_CHECK auto fails and they catch nothing
+            }
+
+            // block running other modules/main packet process function
+            return true;
         }
+
+        // When player ends fishing the minigame
+        if (packet.getType() == 0x110)
+        {
+            const auto typedPacket = packet.as<GP_CLI_COMMAND_FISHING_2>();
+            // Only intercept for minigame completion action
+            if (static_cast<GP_CLI_COMMAND_FISHING_2_MODE>(typedPacket->mode) != GP_CLI_COMMAND_FISHING_2_MODE::RequestEndMiniGame)
+            {
+                return false;
+            }
+
+            TracyZoneScoped;
+            // process the main packet first
+            typedPacket->process(session, PChar);
+
+            // Increment caught fish if something was hooked
+            uint8 animationID = PChar->animation;
+            if (animationID == ANIMATION_FISHING_CAUGHT)
+            {
+                uint8 catchType = PChar->hookedFish->catchtype;
+                if (catchType >= FISHINGCATCHTYPE_SMALLFISH && catchType <= FISHINGCATCHTYPE_ITEM)
+                {
+                    uint16 caught          = charutils::GetCharVar(PChar, CAUGHT);
+                    auto   nextJstMidnight = earth_time::jst::get_next_midnight(earth_time::now());
+                    PChar->setCharVar(CAUGHT, caught + 1, earth_time::timestamp(nextJstMidnight));
+                }
+            }
+
+            // block running other modules/main packet process function
+            return true;
+        }
+
+        return false;
     }
 };
 

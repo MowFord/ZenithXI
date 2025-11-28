@@ -8,19 +8,19 @@ index fb85d967f6..f079c266d8 100644
 --- a/src/map/entities/petentity.cpp
 +++ b/src/map/entities/petentity.cpp
 @@ -490,7 +490,14 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
-     uint16 msg            = 0;
-     uint16 defaultMessage = PSkill->getMsg();
+     MSGBASIC_ID msg            = MSGBASIC_NONE;
+     MSGBASIC_ID defaultMessage = PSkill->getMsg();
  
 -    bool first{ true };
 +    bool canSkillchain = true;
-+    if (this->getPetType() == PET_TYPE::AVATAR && this->PMaster; auto* PChar = dynamic_cast<CCharEntity*>(this->PMaster))
++    if (auto* PChar = dynamic_cast<CCharEntity*>(this->PMaster); PChar && this->getPetType() == PET_TYPE::AVATAR)
 +    {
-+        // If pet is an avatar and pet's owner is a PC, lock skillchaing behind avatar's favor
++        // If pet is an avatar and pet's owner is a PC, lock skillchaining behind avatar's favor
 +        canSkillchain = PChar->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR);
 +    }
 +    // this bool is only ever used for skillchain. If in the future it gets used for something else this logic will need to be adjusted.
 +    bool first{ canSkillchain };
      for (auto&& PTargetFound : PAI->TargetFind->m_targets)
      {
-         actionList_t& list = action.getNewActionList();
- 
+         action_target_t& actionTarget = action.addTarget(PTargetFound->id);
+         action_result_t& actionResult = actionTarget.addResult();
