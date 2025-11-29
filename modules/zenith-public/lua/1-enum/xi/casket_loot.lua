@@ -7,6 +7,8 @@
 require('modules/module_utils')
 
 local m = Module:new('e_x-casketLoot')
+m:addOverride('xi.dummyFunc', function()
+end)
 
 xi.casket_loot.casketItems =
 {

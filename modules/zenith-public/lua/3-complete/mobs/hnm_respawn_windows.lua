@@ -173,9 +173,9 @@ local function createStandardNMOverrides(nmList)
 
         -- Zone initialization override
         -- ensure path exists for multi-mapserver setups
-        local zoneInitPath = fmt('xi.zones.{}.Zone.onInitialize', zoneName)
-        xi.module.ensureTable(zoneInitPath)
-        m:addOverride(zoneInitPath,
+        local zonePath = fmt('xi.zones.{}.Zone', zoneName)
+        xi.module.ensureTable(zonePath)
+        m:addOverride(zonePath .. '.onInitialize',
         function(zone)
             super(zone)
             local mob = zone:queryEntitiesByName(mobName)[1]
@@ -186,9 +186,9 @@ local function createStandardNMOverrides(nmList)
         end)
 
         -- onMobDespawn override
-        local mobDespawnPath = fmt('xi.zones.{}.mobs.{}.onMobDespawn', zoneName, mobName)
-        xi.module.ensureTable(mobDespawnPath)
-        m:addOverride(mobDespawnPath,
+        local mobPath = fmt('xi.zones.{}.mobs.{}', zoneName, mobName)
+        xi.module.ensureTable(mobPath)
+        m:addOverride(mobPath .. '.onMobDespawn',
         function(mob)
             super(mob)
             setAndPersistRespawnTime(mob, respawnTimeCalc)

@@ -1,7 +1,13 @@
 name: Restrict to Allowed Paths
 
 on:
-  pull_request:
+  pull_request_target:
+    types:
+      - opened
+      - labeled
+      - unlabeled
+      - synchronize
+      - reopened
 
 jobs:
   block-paths:
@@ -11,6 +17,15 @@ jobs:
         shell: bash
         id: check
         run: |
+          PR_LABELS=$(jq -r '.pull_request.labels | map(.name) | join(",")' "$GITHUB_EVENT_PATH")
+          echo "Labels: $PR_LABELS"
+
+          if echo "$PR_LABELS" | grep -q "bypass block-paths"; then
+            echo "✅ Label found to not care where changes are for this PR"
+            echo "should_continue=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
           # technically zenith _is_ a fork of LSB, so we have to detect based on repo
           HEAD_REPO="${{ github.event.pull_request.head.repo.full_name }}"
           BASE_REPO="${{ github.repository }}"
@@ -31,7 +46,7 @@ jobs:
           echo "Branch: $BRANCH"
 
           if [ "$FORK" = "false" ] && [ "$BRANCH" = "base" ]; then
-            echo "'base' branch is allowed to modify anything in the codebase"
+            echo "✅ 'base' branch is allowed to modify anything in the codebase"
             echo "should_continue=false" >> $GITHUB_OUTPUT
             exit 0
           fi

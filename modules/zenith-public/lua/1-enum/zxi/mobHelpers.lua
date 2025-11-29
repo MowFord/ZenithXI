@@ -5,6 +5,8 @@ zxi = zxi or {}
 zxi.mobHelpers = zxi.mobHelpers or {}
 
 local m = Module:new('e_z-mobHelpers')
+m:addOverride('xi.dummyFunc', function()
+end)
 
 zxi.mobHelpers.getRespawnVarName = function(mob, mobId)
     if not mob then
