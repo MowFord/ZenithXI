@@ -50,21 +50,23 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get changed files
+      - name: Check for restricted path changes
         if: steps.check.outputs.should_continue == 'true'
-        id: changed
         shell: bash
         run: |
           git fetch origin ${{ github.base_ref }}
-          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.sha }} | paste -sd "," -)
-          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
 
-      - name: Check for restricted path changes
-        if: steps.check.outputs.should_continue == 'true'
-        run: |
-          if echo "$CHANGED_FILES" | sed 's/,/\n/g' | grep -qv "^modules/zenith-public"; then
-            echo "🚫 Changes to restricted paths detected! Please do not modify files outside of the public modules directory."
+          # Get changed files (comma-separated for easy env export)
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}..${{ github.sha }} | paste -sd "," -)
+
+          echo "Changed files:"
+          echo "$CHANGED_FILES" | sed 's/,/\n/g'
+
+          # Fail if any file is outside allowed directory
+          if echo "$CHANGED_FILES" | sed 's/,/\n/g' | grep -qvE '^modules/zenith-public/'; then
+            echo "🚫 Changes to restricted paths detected! Only files inside modules/zenith-public/ are allowed."
             exit 1
-          else
-            echo "✅ No restricted changes."
           fi
+
+          echo "✅ No restricted changes."
+          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
