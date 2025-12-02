@@ -87,7 +87,7 @@ jobs:
 
           echo "Comparing $BASE_SHA...$HEAD_SHA"
           # Get changed files (comma-separated for easy env export)
-          CHANGED_FILES=$(git diff --name-only "$BASE_SHA..$HEAD_SHA" | paste -sd "," -)
+          CHANGED_FILES=$(git diff --name-only "$BASE_SHA...$HEAD_SHA" | paste -sd "," -)
 
           echo "Changed files:"
           echo "$CHANGED_FILES" | tr ',' '\n'
