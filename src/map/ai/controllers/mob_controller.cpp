@@ -291,7 +291,7 @@ auto CMobController::CanDetectTarget(CBattleEntity* PTarget, const bool forceSig
         }
     }
 
-    const bool isTargetAndInRange = PMob->GetBattleTargetID() == PTarget->targid && currentDistance <= PMob->GetMeleeRange();
+    const bool isTargetAndInRange = PMob->GetBattleTargetID() == PTarget->targid && currentDistance <= PMob->GetMeleeRange(PTarget);
 
     if (detectSight && !hasInvisible && currentDistance < PMob->getMobMod(MOBMOD_SIGHT_RANGE) && facing(PMob->loc.p, PTarget->loc.p, 64))
     {
@@ -524,7 +524,7 @@ auto CMobController::TryCastSpell() -> bool
             }
 
             // Check if target is in range before attempting to cast
-            if (PCastTarget && distance(PMob->loc.p, PCastTarget->loc.p) > PSpell->getRange())
+            if (PCastTarget && distance(PMob->loc.p, PCastTarget->loc.p) > PSpell->getRange() + PMob->modelHitboxSize + PCastTarget->modelHitboxSize)
             {
                 return false;
             }
@@ -738,10 +738,10 @@ void CMobController::Move()
     }
 
     const bool  move          = PMob->PAI->PathFind->IsFollowingPath();
-    float       attack_range  = PMob->GetMeleeRange();
+    float       attack_range  = PMob->GetMeleeRange(PTarget);
     const int16 offsetMod     = PMob->getMobMod(MOBMOD_TARGET_DISTANCE_OFFSET);
     const float offset        = static_cast<float>(offsetMod) / 10.0f;
-    float       closeDistance = (attack_range - (offsetMod == 0 ? 0.2f : offset)) / 2;
+    float       closeDistance = attack_range - (offsetMod == 0 ? 0.4f : offset);
 
     // No going negative on the final value.
     if (closeDistance < 0.0f)
@@ -792,7 +792,7 @@ void CMobController::Move()
             }
         }
 
-        if (((currentDistance > closeDistance) || move) && PMob->PAI->CanFollowPath())
+        if (((currentDistance > attack_range) || move) && PMob->PAI->CanFollowPath())
         {
             if (PMob->GetSpeed() != 0 && PMob->getMobMod(MOBMOD_NO_MOVE) == 0 && m_Tick >= m_LastSpecialTime)
             {
@@ -813,16 +813,20 @@ void CMobController::Move()
                     if (!PMob->PAI->PathFind->IsFollowingPath())
                     {
                         // out of melee range, try to path towards
-                        if (currentDistance > closeDistance)
+                        if (currentDistance > attack_range)
                         {
+                            auto projectedPosition = nearPosition(PTarget->loc.p, 0, rotationToRadian(worldAngle(PMob->loc.p, PTarget->loc.p)));
+
                             // try to find path towards target
-                            PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                            PMob->PAI->PathFind->PathInRange(projectedPosition, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                         }
                     }
-                    else if (!isWithinDistance(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p, 2.5f))
+                    else if (!isWithinDistance(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p, 0.1)) // This checks against the previous frames distance, and can false positive for where we want to be _now_
                     {
+                        auto projectedPosition = nearPosition(PTarget->loc.p, 0, rotationToRadian(worldAngle(PMob->loc.p, PTarget->loc.p)));
+
                         // try to find path towards target
-                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                        PMob->PAI->PathFind->PathInRange(projectedPosition, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                     }
 
                     PMob->PAI->PathFind->FollowPath(m_Tick);

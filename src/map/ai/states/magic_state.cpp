@@ -364,7 +364,7 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast)
 
     if (m_PEntity->objtype == TYPE_PC)
     {
-        float spellRange = m_PSpell->getRange();
+        float spellRange = m_PSpell->getRange() + PTarget->modelHitboxSize + m_PEntity->modelHitboxSize;
 
         // Entrust has a 25 yalm range for Indi spells (not affected by hitboxes)
         const auto spellFamily = m_PSpell->getSpellFamily();
