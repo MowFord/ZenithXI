@@ -1,4 +1,30 @@
 -- ------------------------------
+-- Disable ASA NMs
+-- Public Module for ZenithXI
+-- ------------------------------
+-- Notorious Monsters that are part of the A Shantotto Ascension addon.
+-- ------------------------------
+-- Related MobIDs:
+-- Blest Bones 17273309 17273310 17273311
+-- Holey Horror 17273312 17273313 17273314
+-- Fired Urn 17277135 17277136 17277137
+-- Lode Golem 17277132 17277133 17277134
+-- Skeleton Skuffler 17273306 17273307 17273308
+-- Steely Weapon 17277129 17277130 17277131
+
+UPDATE `mob_spawn_points`
+SET pos_x = 0, pos_y = 0, pos_z = 0
+WHERE `mobname` in
+(
+'Blest_Bones',
+'Holey_Horror',
+'Fired_Urn',
+'Lode_Golem',
+'Skeleton_Skuffler',
+'Steely_Weapon'
+);
+
+-- ------------------------------
 -- Disable Aptant NMs
 -- Public Module for ZenithXI
 -- ------------------------------
