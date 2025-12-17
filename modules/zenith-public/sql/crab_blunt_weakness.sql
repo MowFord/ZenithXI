@@ -7,4 +7,4 @@
 -- Affects ALL crab variants (resist_ids: 75, 76, 77, 372, 400)
 -----------------------------------
 
-UPDATE `mob_resistances` SET `impact_sdt` = `impact_sdt` + 2500, `h2h_sdt` = `h2h_sdt` + 1250 WHERE `resist_id` IN (75, 76, 77, 372, 400);
+UPDATE `mob_resistances` SET `impact_sdt` = `impact_sdt` + 2500, `h2h_sdt` = `h2h_sdt` + 1250 WHERE `name` LIKE "Crab%";
