@@ -171,90 +171,106 @@ local lootOverrides =
 {
     -----------------------------------
     -- Under Observation (BCNM40, Horlais Peak)
-    -- Reduced Utsusemi: Ni drop rate (originally ~5.5% in group 3, ~13.8% in group 4)
-    -- Now reduced to ~1% in group 3, ~2% in group 4
+    -- Reduced Utsusemi: Ni drop rate (originally 5% in group 4, 20% in group 5)
+    -- Now reduced to 2.5% in group 4, 10% in group 5
     -----------------------------------
     [xi.battlefield.id.UNDER_OBSERVATION] =
     {
-        -- Group 1: Peacock Charm (rare)
+        -- Group 1: Gil
         {
-            { itemId = xi.item.NONE,          weight = 910 },
-            { itemId = xi.item.PEACOCK_CHARM, weight =  90 },
+            { itemId = xi.item.GIL, weight = 1000, amount = 5000 },
         },
 
-        -- Group 2: Weapons and Tilt Belt
+        -- Group 2: Peacock Charm (rare)
         {
-            { itemId = xi.item.NONE,          weight = 467 },
-            { itemId = xi.item.BEHOURD_LANCE, weight =  48 },
-            { itemId = xi.item.MUTILATOR,     weight =  61 },
-            { itemId = xi.item.RAIFU,         weight =  46 },
-            { itemId = xi.item.TILT_BELT,     weight = 302 },
-            { itemId = xi.item.TOURNEY_PATAS, weight =  76 },
+            { itemId = xi.item.NONE,          weight = 900 },
+            { itemId = xi.item.PEACOCK_CHARM, weight = 100 },
         },
 
-        -- Group 3: Mixed drops - REDUCED Utsusemi: Ni (was 55, now 10)
+        -- Group 3: Weapons and Tilt Belt
+        -- REDUCED Tilt Belt (was 300, now 250)
         {
-            { itemId = xi.item.NONE,                  weight = 458 },
-            { itemId = xi.item.BUZZARD_TUCK,          weight =  42 },
-            { itemId = xi.item.DE_SAINTRES_AXE,       weight =  77 },
-            { itemId = xi.item.GRUDGE_SWORD,          weight =  73 },
-            { itemId = xi.item.MANTRA_BELT,           weight = 258 },
-            { itemId = xi.item.SCROLL_OF_REFRESH,     weight =  68 },
-            { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI, weight =  10 },
-            { itemId = xi.item.SCROLL_OF_ICE_SPIKES,  weight =  14 },
+            { itemId = xi.item.BEHOURD_LANCE,     weight =  50 },
+            { itemId = xi.item.MUTILATOR,         weight =  50 },
+            { itemId = xi.item.RAIFU,             weight =  50 },
+            { itemId = xi.item.TILT_BELT,         weight = 250 },
+            { itemId = xi.item.TOURNEY_PATAS,     weight =  50 },
+            { itemId = xi.item.BLACK_ROCK,        weight =  25 },
+            { itemId = xi.item.BLUE_ROCK,         weight =  25 },
+            { itemId = xi.item.GREEN_ROCK,        weight =  25 },
+            { itemId = xi.item.PURPLE_ROCK,       weight =  25 },
+            { itemId = xi.item.RED_ROCK,          weight =  25 },
+            { itemId = xi.item.TRANSLUCENT_ROCK,  weight =  25 },
+            { itemId = xi.item.WHITE_ROCK,        weight =  25 },
+            { itemId = xi.item.YELLOW_ROCK,       weight =  25 },
+            { itemId = xi.item.AMETRINE,          weight =  25 },
+            { itemId = xi.item.BLACK_PEARL,       weight =  25 },
+            { itemId = xi.item.GARNET,            weight =  25 },
+            { itemId = xi.item.GOSHENITE,         weight =  25 },
+            { itemId = xi.item.PEARL,             weight =  25 },
+            { itemId = xi.item.PERIDOT,           weight =  25 },
+            { itemId = xi.item.SPHENE,            weight =  25 },
+            { itemId = xi.item.TURQUOISE,         weight =  25 },
+            { itemId = xi.item.MYTHRIL_BEASTCOIN, weight =  50 },
+            { itemId = xi.item.OAK_LOG,           weight =  50 },
+            { itemId = xi.item.SCROLL_OF_REFRESH, weight =  50 },
         },
 
-        -- Group 4: Scrolls, gems, coins - REDUCED Utsusemi: Ni (was 138, now 20)
+        -- Group 4: Mixed drops
+        -- REDUCED Utsusemi: Ni (was 50, now 25)
+        -- REDUCED Mantra Belt (was 300, now 250)
         {
-            { itemId = xi.item.SCROLL_OF_ICE_SPIKES,  weight = 114 },
-            { itemId = xi.item.SCROLL_OF_REFRESH,     weight = 174 },
-            { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI, weight =  20 },
-            { itemId = xi.item.RED_ROCK,              weight =  16 },
-            { itemId = xi.item.BLUE_ROCK,             weight =  17 },
-            { itemId = xi.item.YELLOW_ROCK,           weight =  17 },
-            { itemId = xi.item.GREEN_ROCK,            weight =  18 },
-            { itemId = xi.item.TRANSLUCENT_ROCK,      weight =  17 },
-            { itemId = xi.item.PURPLE_ROCK,           weight =  16 },
-            { itemId = xi.item.BLACK_ROCK,            weight =  18 },
-            { itemId = xi.item.WHITE_ROCK,            weight =  16 },
-            { itemId = xi.item.MYTHRIL_BEASTCOIN,     weight = 102 },
-            { itemId = xi.item.GOLD_BEASTCOIN,        weight = 120 },
-            { itemId = xi.item.OAK_LOG,               weight =  22 },
-            { itemId = xi.item.AMETRINE,              weight =  18 },
-            { itemId = xi.item.BLACK_PEARL,           weight =  18 },
-            { itemId = xi.item.GARNET,                weight =  20 },
-            { itemId = xi.item.GOSHENITE,             weight =  19 },
-            { itemId = xi.item.PEARL,                 weight =  21 },
-            { itemId = xi.item.PERIDOT,               weight =  35 },
-            { itemId = xi.item.SPHENE,                weight =  17 },
-            { itemId = xi.item.TURQUOISE,             weight =  23 },
-            { itemId = xi.item.RERAISER,              weight =  21 },
-            { itemId = xi.item.VILE_ELIXIR,           weight =  16 },
+            { itemId = xi.item.BUZZARD_TUCK,          weight =  50 },
+            { itemId = xi.item.DE_SAINTRES_AXE,       weight =  50 },
+            { itemId = xi.item.GRUDGE_SWORD,          weight =  50 },
+            { itemId = xi.item.MANTRA_BELT,           weight = 250 },
+            { itemId = xi.item.BLACK_ROCK,            weight =  25 },
+            { itemId = xi.item.BLUE_ROCK,             weight =  25 },
+            { itemId = xi.item.GREEN_ROCK,            weight =  25 },
+            { itemId = xi.item.PURPLE_ROCK,           weight =  25 },
+            { itemId = xi.item.RED_ROCK,              weight =  25 },
+            { itemId = xi.item.TRANSLUCENT_ROCK,      weight =  25 },
+            { itemId = xi.item.WHITE_ROCK,            weight =  25 },
+            { itemId = xi.item.YELLOW_ROCK,           weight =  25 },
+            { itemId = xi.item.AMETRINE,              weight =  25 },
+            { itemId = xi.item.BLACK_PEARL,           weight =  25 },
+            { itemId = xi.item.GARNET,                weight =  25 },
+            { itemId = xi.item.GOSHENITE,             weight =  25 },
+            { itemId = xi.item.PEARL,                 weight =  25 },
+            { itemId = xi.item.PERIDOT,               weight =  25 },
+            { itemId = xi.item.SPHENE,                weight =  25 },
+            { itemId = xi.item.TURQUOISE,             weight =  25 },
+            { itemId = xi.item.MYTHRIL_BEASTCOIN,     weight =  50 },
+            { itemId = xi.item.OAK_LOG,               weight =  50 },
+            { itemId = xi.item.RERAISER,              weight =  50 },
+            { itemId = xi.item.VILE_ELIXIR,           weight =  25 },
+            { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI, weight =  25 },
         },
 
-        -- Group 5: Scrolls and gems
+        -- Group 5: Scrolls
+        -- REDUCED Utsusemi: Ni (was 200, now 100)
         {
-            { itemId = xi.item.FIRE_SPIRIT_PACT,     weight = 116 },
-            { itemId = xi.item.SCROLL_OF_ABSORB_STR, weight = 113 },
-            { itemId = xi.item.SCROLL_OF_ERASE,      weight = 137 },
-            { itemId = xi.item.SCROLL_OF_ICE_SPIKES, weight =  67 },
-            { itemId = xi.item.SCROLL_OF_PHALANX,    weight =  99 },
-            { itemId = xi.item.AMETRINE,             weight =  58 },
-            { itemId = xi.item.BLACK_PEARL,          weight =  52 },
-            { itemId = xi.item.GARNET,               weight =  51 },
-            { itemId = xi.item.GOSHENITE,            weight =  65 },
-            { itemId = xi.item.PEARL,                weight =  61 },
-            { itemId = xi.item.PERIDOT,              weight =  63 },
-            { itemId = xi.item.SPHENE,               weight =  55 },
-            { itemId = xi.item.TURQUOISE,            weight =  62 },
+            { itemId = xi.item.SCROLL_OF_ICE_SPIKES,  weight = 300 },
+            { itemId = xi.item.SCROLL_OF_REFRESH,     weight = 200 },
+            { itemId = xi.item.SCROLL_OF_UTSUSEMI_NI, weight = 100 },
+            { itemId = xi.item.GOLD_BEASTCOIN,        weight = 400 },
         },
 
-        -- Group 6: Guaranteed Hecteyes Eye
+        -- Group 6: Scrolls
+        {
+            { itemId = xi.item.FIRE_SPIRIT_PACT,     weight = 200 },
+            { itemId = xi.item.SCROLL_OF_ABSORB_STR, weight = 100 },
+            { itemId = xi.item.SCROLL_OF_ERASE,      weight = 200 },
+            { itemId = xi.item.SCROLL_OF_PHALANX,    weight = 200 },
+            { itemId = xi.item.BLACK_PEARL,          weight = 300 },
+        },
+
+        -- Group 7: Guaranteed Hecteyes Eye
         {
             { itemId = xi.item.HECTEYES_EYE, weight = 1000 },
         },
 
-        -- Group 7: Guaranteed Vial of Mercury
+        -- Group 8: Guaranteed Vial of Mercury
         {
             { itemId = xi.item.VIAL_OF_MERCURY, weight = 1000 },
         },
