@@ -171,8 +171,8 @@ local lootOverrides =
 {
     -----------------------------------
     -- Under Observation (BCNM40, Horlais Peak)
-    -- Reduced Utsusemi: Ni drop rate (originally 5% in group 4, 20% in group 5)
-    -- Now reduced to 2.5% in group 4, 10% in group 5
+    -- Reduced Utsusemi: Ni drop rate (originally 5% in group 4, 20% in group 5) - Now 2.5% in group 4, 10% in group 5
+    -- Reduced Phalanx and Erase (originally both 20% in group 6) - Now 10%
     -----------------------------------
     [xi.battlefield.id.UNDER_OBSERVATION] =
     {
@@ -257,11 +257,12 @@ local lootOverrides =
         },
 
         -- Group 6: Scrolls
+        -- REDUCED Erase and Phalanx (was 200, now 100)
         {
             { itemId = xi.item.FIRE_SPIRIT_PACT,     weight = 200 },
-            { itemId = xi.item.SCROLL_OF_ABSORB_STR, weight = 100 },
-            { itemId = xi.item.SCROLL_OF_ERASE,      weight = 200 },
-            { itemId = xi.item.SCROLL_OF_PHALANX,    weight = 200 },
+            { itemId = xi.item.SCROLL_OF_ABSORB_STR, weight = 300 },
+            { itemId = xi.item.SCROLL_OF_ERASE,      weight = 100 },
+            { itemId = xi.item.SCROLL_OF_PHALANX,    weight = 100 },
             { itemId = xi.item.BLACK_PEARL,          weight = 300 },
         },
 
