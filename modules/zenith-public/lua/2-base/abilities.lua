@@ -1,6 +1,6 @@
 require('modules/module_utils')
 
-local m = Module:new('abilities')
+local m = Module:new('b_abilities')
 
 local effectAdjustments =
 {
@@ -11,14 +11,6 @@ local effectAdjustments =
         add =
         {
             power = -10, -- Changed from 20% to 10%
-        },
-    },
-    berserk =
-    {
-        effectId = xi.effect.BERSERK,
-        set =
-        {
-            power = 25, -- Force static 25% modifiers (ignoring BERSERK_POTENCY)
         },
     },
     defender =
