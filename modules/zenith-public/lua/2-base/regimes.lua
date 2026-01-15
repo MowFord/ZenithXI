@@ -1,6 +1,4 @@
-require('modules/module_utils')
-
-local m = Module:new('regimes')
+local m = Module:new('b_regimes')
 
 m:addOverride('xi.regime.checkRegime', function(player, mob, regimeId, index, regimeType)
     local vanadielEpoch = VanadielUniqueDay()
