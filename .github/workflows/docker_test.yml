@@ -20,7 +20,6 @@ on:
 
 jobs:
   Docker_Test:
-    if: false
     name: ${{ format('docker-{0}', inputs.os) }}
     runs-on: ubuntu-latest
     defaults:
