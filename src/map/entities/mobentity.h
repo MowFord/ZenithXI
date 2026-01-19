@@ -25,7 +25,7 @@
 #include "battleentity.h"
 #include <unordered_map>
 
-enum MSGBASIC_ID : uint16_t;
+enum class MsgBasic : uint16_t;
 // forward declaration
 class CMobSpellContainer;
 class CMobSpellList;
@@ -99,7 +99,7 @@ enum BEHAVIOR : uint16
     BEHAVIOR_NO_DESPAWN   = 0x001, // mob does not despawn on death
     BEHAVIOR_STANDBACK    = 0x002, // mob will standback forever
     BEHAVIOR_RAISABLE     = 0x004, // mob can be raised via Raise spells
-    BEHAVIOR_NOHELP       = 0x008, // mob can not be targeted by helpful magic from players (cure, protect, etc)
+    BEHAVIOR_NO_ASSIST    = 0x008, // mob can not be targeted by helpful magic from players (cure, protect, etc)
     BEHAVIOR_AGGRO_AMBUSH = 0x200, // mob aggroes by ambush
     BEHAVIOR_NO_TURN      = 0x400  // mob does not turn to face target
 };
@@ -125,7 +125,7 @@ public:
     bool IsFarFromHome();      // check if mob is too far from spawn
     bool CanBeNeutral() const; // check if mob can have killing pause
 
-    uint16 TPUseChance(); // return % chance to use TP move per 400ms tick
+    bool shouldUseTPMove(uint16 tpThreshold); // return true to use a TP move, checked on on 400ms tick interval
 
     bool              CanDeaggro() const;
     timer::time_point GetDespawnTime();
@@ -177,7 +177,7 @@ public:
     virtual bool OnAttack(CAttackState&, action_t&) override;
     virtual bool CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;
     virtual void OnCastFinished(CMagicState&, action_t&) override;
-    virtual void OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg, bool blockedCast) override;
+    virtual void OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast) override;
 
     virtual void OnDisengage(CAttackState&) override;
     virtual void OnDeathTimer() override;
