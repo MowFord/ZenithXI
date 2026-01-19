@@ -189,6 +189,11 @@ UPDATE `traits` SET `value` = 5 WHERE `name` = 'shield def. bonus' AND `rank` = 
 -- UPDATE `traits` SET `value` = 7 WHERE `name` = 'dead aim' AND `rank` = 2; -- Dead Aim II, +7% critical hit damage -- TODO: Not yet implemented
 -- UPDATE `traits` SET `value` = 9 WHERE `name` = 'dead aim' AND `rank` = 3; -- Dead Aim II, +9% critical hit damage -- TODO: Not yet implemented
 
+UPDATE `traits` SET `value` = 5 WHERE `name` = 'tandem strike' AND `rank` = 1;    -- Tandem Strike I, +5 Acc/Macc
+UPDATE `traits` SET `value` = 10 WHERE `name` = 'tandem strike' AND `rank` = 2;   -- Tandem Strike II, +10 Acc/Macc
+UPDATE `traits` SET `value` = 15 WHERE `name` = 'tandem strike' AND `rank` = 3;   -- Tandem Strike III, +15 Acc/Macc
+UPDATE `traits` SET `value` = 20 WHERE `name` = 'tandem strike' AND `rank` = 4;   -- Tandem Strike IV, +20 Acc/Macc
+
 UPDATE `traits` SET `value` = 10 WHERE `name` = 'daken' AND `rank` = 1; -- Daken I, 10%
 UPDATE `traits` SET `value` = 12 WHERE `name` = 'daken' AND `rank` = 2; -- Daken II, 12%
 UPDATE `traits` SET `value` = 14 WHERE `name` = 'daken' AND `rank` = 3; -- Daken III, 14%
@@ -379,6 +384,8 @@ UPDATE `traits` SET `content_tag`= NULL WHERE `name` IN (
     'lizard killer',
     'plantoid killer',
     'vermin killer',
+    'tandem strike',
+    'tandem blow',
     'crit. def. bonus',
     'dead aim',
     'daken',
