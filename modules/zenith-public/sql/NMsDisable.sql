@@ -9,7 +9,7 @@
 -- Holey Horror 17273312 17273313 17273314
 -- Fired Urn 17277135 17277136 17277137
 -- Lode Golem 17277132 17277133 17277134
--- Skeleton Skuffler 17273306 17273307 17273308
+-- Skeleton Scuffler 17273306 17273307 17273308
 -- Steely Weapon 17277129 17277130 17277131
 
 UPDATE `mob_spawn_points`
@@ -20,7 +20,7 @@ WHERE `mobname` in
 'Holey_Horror',
 'Fired_Urn',
 'Lode_Golem',
-'Skeleton_Skuffler',
+'Skeleton_Scuffler',
 'Steely_Weapon'
 );
 
@@ -68,7 +68,9 @@ WHERE `mobname` in
 'Abatwa',
 'Aqrabuamelu',
 'Atkorkamuy',
+'Becut',
 'Big_Bang',
+'Came-cruse',
 'Canal_Moocher',
 'Chary_Apkallu',
 'Chelicerata',
