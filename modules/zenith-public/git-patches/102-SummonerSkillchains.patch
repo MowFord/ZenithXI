@@ -10,7 +10,7 @@ index fb85d967f6..f079c266d8 100644
 @@ -495,7 +495,14 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
      MsgBasic msg            = MsgBasic::NONE;
      MsgBasic defaultMessage = PSkill->getMsg();
-
+ 
 -    bool first{ true };
 +    bool canSkillchain = true;
 +    if (auto* PChar = dynamic_cast<CCharEntity*>(this->PMaster); PChar && this->getPetType() == PET_TYPE::AVATAR)
