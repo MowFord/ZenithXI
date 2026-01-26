@@ -36,3 +36,6 @@ UPDATE `npc_list` SET `content_tag` = NULL WHERE CONCAT((`npcid` >> 12) & 0xFFF,
     '230-Gondebaud',
     '241-Wetata'
 );
+
+-- Explorer Moogle - Remove tag to enable without any expansion
+UPDATE `npc_list` SET `content_tag` = NULL WHERE `name` = 'Explorer_Moogle';
