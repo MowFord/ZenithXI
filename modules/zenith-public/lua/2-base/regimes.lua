@@ -1,6 +1,10 @@
 local m = Module:new('b_regimes')
 
 m:addOverride('xi.regime.checkRegime', function(player, mob, regimeId, index, regimeType)
+    if not player then
+        return
+    end
+
     local vanadielEpoch = VanadielUniqueDay()
     local localVarName = 'regimeReminder'
     if player:getCharVar('[regime]lastReward') < vanadielEpoch then
